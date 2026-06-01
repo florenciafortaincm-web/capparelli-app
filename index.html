@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Generador — Capparelli / Artigue</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,700;0,800;0,900;1,300&family=Lora:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#F3F3F3;font-family:"Proxima Nova","Nunito Sans",Arial,sans-serif}
+input,select,button{font-family:inherit}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+@media(max-width:700px){.col2{grid-template-columns:1fr!important}}
+</style>
+</head>
+<body><div id="root"></div>
+<script type="text/babel">
+const {useState,useRef,useEffect}=React;
+
+/* ── Paleta ── */
+const C={y:"#ffc62d",d:"#26282a",m:"#53575a",g:"#97999b"};
+const PN='"Proxima Nova","Nunito Sans",Arial,sans-serif';
+const LO='"Lora",Georgia,serif';
+const IT='"Inter","Nunito Sans",Arial,sans-serif';
+
+/* ── SVG Logo Capparelli ──
+   C shape: centro(50,50) radio ext=44 int=28
+   Arco desde (81,19) long way a (81,81) — gap arriba-derecha ≈ 90°
+   Cuadrado amarillo en la abertura
+*/
+const CappC=({h=36,cc="white"})=>(
+  <svg width={h} height={h} viewBox="0 0 100 100" style={{display:"block",flexShrink:0}}>
+    <path d="M81,19 A44,44,0,1,0,81,81 L70,70 A28,28,0,1,1,70,30 Z" fill={cc}/>
+    <rect x="63" y="5" width="24" height="24" fill="#ffc62d"/>
+  </svg>
+);
+const CappH=({h=28,light=true})=>{
+  const tc=light?"white":"#26282a",sc=light?"rgba(255,255,255,.72)":"#53575a";
+  return <div style={{display:"flex",alignItems:"center",gap:h*.28,flexShrink:0}}>
+    <CappC h={h} cc={light?"white":"#53575a"}/>
+    <div>
+      <div style={{fontFamily:PN,fontWeight:900,fontSize:h*.47,color:tc,letterSpacing:.5,lineHeight:1}}>CAPPARELLI</div>
+      <div style={{fontFamily:PN,fontWeight:300,fontSize:h*.27,color:sc,letterSpacing:1.5,lineHeight:1}}>PROPIEDADES</div>
+    </div>
+  </div>;
+};
+const CappV=({h=60,light=true})=>{
+  const tc=light?"white":"#26282a",sc=light?"rgba(255,255,255,.72)":"#53575a";
+  return <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:h*.05,flexShrink:0}}>
+    <CappC h={h*.56} cc={light?"white":"#53575a"}/>
+    <div style={{textAlign:"center"}}>
+      <div style={{fontFamily:PN,fontWeight:900,fontSize:h*.20,color:tc,letterSpacing:.5,lineHeight:1}}>CAPPARELLI</div>
+      <div style={{fontFamily:PN,fontWeight:300,fontSize:h*.12,color:sc,letterSpacing:1.5,lineHeight:1.2}}>PROPIEDADES</div>
+    </div>
+  </div>;
+};
+const CappGhost=({sz=200,op=.1})=>(
+  <svg width={sz} height={sz} viewBox="0 0 100 100" style={{opacity:op,display:"block",flexShrink:0}}>
+    <path d="M81,19 A44,44,0,1,0,81,81 L70,70 A28,28,0,1,1,70,30 Z" fill="white"/>
+    <rect x="63" y="5" width="24" height="24" fill="white"/>
+  </svg>
+);
+
+/* ── SVG Logo Artigue ── */
+const ArtH=({h=28,light=true})=>{
+  const cc=light?"white":"#042A39",sc=light?"rgba(255,255,255,.8)":"rgba(4,42,57,.7)";
+  return <div style={{display:"flex",alignItems:"center",gap:h*.25,flexShrink:0}}>
+    <svg width={h} height={h} viewBox="0 0 60 60" style={{display:"block",flexShrink:0}}>
+      <polygon points="30,3 7,53 18,53 30,22 42,53 53,53" fill={cc}/>
+      <path d="M13,47 Q30,33 47,47" fill="none" stroke="#E38B53" strokeWidth="7" strokeLinecap="round"/>
+    </svg>
+    <div>
+      <div style={{fontFamily:LO,fontWeight:700,fontSize:h*.43,color:cc,letterSpacing:.8,lineHeight:1}}>Artigue</div>
+      <div style={{fontFamily:IT,fontWeight:400,fontSize:h*.21,color:sc,letterSpacing:1.4}}>NEGOCIOS INMOBILIARIOS</div>
+    </div>
+  </div>;
+};
+const ArtV=({h=60,light=true})=>{
+  const cc=light?"white":"#042A39",sc=light?"rgba(255,255,255,.75)":"rgba(4,42,57,.7)";
+  return <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:h*.05,flexShrink:0}}>
+    <svg width={h*.62} height={h*.62} viewBox="0 0 60 60" style={{display:"block"}}>
+      <polygon points="30,3 7,53 18,53 30,22 42,53 53,53" fill={cc}/>
+      <path d="M13,47 Q30,33 47,47" fill="none" stroke="#E38B53" strokeWidth="7" strokeLinecap="round"/>
+    </svg>
+    <div style={{textAlign:"center"}}>
+      <div style={{fontFamily:LO,fontWeight:700,fontSize:h*.20,color:cc,letterSpacing:.8,lineHeight:1}}>Artigue</div>
+      <div style={{fontFamily:IT,fontWeight:400,fontSize:h*.11,color:sc,letterSpacing:1.4}}>NEGOCIOS INMOBILIARIOS</div>
+    </div>
+  </div>;
+};
+const ArtGhost=({sz=200,op=.08})=>(
+  <svg width={sz} height={sz} viewBox="0 0 60 60" style={{opacity:op,display:"block",flexShrink:0}}>
+    <polygon points="30,3 7,53 18,53 30,22 42,53 53,53" fill="white"/>
+    <path d="M13,47 Q30,33 47,47" fill="none" stroke="white" strokeWidth="7" strokeLinecap="round"/>
+  </svg>
+);
+
+const BR={
+  capparelli:{id:"capparelli",name:"Capparelli Propiedades",mat:"FRANCISCO CAPPARELLI, COL. 7365",acc:C.y,bg:C.d,fT:PN,fB:PN,H:CappH,V:CappV,Ghost:CappGhost},
+  artigue:{id:"artigue",name:"Artigue Negocios Inmobiliarios",mat:"ARTIGUE NEGOCIOS INMOBILIARIOS",acc:"#E38B53",bg:"#042A39",fT:LO,fB:IT,H:ArtH,V:ArtV,Ghost:ArtGhost},
+};
+
+const DEMO={
+  tipo:"Casa",op:"venta",m2:"220",amb:"5",dorm:"4",ban:"3",gar:"2",pool:true,
+  precio:"237.000",moneda:"USD",expensas:"85.000",monedaExp:"$",
+  dir:"Calle 489 e/ 133 y 134 - Gonnet",badge:"Oportunidad",
+  agentes:[{n:"Francisco",t:"+54 9 221 638 7669",on:true},{n:"Sofía",t:"+54 9 221 593 9144",on:true},{n:"",t:"",on:false}],
+};
+
+const fs=(tx="",base=22,min=10,thr=14)=>{const l=String(tx).length;return l<=thr?base:Math.max(min,base-(l-thr)*.9);};
+
+/* ── Icons ── */
+const M2=({w=13,c="currentColor"})=><svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" width={w} height={w}><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 3v18"/></svg>;
+const Amb=({w=13,c="currentColor"})=><svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" width={w} height={w}><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M2 12h20M12 7v14"/></svg>;
+const Dorm=({w=13,c="currentColor"})=><svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" width={w} height={w}><path d="M2 20V10a2 2 0 012-2h16a2 2 0 012 2v10"/><path d="M2 15h20"/><path d="M6 8V6a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>;
+const Ban=({w=13,c="currentColor"})=><svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" width={w} height={w}><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4z"/><path d="M4 12V6a2 2 0 012-2h2v4"/></svg>;
+const Gar=({w=13,c="currentColor"})=><svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" width={w} height={w}><rect x="2" y="10" width="20" height="10" rx="1"/><path d="M2 10l3-6h14l3 6"/><path d="M9 17h6"/></svg>;
+const Pool=({w=13,c="currentColor"})=><svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" width={w} height={w}><path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M7 3v6M17 3v6"/></svg>;
+const Wp=({w=13})=><svg viewBox="0 0 24 24" fill="currentColor" width={w} height={w}><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>;
+
+function Feats({data,b,s,compact=false,light=true}){
+  const acc=b.acc,col=light?"white":b.bg,ico=compact?11*s:12*s,txs=compact?8.5*s:9.5*s,gap=compact?7*s:10*s;
+  const items=[data.m2&&{I:M2,t:`${data.m2}m²`},data.amb&&{I:Amb,t:`${data.amb} amb.`},
+    data.dorm&&{I:Dorm,t:`${data.dorm} dorm.`},data.ban&&{I:Ban,t:`${data.ban} baño${data.ban>1?"s":""}`},
+    data.gar&&{I:Gar,t:`${data.gar} coch.`},data.pool&&{I:Pool,t:"Pileta"}].filter(Boolean);
+  if(!items.length)return null;
+  return <div style={{display:"flex",flexWrap:"wrap",gap:`${3*s}px ${gap}px`,alignItems:"center"}}>
+    {items.map(({I,t},i)=><div key={i} style={{display:"flex",alignItems:"center",gap:3*s,fontFamily:b.fB,fontSize:txs,fontWeight:700,color:col}}><I w={ico} c={acc}/><span>{t}</span></div>)}
+  </div>;
+}
+const PT=({data,b,s,light=true})=>{
+  if(!data.precio)return null;
+  const lb=`${data.moneda} ${data.precio}`;
+  return <div style={{display:"inline-block",border:`2px solid ${b.acc}`,borderRadius:5,padding:`${3*s}px ${8*s}px`}}>
+    <span style={{fontFamily:b.fB,fontWeight:900,fontSize:fs(lb,13*s,8*s,10),color:light?"white":b.bg,lineHeight:1,whiteSpace:"nowrap"}}>{lb}</span>
+  </div>;
+};
+const Exp=({data,b,s,light=true})=>data.expensas?<div style={{fontFamily:b.fB,fontSize:7.5*s,color:light?"rgba(255,255,255,.6)":"rgba(0,0,0,.45)",marginTop:1*s}}>Expensas: {data.monedaExp} {data.expensas}</div>:null;
+
+/* ══════════════════════════════════════════════
+   PHOTO SLOT — scroll=zoom, drag=mover
+══════════════════════════════════════════════ */
+function PhotoSlot({url,bg="#2a2a2a"}){
+  const [zoom,setZoom]=useState(1);
+  const [off,setOff]=useState({x:0,y:0});
+  const drag=useRef(false),last=useRef({x:0,y:0}),el=useRef();
+
+  /* Reset when photo changes */
+  useEffect(()=>{setZoom(1);setOff({x:0,y:0});},[url]);
+
+  /* Wheel zoom — must be non-passive to preventDefault */
+  useEffect(()=>{
+    const e=el.current; if(!e)return;
+    const fn=ev=>{
+      ev.preventDefault();
+      setZoom(z=>{const nz=Math.max(1,Math.min(3.5,z-ev.deltaY*.0025));if(nz<=1.02)setOff({x:0,y:0});return nz;});
+    };
+    e.addEventListener('wheel',fn,{passive:false});
+    return()=>e.removeEventListener('wheel',fn);
+  },[]);
+
+  const pt=e=>e.touches?{x:e.touches[0].clientX,y:e.touches[0].clientY}:{x:e.clientX,y:e.clientY};
+  const onD=e=>{drag.current=true;last.current=pt(e);e.preventDefault();};
+  const onM=e=>{
+    if(!drag.current)return;
+    const p=pt(e);
+    setOff(o=>({x:o.x+(p.x-last.current.x),y:o.y+(p.y-last.current.y)}));
+    last.current=p;
+  };
+  const onU=()=>{drag.current=false;};
+
+  return <div ref={el}
+    style={{width:"100%",height:"100%",overflow:"hidden",background:bg,userSelect:"none",cursor:zoom>1.05?"move":"default",position:"relative"}}
+    onMouseDown={onD} onMouseMove={onM} onMouseUp={onU} onMouseLeave={onU}
+    onTouchStart={onD} onTouchMove={onM} onTouchEnd={onU}
+    title="Scroll=zoom · arrastrar=mover">
+    {url&&<img src={url} draggable={false}
+      style={{width:"100%",height:"100%",objectFit:"cover",
+        transform:`scale(${zoom}) translate(${off.x/zoom}px,${off.y/zoom}px)`,
+        transformOrigin:"center",pointerEvents:"none"}}/>}
+    {!url&&<div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center"}}>
+      <span style={{color:"rgba(255,255,255,.2)",fontSize:10,fontFamily:PN}}>sin foto</span>
+    </div>}
+  </div>;
+}
+
+/* ── Drag (logo / matrícula) ── */
+function Drag({W,H,ix=10,iy=10,children}){
+  const [pos,setPos]=useState({x:ix,y:iy});
+  const dr=useRef(false),off=useRef({x:0,y:0}),el=useRef();
+  const xy=e=>e.touches?{x:e.touches[0].clientX,y:e.touches[0].clientY}:{x:e.clientX,y:e.clientY};
+  const go=e=>{
+    e.stopPropagation();e.preventDefault();dr.current=true;
+    const{x,y}=xy(e),r=el.current.getBoundingClientRect();
+    off.current={x:x-r.left,y:y-r.top};
+    window.addEventListener("mousemove",mv);window.addEventListener("mouseup",stop);
+    window.addEventListener("touchmove",mv,{passive:false});window.addEventListener("touchend",stop);
+  };
+  const mv=e=>{
+    if(!dr.current)return;e.preventDefault();
+    const{x,y}=xy(e),p=el.current.parentElement.getBoundingClientRect();
+    setPos({x:Math.min(W-60,Math.max(0,x-p.left-off.current.x)),y:Math.min(H-20,Math.max(0,y-p.top-off.current.y))});
+  };
+  const stop=()=>{dr.current=false;window.removeEventListener("mousemove",mv);window.removeEventListener("mouseup",stop);window.removeEventListener("touchmove",mv);window.removeEventListener("touchend",stop);};
+  return <div ref={el} onMouseDown={go} onTouchStart={go}
+    style={{position:"absolute",left:pos.x,top:pos.y,cursor:"grab",userSelect:"none",zIndex:40,touchAction:"none"}}>
+    {children}
+  </div>;
+}
+
+function DLogo({brand,lt,W,H,ix,iy}){
+  const b=BR[brand],s=W/295;
+  /* Siempre light=true: logo blanco sobre fondos oscuros */
+  return <Drag W={W} H={H} ix={ix??W*.55} iy={iy??H*.07}>
+    {lt==="full"?<b.H h={20*s} light={true}/>:<b.V h={34*s} light={true}/>}
+  </Drag>;
+}
+function DMat({brand,W,H,ix,iy,dark=false}){
+  const b=BR[brand],s=W/295;
+  return <Drag W={W} H={H} ix={ix??W*.04} iy={iy??H*.83}>
+    <div style={{fontSize:6.5*s,color:dark?"rgba(0,0,0,.28)":"rgba(255,255,255,.40)",letterSpacing:1.3,fontFamily:PN,whiteSpace:"nowrap"}}>
+      {b.mat}
+    </div>
+  </Drag>;
+}
+
+/* Link Zone — in-flow, empuja desde abajo */
+const LZ=({s,H})=>
+  <div style={{height:Math.round(H*.18),borderTop:"1px dashed rgba(255,255,255,.22)",background:"rgba(255,255,255,.04)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,pointerEvents:"none",marginTop:"auto"}}>
+    <span style={{fontSize:6.5*s,color:"rgba(255,255,255,.28)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
+  </div>;
+
+/* InfoInner — sin fondo propio, sin altura fija */
+function InfoInner({data,b,s,compact=false}){
+  return <div style={{display:"flex",flexDirection:"column",gap:3.5*s}}>
+    <div>
+      <div style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(data.tipo,compact?20*s:22*s,11*s,12),color:"white",lineHeight:1.05}}>{data.tipo||"Propiedad"}</div>
+      <div style={{fontFamily:b.fB,fontWeight:300,fontSize:fs(data.op,compact?13*s:15*s,9*s,14),color:"rgba(255,255,255,.9)",lineHeight:1.2}}>en {data.op||"venta"}</div>
+    </div>
+    {data.badge&&<div style={{display:"inline-flex"}}><div style={{background:b.acc,color:"#111",fontSize:8*s,fontWeight:800,padding:`${2*s}px ${7*s}px`,borderRadius:3,fontFamily:b.fB}}>{data.badge}</div></div>}
+    {data.dir&&<div style={{fontFamily:b.fB,fontStyle:"italic",fontSize:fs(data.dir,8.5*s,6.5*s,32),color:"rgba(255,255,255,.58)",lineHeight:1.3}}>{data.dir}</div>}
+    <Feats data={data} b={b} s={s} compact/>
+    <div style={{display:"flex",alignItems:"center",gap:8*s,flexWrap:"wrap"}}><PT data={data} b={b} s={s}/><Exp data={data} b={b} s={s}/></div>
+  </div>;
+}
+
+/*
+  Patrón layouts oscuros (A-F, I, J):
+  Contenedor: height=H, flex column, bg=b.bg
+  ├── foto(s): flexShrink:0
+  ├── línea acento: 3px
+  ├── flex:1 sección info
+  │   ├── InfoInner (padding)
+  │   ├── flex:1 spacer
+  │   └── LZ (in-flow)
+  ├── DLogo (absolute)
+  └── DMat (absolute)
+*/
+
+/* A: foto grande + 3 minis + info */
+function LA({ph,data,brand,lt,W,slRef}){
+  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const pH=Math.round(H*.50),mH=Math.round(H*.115);
+  return <div ref={slRef} style={{width:W,height:H,background:b.bg,borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{height:pH,flexShrink:0}}><PhotoSlot url={ph[0]}/></div>
+    <div style={{height:3,background:b.acc,flexShrink:0}}/>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:2,height:mH,flexShrink:0,overflow:"hidden"}}>
+      {[1,2,3].map(i=><div key={i} style={{height:mH,overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
+    </div>
+    <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
+      <div style={{padding:`${6*s}px ${10*s}px ${4*s}px`}}><InfoInner data={data} b={b} s={s*.85} compact/></div>
+      <LZ s={s} H={H}/>
+    </div>
+    <DLogo brand={brand} lt={lt} W={W} H={H} ix={W*.60} iy={pH*.50}/>
+    <DMat brand={brand} W={W} H={H}/>
+  </div>;
+}
+
+/* B: foto + info */
+function LB({ph,data,brand,lt,W,slRef}){
+  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const pH=Math.round(H*.60);
+  return <div ref={slRef} style={{width:W,height:H,background:b.bg,borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{height:pH,flexShrink:0}}><PhotoSlot url={ph[0]}/></div>
+    <div style={{height:3,background:b.acc,flexShrink:0}}/>
+    <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
+      <div style={{padding:`${7*s}px ${11*s}px ${4*s}px`}}><InfoInner data={data} b={b} s={s*.92} compact/></div>
+      <LZ s={s} H={H}/>
+    </div>
+    <DLogo brand={brand} lt={lt} W={W} H={H} ix={W*.60} iy={pH*.50}/>
+    <DMat brand={brand} W={W} H={H}/>
+  </div>;
+}
+
+/* C: 2+1 columnas + info */
+function LC({ph,data,brand,lt,W,slRef}){
+  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const gH=Math.round(H*.60);
+  return <div ref={slRef} style={{width:W,height:H,background:b.bg,borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{display:"grid",gridTemplateColumns:"2fr 1fr",gap:2,height:gH,flexShrink:0}}>
+      <div style={{height:gH,overflow:"hidden"}}><PhotoSlot url={ph[0]}/></div>
+      <div style={{display:"grid",gridTemplateRows:"1fr 1fr",gap:2}}>
+        {[1,2].map(i=><div key={i} style={{overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
+      </div>
+    </div>
+    <div style={{height:3,background:b.acc,flexShrink:0}}/>
+    <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
+      <div style={{padding:`${7*s}px ${11*s}px ${4*s}px`}}><InfoInner data={data} b={b} s={s*.90} compact/></div>
+      <LZ s={s} H={H}/>
+    </div>
+    <DLogo brand={brand} lt={lt} W={W} H={H} ix={W*.60} iy={gH*.50}/>
+    <DMat brand={brand} W={W} H={H}/>
+  </div>;
+}
+
+/* D: pantalla completa con gradiente */
+function LD({ph,data,brand,lt,W,slRef}){
+  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  return <div ref={slRef} style={{width:W,height:H,background:"#111",borderRadius:12,overflow:"hidden",position:"relative"}}>
+    <div style={{position:"absolute",inset:0}}><PhotoSlot url={ph[0]}/></div>
+    <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom,rgba(0,0,0,.05) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,.5) 60%,rgba(0,0,0,.80) 100%)"}}/>
+    <div style={{position:"absolute",bottom:H*.20,left:0,right:0,padding:`0 ${14*s}px`}}>
+      <div style={{width:34*s,height:2*s,background:b.acc,marginBottom:6*s}}/>
+      <div style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(data.tipo,23*s,13*s,12),color:"white",lineHeight:1}}>{data.tipo||"Propiedad"}</div>
+      <div style={{fontFamily:b.fB,fontWeight:300,fontSize:14*s,color:"rgba(255,255,255,.9)"}}>en {data.op||"venta"}</div>
+      {data.badge&&<div style={{display:"inline-block",marginTop:4*s,background:b.acc,color:"#111",fontSize:8*s,fontWeight:800,padding:`${2*s}px ${7*s}px`,borderRadius:3,fontFamily:b.fB}}>{data.badge}</div>}
+      {data.dir&&<div style={{fontFamily:b.fB,fontStyle:"italic",fontSize:8.5*s,color:"rgba(255,255,255,.6)",marginTop:3*s,lineHeight:1.3}}>{data.dir}</div>}
+      <div style={{marginTop:6*s}}><Feats data={data} b={b} s={s} compact/></div>
+      <div style={{marginTop:5*s,display:"flex",gap:8*s,flexWrap:"wrap",alignItems:"center"}}><PT data={data} b={b} s={s}/><Exp data={data} b={b} s={s}/></div>
+    </div>
+    {/* LZ absolute en este layout */}
+    <div style={{position:"absolute",bottom:0,left:0,right:0,height:H*.18,borderTop:"1px dashed rgba(255,255,255,.22)",background:"rgba(0,0,0,.35)",display:"flex",alignItems:"center",justifyContent:"center"}}>
+      <span style={{fontSize:6.5*s,color:"rgba(255,255,255,.28)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
+    </div>
+    <DLogo brand={brand} lt={lt} W={W} H={H} ix={W*.60} iy={H*.15}/>
+    <DMat brand={brand} W={W} H={H}/>
+  </div>;
+}
+
+/* E: banda color + foto + info */
+function LE({ph,data,brand,lt,W,slRef}){
+  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const bH=Math.round(H*.82*.10),pH=Math.round(H*.82*.44);
+  return <div ref={slRef} style={{width:W,height:H,background:b.bg,borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{height:bH,background:b.acc,display:"flex",alignItems:"center",padding:`0 ${12*s}px`,flexShrink:0}}>
+      <span style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(data.tipo+" en "+data.op,12*s,8*s,16),color:b.bg,lineHeight:1}}>
+        {data.tipo||"Propiedad"} <span style={{fontWeight:300}}>en {data.op||"venta"}</span>
+      </span>
+    </div>
+    <div style={{height:pH,flexShrink:0}}><PhotoSlot url={ph[0]}/></div>
+    <div style={{height:3,background:"rgba(255,255,255,.12)",flexShrink:0}}/>
+    <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
+      <div style={{padding:`${6*s}px ${10*s}px ${4*s}px`}}><InfoInner data={data} b={b} s={s*.83} compact/></div>
+      <LZ s={s} H={H}/>
+    </div>
+    <DLogo brand={brand} lt={lt} W={W} H={H} ix={W*.62} iy={bH+pH*.50}/>
+    <DMat brand={brand} W={W} H={H}/>
+  </div>;
+}
+
+/* F: 2 fotos + info */
+function LF({ph,data,brand,lt,W,slRef}){
+  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const gH=Math.round(H*.82*.44);
+  return <div ref={slRef} style={{width:W,height:H,background:b.bg,borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:2,height:gH,flexShrink:0,overflow:"hidden"}}>
+      {[0,1].map(i=><div key={i} style={{height:gH,overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
+    </div>
+    <div style={{height:3,background:b.acc,flexShrink:0}}/>
+    <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
+      <div style={{padding:`${7*s}px ${11*s}px ${4*s}px`}}><InfoInner data={data} b={b} s={s*.90} compact/></div>
+      <LZ s={s} H={H}/>
+    </div>
+    <DLogo brand={brand} lt={lt} W={W} H={H} ix={W*.60} iy={gH*.50}/>
+    <DMat brand={brand} W={W} H={H}/>
+  </div>;
+}
+
+/* G: fondo claro — header logo, foto, split info+foto, features, contacts */
+function LG({ph,data,brand,lt,W,slRef}){
+  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const sh=H*.82;
+  const hH=Math.round(sh*.09),pHm=Math.round(sh*.30),spH=Math.round(sh*.24),fH=Math.round(sh*.10),cH=Math.round(sh*.09);
+  const Logo=b.H;
+  return <div ref={slRef} style={{width:W,height:H,background:"#F2F2F2",borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    {/* Header con logo oscuro */}
+    <div style={{height:hH,background:"white",display:"flex",alignItems:"center",padding:`0 ${10*s}px`,borderBottom:`2px solid ${b.acc}`,flexShrink:0}}>
+      <Logo h={hH*.58} light={false}/>
+    </div>
+    <div style={{height:pHm,flexShrink:0,position:"relative"}}>
+      <PhotoSlot url={ph[0]}/>
+      {data.badge&&<div style={{position:"absolute",top:6*s,left:8*s,background:b.acc,color:"#111",fontSize:8.5*s,fontWeight:900,padding:`${2*s}px ${9*s}px`,borderRadius:3,fontFamily:b.fB,zIndex:5}}>{data.badge.toUpperCase()}</div>}
+    </div>
+    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",height:spH,flexShrink:0}}>
+      <div style={{background:b.bg,padding:`${6*s}px ${8*s}px`,display:"flex",flexDirection:"column",justifyContent:"center",gap:3*s}}>
+        <div style={{fontFamily:b.fB,fontWeight:900,fontSize:fs(data.tipo,9.5*s,7*s,10),color:b.acc,lineHeight:1}}>{(data.tipo||"PROP.").toUpperCase()} EN {(data.op||"VENTA").toUpperCase()}</div>
+        <PT data={data} b={b} s={s*.80}/><Exp data={data} b={b} s={s*.80}/>
+        {data.dir&&<div style={{fontSize:6.5*s,color:"rgba(255,255,255,.5)",fontStyle:"italic",lineHeight:1.3,fontFamily:b.fB}}>{data.dir}</div>}
+      </div>
+      <div style={{overflow:"hidden"}}><PhotoSlot url={ph[1]}/></div>
+    </div>
+    <div style={{height:fH,background:"white",padding:`${3*s}px ${10*s}px`,display:"flex",alignItems:"center",flexShrink:0}}>
+      <Feats data={data} b={{...b,acc:b.bg}} s={s} light={false} compact/>
+    </div>
+    <div style={{height:cH,background:b.bg,padding:`0 ${10*s}px`,display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0}}>
+      {data.agentes.filter(a=>a.on&&a.t).map((a,i)=>(
+        <div key={i} style={{display:"flex",alignItems:"center",gap:4*s,fontSize:8*s,color:"white",fontFamily:b.fB}}><Wp w={10*s}/>{a.t}</div>
+      ))}
+    </div>
+    <div style={{flex:1,display:"flex",flexDirection:"column"}}>
+      {/* LZ para fondo claro */}
+      <div style={{height:Math.round(H*.18),borderTop:"1px dashed rgba(0,0,0,.12)",background:"rgba(0,0,0,.04)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+        <span style={{fontSize:6.5*s,color:"rgba(0,0,0,.20)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
+      </div>
+    </div>
+    <DMat brand={brand} W={W} H={H} dark={true} ix={W*.44}/>
+  </div>;
+}
+
+/* H: fondo claro — logo+línea, título+precio, 2fotos, panorama, features, dirección+logo */
+function LH({ph,data,brand,lt,W,slRef}){
+  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const sh=H*.82;
+  const hH=Math.round(sh*.09),tH=Math.round(sh*.09),tpH=Math.round(sh*.21),panH=Math.round(sh*.21),fH=Math.round(sh*.10),aH=Math.round(sh*.10);
+  const Logo=b.H;
+  return <div ref={slRef} style={{width:W,height:H,background:"white",borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{height:hH,background:"white",display:"flex",alignItems:"center",padding:`0 ${10*s}px`,borderBottom:`2.5px solid ${b.acc}`,flexShrink:0}}>
+      <Logo h={hH*.54} light={false}/>
+    </div>
+    <div style={{height:tH,background:"white",display:"flex",alignItems:"center",justifyContent:"space-between",padding:`0 ${10*s}px`,borderBottom:"1px solid #eee",flexShrink:0}}>
+      <span style={{fontFamily:b.fT,fontWeight:900,fontSize:fs((data.tipo||"")+" EN "+(data.op||""),12*s,8*s,14),color:b.bg}}>{(data.tipo||"").toUpperCase()} EN {(data.op||"").toUpperCase()}</span>
+      <div style={{background:b.acc,borderRadius:4,padding:`${2*s}px ${7*s}px`}}>
+        <span style={{fontFamily:b.fB,fontWeight:900,fontSize:fs(`${data.moneda} ${data.precio}`,11*s,8*s,10),color:b.bg,whiteSpace:"nowrap"}}>{data.moneda} {data.precio||"—"}</span>
+      </div>
+    </div>
+    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:2,height:tpH,flexShrink:0,overflow:"hidden"}}>
+      {[0,1].map(i=><div key={i} style={{height:tpH,overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
+    </div>
+    <div style={{height:panH,flexShrink:0,marginTop:2}}><PhotoSlot url={ph[2]}/></div>
+    <div style={{height:fH,background:"white",padding:`${3*s}px ${10*s}px`,display:"flex",alignItems:"center",borderTop:"1px solid #eee",flexShrink:0}}>
+      <Feats data={data} b={{...b,acc:b.bg}} s={s*.9} light={false} compact/>
+    </div>
+    <div style={{height:aH,background:"white",padding:`${4*s}px ${10*s}px`,display:"flex",alignItems:"center",justifyContent:"space-between",borderTop:"1px solid #eee",flexShrink:0}}>
+      <div>
+        {data.dir&&<div style={{fontSize:8*s,color:"#444",fontStyle:"italic",fontFamily:b.fB,lineHeight:1.3}}>{data.dir}</div>}
+        <Exp data={data} b={{...b}} s={s} light={false}/>
+      </div>
+      <Logo h={hH*.50} light={false}/>
+    </div>
+    <div style={{flex:1,display:"flex",flexDirection:"column"}}>
+      <div style={{flex:1,background:b.bg,display:"flex",alignItems:"center",justifyContent:"center"}}>
+        <span style={{fontSize:6*s,color:"rgba(255,255,255,.38)",letterSpacing:1.2,fontFamily:PN}}>{b.mat}</span>
+      </div>
+      <div style={{height:Math.round(H*.18),borderTop:"1px dashed rgba(0,0,0,.12)",background:"rgba(0,0,0,.04)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+        <span style={{fontSize:6.5*s,color:"rgba(0,0,0,.20)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
+      </div>
+    </div>
+  </div>;
+}
+
+/* I: ghost logo bg + foto full + caja features (sin logo duplicado) */
+function LI({ph,data,brand,lt,W,slRef}){
+  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const Ghost=b.Ghost;
+  const items=[data.m2&&[M2,`${data.m2}M² TOTALES`],data.dorm&&[Dorm,`${data.dorm} DORMITORIOS`],
+    data.ban&&[Ban,`${data.ban} BAÑOS`],data.gar&&[Gar,`${data.gar} COCHERAS`],
+    data.pool&&[Pool,"PILETA"],data.amb&&[Amb,`${data.amb} AMBIENTES`]].filter(Boolean);
+  return <div ref={slRef} style={{width:W,height:H,background:"#2A2A2A",borderRadius:12,overflow:"hidden",position:"relative"}}>
+    <div style={{position:"absolute",inset:0}}><PhotoSlot url={ph[0]}/></div>
+    <div style={{position:"absolute",inset:0,background:"rgba(0,0,0,.45)"}}/>
+    <div style={{position:"absolute",top:-W*.08,right:-W*.1,pointerEvents:"none"}}><Ghost sz={W*.72} op={.13}/></div>
+    <div style={{position:"absolute",top:H*.14,left:0,right:0,bottom:H*.19,padding:`0 ${14*s}px`,overflow:"hidden"}}>
+      <div style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(data.tipo,24*s,14*s,10),color:"white",lineHeight:1}}>{data.tipo||"Casa"}</div>
+      <div style={{display:"flex",alignItems:"center",gap:8*s,marginTop:3*s}}>
+        <span style={{fontFamily:b.fB,fontWeight:300,fontSize:13*s,color:"white"}}>en {data.op||"venta"}</span>
+        <div style={{flex:1,height:1.5*s,background:b.acc}}/>
+      </div>
+      {data.badge&&<div style={{display:"inline-block",marginTop:4*s,background:b.acc,color:"#111",fontSize:8*s,fontWeight:800,padding:`${2*s}px ${7*s}px`,borderRadius:3,fontFamily:b.fB}}>{data.badge}</div>}
+      {data.dir&&<div style={{fontStyle:"italic",fontSize:8.5*s,color:"rgba(255,255,255,.6)",marginTop:4*s,fontFamily:b.fB,lineHeight:1.3}}>{data.dir}</div>}
+      <div style={{marginTop:6*s,display:"flex",alignItems:"center",gap:8*s,flexWrap:"wrap"}}><PT data={data} b={b} s={s}/><Exp data={data} b={b} s={s}/></div>
+      {items.length>0&&<div style={{marginTop:8*s,border:`1.5px solid ${b.acc}`,borderRadius:7,padding:`${6*s}px ${9*s}px`,background:"rgba(0,0,0,.45)"}}>
+        {items.map(([Ico,label],i)=>(
+          <div key={i} style={{display:"flex",alignItems:"center",gap:6*s,marginBottom:i<items.length-1?3*s:0,fontFamily:b.fB,fontSize:9*s,fontWeight:700,color:"white"}}>
+            <Ico w={12*s} c={b.acc}/>{label}
+          </div>
+        ))}
+      </div>}
+    </div>
+    <div style={{position:"absolute",bottom:H*.20,left:0,right:0,height:Math.round(H*.18)*0,pointerEvents:"none"}}/>
+    <div style={{position:"absolute",bottom:0,left:0,right:0,height:Math.round(H*.18),borderTop:"1px dashed rgba(255,255,255,.22)",background:"rgba(0,0,0,.5)",display:"flex",alignItems:"center",justifyContent:"center"}}>
+      <span style={{fontSize:6.5*s,color:"rgba(255,255,255,.28)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
+    </div>
+    <DLogo brand={brand} lt={lt} W={W} H={H} ix={W*.55} iy={H*.68}/>
+    <DMat brand={brand} W={W} H={H}/>
+  </div>;
+}
+
+/* J: header oscuro con logo, foto+overlay, 3 minis, features bar, contactos */
+function LJ({ph,data,brand,lt,W,slRef}){
+  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const sh=H*.82;
+  const hH=Math.round(sh*.09),pHm=Math.round(sh*.28),mH=Math.round(sh*.15),fH=Math.round(sh*.10),cH=Math.round(sh*.14);
+  const Logo=b.H;
+  return <div ref={slRef} style={{width:W,height:H,background:b.bg,borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{height:hH,background:b.bg,display:"flex",alignItems:"center",padding:`0 ${10*s}px`,flexShrink:0}}>
+      <Logo h={hH*.58} light={true}/>
+    </div>
+    <div style={{height:pHm,flexShrink:0,position:"relative"}}>
+      <PhotoSlot url={ph[0]}/>
+      <div style={{position:"absolute",inset:0,background:"linear-gradient(to right,rgba(0,0,0,.65) 0%,rgba(0,0,0,.1) 60%)"}}/>
+      <div style={{position:"absolute",bottom:8*s,left:10*s,zIndex:2}}>
+        <div style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(data.op,16*s,10*s,8),color:b.acc,lineHeight:1}}>{(data.op||"VENTA").toUpperCase()}</div>
+        <div style={{fontFamily:b.fT,fontWeight:700,fontSize:fs(data.tipo,12*s,8*s,10),color:"white",lineHeight:1.1,marginTop:1*s}}>{data.tipo||"Propiedad"}</div>
+        <div style={{marginTop:3*s}}><PT data={data} b={b} s={s*.82}/></div>
+        <Exp data={data} b={b} s={s*.82}/>
+        {data.dir&&<div style={{fontSize:6.5*s,color:"rgba(255,255,255,.5)",fontStyle:"italic",marginTop:3*s,fontFamily:b.fB}}>{data.dir}</div>}
+      </div>
+    </div>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:2,height:mH,flexShrink:0,overflow:"hidden"}}>
+      {[1,2,3].map(i=><div key={i} style={{height:mH,overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
+    </div>
+    <div style={{height:fH,background:b.acc,padding:`0 ${10*s}px`,display:"flex",alignItems:"center",flexShrink:0}}>
+      <Feats data={data} b={{...b,acc:b.bg}} s={s*.9} light={false} compact/>
+    </div>
+    <div style={{height:cH,background:b.bg,padding:`${5*s}px ${10*s}px`,display:"flex",flexDirection:"column",justifyContent:"center",gap:4*s,flexShrink:0}}>
+      {data.agentes.filter(a=>a.on&&a.t).slice(0,2).map((a,i)=>(
+        <div key={i} style={{display:"flex",alignItems:"center",gap:5*s,fontSize:8.5*s,color:"rgba(255,255,255,.85)",fontFamily:b.fB}}>
+          <Wp w={10*s}/>{a.n&&<b style={{color:"white"}}>{a.n} </b>}<span>{a.t}</span>
+        </div>
+      ))}
+    </div>
+    <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
+      <LZ s={s} H={H}/>
+    </div>
+    <DMat brand={brand} W={W} H={H}/>
+  </div>;
+}
+
+/* K: fondo claro, 1 grande izq + 3 der, features, título, dirección+logo */
+function LK({ph,data,brand,lt,W,slRef}){
+  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const sh=H*.82;
+  const gH=Math.round(sh*.44),fH=Math.round(sh*.10),tH=Math.round(sh*.21),aH=Math.round(sh*.08);
+  const Logo=b.H;
+  return <div ref={slRef} style={{width:W,height:H,background:"white",borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{display:"grid",gridTemplateColumns:"3fr 2fr",gap:2,height:gH,flexShrink:0,overflow:"hidden"}}>
+      <div style={{height:gH,overflow:"hidden",position:"relative"}}>
+        <PhotoSlot url={ph[0]}/>
+        <div style={{position:"absolute",inset:0,background:"linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 55%)"}}/>
+        <div style={{position:"absolute",bottom:8*s,left:8*s,zIndex:2}}>
+          <div style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(data.op,13*s,9*s,8),color:"white"}}>{(data.op||"VENTA").toUpperCase()}</div>
+          <PT data={data} b={b} s={s*.82}/><Exp data={data} b={b} s={s*.82}/>
+        </div>
+      </div>
+      <div style={{display:"grid",gridTemplateRows:"1fr 1fr 1fr",gap:2}}>
+        {[1,2,3].map(i=><div key={i} style={{overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
+      </div>
+    </div>
+    <div style={{height:fH,background:"white",padding:`${3*s}px ${10*s}px`,display:"flex",alignItems:"center",borderBottom:"1px solid #eee",flexShrink:0}}>
+      <Feats data={data} b={{...b,acc:b.bg}} s={s*.9} light={false} compact/>
+    </div>
+    <div style={{height:tH,background:"white",padding:`${5*s}px ${12*s}px`,display:"flex",flexDirection:"column",justifyContent:"center",flexShrink:0}}>
+      <div style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(data.tipo,20*s,12*s,10),color:b.bg,lineHeight:1}}>{data.tipo||"Casa"}</div>
+      <div style={{display:"flex",alignItems:"center",gap:6*s,marginTop:2*s}}>
+        <span style={{fontFamily:b.fT,fontWeight:300,fontSize:13*s,color:b.bg}}>en {data.op||"venta"}</span>
+        <div style={{flex:1,height:1.5*s,background:b.acc}}/>
+      </div>
+      {data.badge&&<div style={{display:"inline-block",marginTop:4*s,background:b.acc,color:"#111",fontSize:8*s,fontWeight:800,padding:`${2*s}px ${7*s}px`,borderRadius:3,fontFamily:b.fB}}>{data.badge}</div>}
+    </div>
+    <div style={{height:aH,background:"white",padding:`0 ${12*s}px`,display:"flex",alignItems:"center",justifyContent:"space-between",borderTop:"1px solid #eee",flexShrink:0}}>
+      {data.dir&&<div style={{fontStyle:"italic",fontSize:7.5*s,color:"#555",fontFamily:b.fB,lineHeight:1.2}}>{data.dir}</div>}
+      <Logo h={aH*.6} light={false}/>
+    </div>
+    <div style={{flex:1,display:"flex",flexDirection:"column"}}>
+      <div style={{flex:1,background:b.bg,display:"flex",alignItems:"center",justifyContent:"center"}}>
+        <span style={{fontSize:5.5*s,color:"rgba(255,255,255,.35)",letterSpacing:1.1,fontFamily:PN}}>{b.mat}</span>
+      </div>
+      <div style={{height:Math.round(H*.18),borderTop:"1px dashed rgba(0,0,0,.12)",background:"rgba(0,0,0,.04)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+        <span style={{fontSize:6.5*s,color:"rgba(0,0,0,.20)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
+      </div>
+    </div>
+  </div>;
+}
+
+/* ── Feed slides ── */
+function FeedCover({ph,data,brand,lt,W,fRef}){
+  const s=W/285,b=BR[brand];
+  const pH=Math.round(W*.60);
+  return <div ref={fRef} style={{width:W,background:b.bg,borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{height:pH}}><PhotoSlot url={ph[0]}/></div>
+    <div style={{height:3,background:b.acc}}/>
+    <div style={{padding:`${7*s}px ${11*s}px`}}>
+      <InfoInner data={data} b={b} s={s}/>
+    </div>
+    <DLogo brand={brand} lt={lt} W={W} H={pH} ix={W*.52} iy={pH*.50}/>
+  </div>;
+}
+
+function FeedSlide({photo,label,sub,idx,brand,lt,W,fRef}){
+  const s=W/285,b=BR[brand];
+  const ir=idx%2===0,bt=idx%3===0;
+  return <div ref={fRef} style={{width:W,height:W,background:"#222",borderRadius:12,overflow:"hidden",position:"relative"}}>
+    <div style={{position:"absolute",inset:0}}><PhotoSlot url={photo}/></div>
+    <div style={{position:"absolute",inset:0,background:"linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 55%)"}}/>
+    <DLogo brand={brand} lt={lt} W={W} H={W} ix={W*.62} iy={W*.08}/>
+    <div style={{position:"absolute",bottom:"13%",[ir?"right":"left"]:14*s,maxWidth:"74%",zIndex:5}}>
+      {bt&&<div style={{width:34*s,height:2*s,background:b.acc,marginBottom:5*s}}/>}
+      <div style={{display:"flex",alignItems:"stretch"}}>
+        {!bt&&<div style={{width:3*s,background:b.acc,borderRadius:2,marginRight:6*s,flexShrink:0}}/>}
+        <div>
+          <div style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(label,18*s,11*s,14),color:"white",lineHeight:1.1,textShadow:"0 1px 6px rgba(0,0,0,.6)"}}>{label||"Ambiente"}</div>
+          {sub&&<div style={{fontFamily:b.fB,fontWeight:300,fontSize:fs(sub,11*s,8*s,22),color:"rgba(255,255,255,.88)",marginTop:2*s,lineHeight:1.3}}>{sub}</div>}
+        </div>
+      </div>
+    </div>
+  </div>;
+}
+
+function FeedCTA({data,brand,W,fRef}){
+  const s=W/285,b=BR[brand];
+  const Logo=b.H,Ghost=b.Ghost;
+  const visAgentes=data.agentes.filter(a=>a.on&&a.n);
+  return <div ref={fRef} style={{width:W,height:W,background:"#ECECEC",borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
+    <div style={{position:"absolute",top:-20*s,left:-40*s,pointerEvents:"none"}}><Ghost sz={300*s} op={.09}/></div>
+    <div style={{textAlign:"center",padding:`0 ${18*s}px`,position:"relative",zIndex:1}}>
+      <div style={{marginBottom:9*s}}><Logo h={22*s} light={false}/></div>
+      <div style={{fontSize:fs("Agendá tu visita",16*s,11*s,14),fontWeight:300,color:b.bg,fontFamily:b.fT}}>Agendá tu visita</div>
+      <div style={{width:38*s,height:2*s,background:b.acc,margin:`${5*s}px auto ${10*s}px`}}/>
+      <div style={{fontSize:8.5*s,color:C.m,marginBottom:8*s,fontFamily:b.fB}}>Contactá a nuestros agentes</div>
+      {visAgentes.map((a,i)=>(
+        <div key={i} style={{display:"flex",alignItems:"center",justifyContent:"center",gap:5*s,marginBottom:6*s}}>
+          <span style={{fontFamily:b.fB,fontSize:10.5*s,fontWeight:700,color:b.bg}}>{a.n}</span>
+          <span style={{color:"#25D366",display:"flex"}}><Wp w={11*s}/></span>
+          <span style={{fontFamily:b.fB,fontSize:fs(a.t,10*s,7.5*s,18),color:C.m}}>{a.t}</span>
+        </div>
+      ))}
+    </div>
+    <div style={{position:"absolute",bottom:"5%",fontSize:6.5*s,color:"rgba(0,0,0,.25)",letterSpacing:1.2,fontFamily:PN}}>{b.mat}</div>
+  </div>;
+}
+
+/* ── Form helpers ── */
+const Inp=({label,value,onChange,placeholder,small=false})=>
+  <div style={{marginBottom:small?5:9}}>
+    <label style={{display:"block",fontFamily:PN,fontSize:10,fontWeight:700,color:C.m,letterSpacing:.6,marginBottom:2,textTransform:"uppercase"}}>{label}</label>
+    <input value={value} onChange={e=>onChange(e.target.value)} placeholder={placeholder}
+      style={{width:"100%",padding:small?"5px 8px":"7px 10px",border:"1.5px solid #E0E0E0",borderRadius:6,fontFamily:PN,fontSize:12,color:C.d,outline:"none"}}
+      onFocus={e=>e.target.style.borderColor="#ffc62d"} onBlur={e=>e.target.style.borderColor="#E0E0E0"}/>
+  </div>;
+
+const Sel=({label,value,onChange,options})=>
+  <div style={{marginBottom:9}}>
+    <label style={{display:"block",fontFamily:PN,fontSize:10,fontWeight:700,color:C.m,letterSpacing:.6,marginBottom:2,textTransform:"uppercase"}}>{label}</label>
+    <select value={value} onChange={e=>onChange(e.target.value)}
+      style={{width:"100%",padding:"7px 10px",border:"1.5px solid #E0E0E0",borderRadius:6,fontFamily:PN,fontSize:12,color:C.d,outline:"none",background:"white"}}>
+      {options.map(o=><option key={o.v} value={o.v}>{o.l}</option>)}
+    </select>
+  </div>;
+
+const Card=({title,children})=>
+  <div style={{background:"white",borderRadius:12,padding:13,boxShadow:"0 2px 10px rgba(0,0,0,.06)",marginBottom:12}}>
+    {title&&<h3 style={{margin:"0 0 9px",fontSize:11,fontWeight:800,letterSpacing:.6,textTransform:"uppercase",color:C.d,fontFamily:PN}}>{title}</h3>}
+    {children}
+  </div>;
+
+const MRow=({label,value,onChange,moneda,onMoneda,placeholder})=>
+  <div style={{marginBottom:9}}>
+    <label style={{display:"block",fontFamily:PN,fontSize:10,fontWeight:700,color:C.m,letterSpacing:.6,marginBottom:2,textTransform:"uppercase"}}>{label}</label>
+    <div style={{display:"flex",gap:5}}>
+      <div style={{display:"flex",borderRadius:6,overflow:"hidden",border:"1.5px solid #E0E0E0",flexShrink:0}}>
+        {["USD","$"].map(c=><button key={c} onClick={()=>onMoneda(c)} style={{padding:"5px 9px",border:"none",cursor:"pointer",fontFamily:PN,fontSize:11,fontWeight:800,background:moneda===c?"#ffc62d":"white",color:moneda===c?C.d:C.m}}>{c}</button>)}
+      </div>
+      <input value={value} onChange={e=>onChange(e.target.value)} placeholder={placeholder}
+        style={{flex:1,padding:"5px 9px",border:"1.5px solid #E0E0E0",borderRadius:6,fontFamily:PN,fontSize:12,color:C.d,outline:"none"}}
+        onFocus={e=>e.target.style.borderColor="#ffc62d"} onBlur={e=>e.target.style.borderColor="#E0E0E0"}/>
+    </div>
+  </div>;
+
+/* ── Photo Manager ── */
+function PhotoMgr({photos,setPhotos,selected,setSelected}){
+  const ref=useRef();
+  const add=files=>{Array.from(files).slice(0,10-photos.length).forEach(f=>{const r=new FileReader();r.onload=e=>setPhotos(p=>[...p,{url:e.target.result,id:Math.random()}]);r.readAsDataURL(f);});};
+  const tog=id=>setSelected(p=>p.includes(id)?p.filter(x=>x!==id):[...p,id]);
+  const up=id=>setSelected(p=>{const i=p.indexOf(id);if(i<=0)return p;const a=[...p];[a[i-1],a[i]]=[a[i],a[i-1]];return a;});
+  const dn=id=>setSelected(p=>{const i=p.indexOf(id);if(i<0||i>=p.length-1)return p;const a=[...p];[a[i],a[i+1]]=[a[i+1],a[i]];return a;});
+  return <div>
+    <div onDrop={e=>{e.preventDefault();add(e.dataTransfer.files);}} onDragOver={e=>e.preventDefault()} onClick={()=>ref.current.click()}
+      style={{border:"2px dashed #ffc62d",borderRadius:9,padding:"12px",textAlign:"center",cursor:"pointer",background:"#fafafa",marginBottom:8}}>
+      <div style={{fontSize:20,marginBottom:2}}>📷</div>
+      <div style={{fontFamily:PN,fontWeight:600,fontSize:12,color:C.d}}>Arrastrá o hacé click · máx 10</div>
+      <div style={{fontFamily:PN,fontSize:10,color:C.g,marginTop:2}}>Scroll en cada foto = zoom · arrastrá = mover</div>
+      <input ref={ref} type="file" multiple accept="image/*" style={{display:"none"}} onChange={e=>add(e.target.files)}/>
+    </div>
+    {photos.length>0&&<>
+      <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:"#999",letterSpacing:.5,textTransform:"uppercase",marginBottom:4}}>Tocá para seleccionar · ← → reordenar</div>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:4}}>
+        {photos.map(p=>{
+          const si=selected.indexOf(p.id),isSel=si>=0;
+          return <div key={p.id} style={{position:"relative",aspectRatio:"1",borderRadius:5,overflow:"hidden",border:`2.5px solid ${isSel?"#ffc62d":"#DDD"}`,cursor:"pointer"}} onClick={()=>tog(p.id)}>
+            <img src={p.url} style={{width:"100%",height:"100%",objectFit:"cover"}}/>
+            {isSel&&<div style={{position:"absolute",top:2,left:2,background:"#ffc62d",color:"#111",fontSize:8,fontWeight:800,width:14,height:14,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:PN}}>{si+1}</div>}
+            {isSel&&<div style={{position:"absolute",bottom:2,left:0,right:0,display:"flex",justifyContent:"center",gap:2}}>
+              <button onClick={e=>{e.stopPropagation();up(p.id);}} style={{background:"rgba(0,0,0,.7)",color:"white",border:"none",borderRadius:2,width:13,height:13,cursor:"pointer",fontSize:7,display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
+              <button onClick={e=>{e.stopPropagation();dn(p.id);}} style={{background:"rgba(0,0,0,.7)",color:"white",border:"none",borderRadius:2,width:13,height:13,cursor:"pointer",fontSize:7,display:"flex",alignItems:"center",justifyContent:"center"}}>→</button>
+            </div>}
+            <button onClick={e=>{e.stopPropagation();setPhotos(prev=>prev.filter(x=>x.id!==p.id));setSelected(prev=>prev.filter(x=>x!==p.id));}}
+              style={{position:"absolute",top:2,right:2,background:"rgba(0,0,0,.7)",color:"white",border:"none",borderRadius:"50%",width:13,height:13,cursor:"pointer",fontSize:7,display:"flex",alignItems:"center",justifyContent:"center"}}>✕</button>
+          </div>;
+        })}
+      </div>
+    </>}
+  </div>;
+}
+
+/* ── Descargar ── */
+function DLBtn({targetRef,fname,accent}){
+  const [loading,setLoading]=useState(false);
+  const go=async()=>{
+    setLoading(true);
+    try{const cv=await html2canvas(targetRef.current,{useCORS:true,allowTaint:true,scale:2,backgroundColor:null});const a=document.createElement("a");a.download=fname;a.href=cv.toDataURL("image/png");a.click();}
+    catch(e){alert("Error: "+e.message);}
+    finally{setLoading(false);}
+  };
+  return <button onClick={go} disabled={loading}
+    style={{display:"flex",alignItems:"center",justifyContent:"center",gap:6,padding:"10px 14px",background:loading?"#CCC":accent,color:C.d,border:"none",borderRadius:8,fontFamily:PN,fontWeight:800,fontSize:12,cursor:loading?"not-allowed":"pointer",width:"100%"}}>
+    {loading?"⏳ Generando…":"⬇️ Descargar imagen"}
+  </button>;
+}
+
+const SLAYS=[{id:"A",l:"A: Foto+3 mini"},{id:"B",l:"B: Foto+Info"},{id:"C",l:"C: 2+1 col"},
+  {id:"D",l:"D: Pantalla"},{id:"E",l:"E: Banda color"},{id:"F",l:"F: 2 fotos"},
+  {id:"G",l:"G: Split claro"},{id:"H",l:"H: Collage"},{id:"I",l:"I: Ghost"},
+  {id:"J",l:"J: Header+Grid"},{id:"K",l:"K: 1+3+Título"}];
+const LMAP={A:LA,B:LB,C:LC,D:LD,E:LE,F:LF,G:LG,H:LH,I:LI,J:LJ,K:LK};
+
+/* ══════════════════════════════════════════════
+   APP PRINCIPAL
+══════════════════════════════════════════════ */
+function App(){
+  const [brand,setBrand]=useState("capparelli");
+  const [photos,setPhotos]=useState([]);
+  const [selected,setSelected]=useState([]);
+  const [mode,setMode]=useState("story");
+  const [stL,setStL]=useState("A");
+  const [slide,setSlide]=useState(0);
+  const [lt,setLt]=useState("full");
+  const [labels,setLabels]=useState([]);
+  const [data,setData]=useState(DEMO);
+  const [inputMode,setInputMode]=useState("manual");
+  const [autoSubMode,setAutoSubMode]=useState("url");
+  const [autoUrl,setAutoUrl]=useState("");
+  const [pasteContent,setPasteContent]=useState("");
+  const [autoStatus,setAutoStatus]=useState("idle");
+  const [autoMsg,setAutoMsg]=useState("");
+  const pRef=useRef();
+
+  useEffect(()=>{setLabels(p=>Array.from({length:selected.length},(_,i)=>p[i]||{title:"",sub:""}));},[selected.length]);
+
+  const upd=k=>v=>setData(p=>({...p,[k]:v}));
+  const updA=(i,k)=>v=>setData(p=>{const a=[...p.agentes];a[i]={...a[i],[k]:v};return{...p,agentes:a};});
+  const updL=(i,k)=>v=>setLabels(p=>{const l=[...p];l[i]={...(l[i]||{}),[k]:v};return l;});
+
+  const callProxy=(body)=>
+    fetch("/.netlify/functions/proxy",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(body)
+    });
+
+  const applyEx=(ex)=>{
+    const n=s=>String(s||"").trim();
+    const op=n(ex.op).toLowerCase().includes("alquiler")?"alquiler":"venta";
+    const mon=n(ex.moneda)||(op==="alquiler"?"$":"USD");
+    setData(prev=>({...prev,tipo:n(ex.tipo)||prev.tipo,op,
+      m2:n(ex.m2),amb:n(ex.amb),dorm:n(ex.dorm),ban:n(ex.ban),gar:n(ex.gar),pool:!!ex.pool,
+      precio:n(ex.precio),moneda:mon,expensas:n(ex.expensas),monedaExp:n(ex.monedaExp)||"$",
+      dir:n(ex.dir),badge:n(ex.badge)}));
+    const fotos=(ex.fotos||[]).filter(u=>typeof u==="string"&&u.startsWith("http")).slice(0,10);
+    if(fotos.length){const np=fotos.map(u=>({url:u,id:Math.random()}));setPhotos(np);setSelected(np.map(p=>p.id));}
+    return {op,nF:fotos.length};
+  };
+
+  const parseRes=async(res)=>{
+    const txt=await res.text();
+    if(!txt)throw new Error("El servidor no respondió.");
+    let d;try{d=JSON.parse(txt);}catch{throw new Error("Respuesta inválida: "+txt.substring(0,100));}
+    if(!res.ok||d.error)throw new Error(d.error||"Error "+res.status);
+    return d;
+  };
+
+  const loadFromUrl=async()=>{
+    if(!autoUrl.trim()){setAutoMsg("Pegá una URL.");return;}
+    setAutoStatus("loading");setAutoMsg("⏳ Analizando propiedad...");
+    try{
+      const ex=await parseRes(await callProxy({url:autoUrl.trim()}));
+      const {op,nF}=applyEx(ex);
+      setAutoMsg("✓ Listo. Operación: "+op+(nF?" | "+nF+" fotos":" | Subí fotos manualmente")+". Revisá.");
+      setAutoStatus("done");
+    }catch(err){setAutoStatus("error");setAutoMsg("Error: "+err.message);}
+  };
+
+  const loadFromPaste=async()=>{
+    const raw=pasteContent.trim();
+    if(!raw){setAutoMsg("Pegá el contenido primero.");return;}
+    setAutoStatus("loading");setAutoMsg("⏳ Analizando...");
+    try{
+      const ex=await parseRes(await callProxy({text:raw.substring(0,20000)}));
+      const {op,nF}=applyEx(ex);
+      setAutoMsg("✓ Listo. Operación: "+op+(nF?" | "+nF+" fotos":" | Subí fotos manualmente")+". Revisá.");
+      setAutoStatus("done");
+    }catch(err){setAutoStatus("error");setAutoMsg("Error: "+err.message);}
+  };
+
+  const b=BR[brand];
+  const selPhotos=selected.map(id=>photos.find(p=>p.id===id)).filter(Boolean);
+  const ph=selPhotos.map(p=>p.url);
+  const carSlides=[{type:"cover"},...selPhotos.slice(1).map((_,i)=>({type:"photo",idx:i+1})),{type:"cta"}];
+  const total=carSlides.length;
+  const tipoOpts=["Departamento","Casa","Dúplex","Triplex","PH","Local","Oficina","Terreno","Cochera"].map(v=>({v,l:v}));
+  const opOpts=["venta","alquiler","alquiler temporal"].map(v=>({v,l:v[0].toUpperCase()+v.slice(1)}));
+  const SC=LMAP[stL]||LA;
+  const W=320;
+
+  const Tab=({id,label})=>
+    <button onClick={()=>setMode(id)} style={{flex:1,padding:"8px 0",border:"none",cursor:"pointer",borderRadius:8,fontFamily:PN,fontWeight:700,fontSize:11,letterSpacing:.6,textTransform:"uppercase",background:mode===id?b.bg:"transparent",color:mode===id?"white":C.m}}>
+      {label}
+    </button>;
+
+  return <div style={{minHeight:"100vh",background:"#F3F3F3"}}>
+    {/* Header */}
+    <div style={{background:b.bg,padding:"12px 20px",display:"flex",alignItems:"center",gap:12,flexWrap:"wrap"}}>
+      <b.H h={30} light={true}/>
+      <div style={{width:1,height:24,background:"rgba(255,255,255,.2)"}}/>
+      <span style={{color:"rgba(255,255,255,.45)",fontSize:10,letterSpacing:2,textTransform:"uppercase"}}>Generador de Plantillas</span>
+      <div style={{marginLeft:"auto",display:"flex",gap:6}}>
+        {Object.values(BR).map(br=><button key={br.id} onClick={()=>setBrand(br.id)}
+          style={{padding:"5px 12px",border:`2px solid ${brand===br.id?br.acc:"rgba(255,255,255,.2)"}`,borderRadius:18,fontFamily:PN,fontSize:9,fontWeight:700,cursor:"pointer",background:brand===br.id?"rgba(255,255,255,.12)":"transparent",color:brand===br.id?"white":"rgba(255,255,255,.45)"}}>
+          {br.name.split(" ")[0].toUpperCase()}
+        </button>)}
+      </div>
+    </div>
+
+    {/* Main grid */}
+    <div className="col2" style={{maxWidth:1100,margin:"0 auto",padding:"16px 14px",display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
+
+      {/* LEFT */}
+      <div>
+                <Card title="Modo de carga">
+          <div style={{display:"flex",gap:6,marginBottom:10}}>
+            {[["manual","Manual"],["auto","Automatico"]].map(([id,label])=>
+              <button key={id} onClick={()=>{setInputMode(id);setAutoStatus("idle");setAutoMsg("");}}
+                style={{flex:1,padding:"8px 6px",borderRadius:8,cursor:"pointer",
+                  border:"2px solid "+(inputMode===id?b.acc:"#E0E0E0"),
+                  fontFamily:PN,fontWeight:700,fontSize:11,
+                  background:inputMode===id?"#FFF8E1":"white",color:inputMode===id?C.d:C.m}}>
+                {label}
+              </button>
+            )}
+          </div>
+          {inputMode==="auto"&&<>
+            <div style={{display:"flex",gap:4,marginBottom:8,background:"#F5F5F5",borderRadius:8,padding:3}}>
+              {[["url","Desde URL"],["paste","Pegar texto"]].map(([id,label])=>
+                <button key={id} onClick={()=>{setAutoSubMode(id);setAutoStatus("idle");setAutoMsg("");}}
+                  style={{flex:1,padding:"6px 4px",border:"none",borderRadius:6,cursor:"pointer",
+                    fontFamily:PN,fontWeight:700,fontSize:11,
+                    background:autoSubMode===id?"white":"transparent",
+                    color:autoSubMode===id?C.d:C.m,
+                    boxShadow:autoSubMode===id?"0 1px 3px rgba(0,0,0,.12)":"none"}}>
+                  {label}
+                </button>
+              )}
+            </div>
+            {autoSubMode==="url"&&<>
+              <div style={{fontSize:11,fontFamily:PN,color:C.m,marginBottom:6}}>
+                Pegá la URL de la ficha y el sistema extrae todo automaticamente.
+              </div>
+              <div style={{display:"flex",gap:6}}>
+                <input value={autoUrl} onChange={e=>setAutoUrl(e.target.value)}
+                  onKeyDown={e=>e.key==="Enter"&&loadFromUrl()}
+                  placeholder="https://capparellipropiedades.com/propiedad/..."
+                  style={{flex:1,padding:"7px 10px",border:"1.5px solid #D0D0D0",
+                    borderRadius:7,fontFamily:PN,fontSize:11,outline:"none"}}/>
+                <button onClick={loadFromUrl} disabled={autoStatus==="loading"}
+                  style={{padding:"7px 16px",border:"none",borderRadius:7,whiteSpace:"nowrap",
+                    cursor:autoStatus==="loading"?"not-allowed":"pointer",
+                    background:autoStatus==="loading"?"#ccc":b.acc,
+                    fontFamily:PN,fontWeight:800,fontSize:11,color:C.d}}>
+                  {autoStatus==="loading"?"Cargando...":"Cargar"}
+                </button>
+              </div>
+            </>}
+            {autoSubMode==="paste"&&<>
+              <div style={{fontSize:11,fontFamily:PN,lineHeight:1.6,marginBottom:6,
+                background:"#FFFBE6",border:"1px solid #FFE082",borderRadius:6,padding:"8px 10px",color:C.d}}>
+                <strong>Como hacerlo:</strong><br/>
+                1. Abrí la ficha en Chrome<br/>
+                2. <strong>Ctrl+A</strong> y luego <strong>Ctrl+C</strong><br/>
+                3. Pegá acá con <strong>Ctrl+V</strong>
+              </div>
+              <textarea value={pasteContent} onChange={e=>setPasteContent(e.target.value)}
+                placeholder="Pegá el contenido de la pagina..."
+                style={{width:"100%",minHeight:90,padding:"8px 10px",boxSizing:"border-box",
+                  border:"1.5px solid #D0D0D0",borderRadius:7,fontFamily:PN,fontSize:11,
+                  outline:"none",resize:"vertical",lineHeight:1.4}}/>
+              <button onClick={loadFromPaste} disabled={autoStatus==="loading"||!pasteContent.trim()}
+                style={{marginTop:6,width:"100%",padding:"8px 0",border:"none",borderRadius:7,
+                  fontFamily:PN,fontWeight:800,fontSize:12,color:C.d,
+                  background:(!pasteContent.trim()||autoStatus==="loading")?"#ccc":b.acc,
+                  cursor:(!pasteContent.trim()||autoStatus==="loading")?"not-allowed":"pointer"}}>
+                {autoStatus==="loading"?"Analizando...":"Extraer datos"}
+              </button>
+            </>}
+            {autoMsg&&<div style={{marginTop:8,padding:"7px 10px",borderRadius:6,
+              fontFamily:PN,fontSize:11,lineHeight:1.5,
+              background:autoStatus==="done"?"#F0FFF4":autoStatus==="error"?"#FFF0F0":"#FFFBE6",
+              color:autoStatus==="done"?"#2E7D32":autoStatus==="error"?"#C62828":"#7B5B00",
+              border:"1px solid "+(autoStatus==="done"?"#A5D6A7":autoStatus==="error"?"#FFCDD2":"#FFE082")}}>
+              {autoMsg}
+            </div>}
+          </>}
+        </Card>
+
+<Card title="📷 Fotos">
+          <PhotoMgr photos={photos} setPhotos={setPhotos} selected={selected} setSelected={setSelected}/>
+        </Card>
+
+        <Card title="📋 Propiedad">
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"0 10px"}}>
+            <Sel label="Tipo" value={data.tipo} onChange={upd("tipo")} options={tipoOpts}/>
+            <Sel label="Operación" value={data.op} onChange={upd("op")} options={opOpts}/>
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"0 6px"}}>
+            <Inp small label="M²"    value={data.m2}   onChange={upd("m2")}   placeholder="220"/>
+            <Inp small label="Amb."  value={data.amb}  onChange={upd("amb")}  placeholder="5"/>
+            <Inp small label="Dorm." value={data.dorm} onChange={upd("dorm")} placeholder="4"/>
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"0 6px"}}>
+            <Inp small label="Baños" value={data.ban}  onChange={upd("ban")}  placeholder="3"/>
+            <Inp small label="Coch." value={data.gar}  onChange={upd("gar")}  placeholder="2"/>
+            <div style={{marginBottom:5}}>
+              <label style={{display:"block",fontFamily:PN,fontSize:10,fontWeight:700,color:C.m,letterSpacing:.6,marginBottom:2,textTransform:"uppercase"}}>Pileta</label>
+              <button onClick={()=>upd("pool")(!data.pool)} style={{padding:"5px 12px",border:`1.5px solid ${data.pool?"#ffc62d":"#E0E0E0"}`,borderRadius:6,fontFamily:PN,fontSize:11,fontWeight:700,cursor:"pointer",background:data.pool?"#FFF8E1":"white",color:data.pool?C.d:C.m}}>
+                {data.pool?"✓ Sí":"No"}
+              </button>
+            </div>
+          </div>
+          <MRow label="Precio" value={data.precio} onChange={upd("precio")} moneda={data.moneda} onMoneda={upd("moneda")} placeholder="237.000"/>
+          <MRow label="Expensas (opcional)" value={data.expensas} onChange={upd("expensas")} moneda={data.monedaExp} onMoneda={upd("monedaExp")} placeholder="85.000"/>
+          <Inp label="Dirección" value={data.dir}   onChange={upd("dir")}   placeholder="Calle 489 e/ 133 y 134 - Gonnet"/>
+          <Inp label="Badge"     value={data.badge} onChange={upd("badge")} placeholder="Oportunidad · A estrenar"/>
+        </Card>
+
+        {mode==="feed"&&selPhotos.length>1&&
+          <Card title="🏷 Texto por foto">
+            {selPhotos.slice(1).map((p,i)=>(
+              <div key={p.id} style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"0 6px",paddingBottom:4,borderBottom:"1px solid #eee",marginBottom:5}}>
+                <Inp small label={`Foto ${i+2}`}  value={labels[i+1]?.title||""} onChange={updL(i+1,"title")} placeholder="Living"/>
+                <Inp small label="Subtítulo"       value={labels[i+1]?.sub||""}   onChange={updL(i+1,"sub")}   placeholder="amplio"/>
+              </div>
+            ))}
+          </Card>
+        }
+
+        <Card title="📞 Agentes">
+          {data.agentes.map((a,i)=>(
+            <div key={i} style={{marginBottom:10,paddingBottom:10,borderBottom:i<2?"1px solid #f0f0f0":"none"}}>
+              {/* Toggle agente */}
+              <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:6}}>
+                <span style={{fontFamily:PN,fontSize:10,fontWeight:700,color:C.m,textTransform:"uppercase",letterSpacing:.5}}>Agente {i+1}</span>
+                <button onClick={()=>updA(i,"on")(!a.on)} style={{
+                  padding:"3px 10px",border:`1.5px solid ${a.on?"#ffc62d":"#DDD"}`,borderRadius:12,
+                  fontFamily:PN,fontSize:9,fontWeight:700,cursor:"pointer",
+                  background:a.on?"#FFF8E1":"white",color:a.on?C.d:C.g}}>
+                  {a.on?"● Visible":"○ Oculto"}
+                </button>
+              </div>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"0 6px",opacity:a.on?1:.4}}>
+                <Inp small label="Nombre" value={a.n} onChange={updA(i,"n")} placeholder={`Agente ${i+1}`}/>
+                <Inp small label="Teléfono" value={a.t} onChange={updA(i,"t")} placeholder="+54 9 221..."/>
+              </div>
+            </div>
+          ))}
+        </Card>
+      </div>
+
+      {/* RIGHT */}
+      <div>
+        <Card>
+          <div style={{display:"flex",background:"#F0F0F0",borderRadius:10,padding:3,marginBottom:12}}>
+            <Tab id="feed" label="⬛ Carrusel Feed"/>
+            <Tab id="story" label="📱 Historia"/>
+          </div>
+
+          {/* Logo tipo */}
+          <div style={{display:"flex",gap:5,marginBottom:10,alignItems:"center"}}>
+            <span style={{fontFamily:PN,fontSize:10,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",flexShrink:0}}>Logo:</span>
+            {[{id:"full",l:"Horizontal"},{id:"icon",l:"Vertical"}].map(o=>
+              <button key={o.id} onClick={()=>setLt(o.id)} style={{flex:1,padding:"6px 0",border:`2px solid ${lt===o.id?b.acc:"#DDD"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:10,cursor:"pointer",background:lt===o.id?"#FFF8E1":"white",color:lt===o.id?C.d:C.m}}>{o.l}</button>
+            )}
+          </div>
+
+          {/* FEED */}
+          {mode==="feed"&&<>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
+              <button onClick={()=>setSlide(s=>Math.max(0,s-1))} disabled={slide===0} style={{background:b.bg,color:"white",border:"none",borderRadius:7,width:28,height:28,cursor:"pointer",opacity:slide===0?.3:1,fontSize:16}}>‹</button>
+              <div style={{textAlign:"center"}}>
+                <div style={{fontFamily:PN,fontWeight:700,fontSize:12,color:C.d}}>Slide {slide+1} / {total}</div>
+                <div style={{fontSize:10,color:C.g}}>{carSlides[slide]?.type==="cover"?"Portada":carSlides[slide]?.type==="cta"?"Contacto":"Foto ambiente"}</div>
+              </div>
+              <button onClick={()=>setSlide(s=>Math.min(total-1,s+1))} disabled={slide===total-1} style={{background:b.bg,color:"white",border:"none",borderRadius:7,width:28,height:28,cursor:"pointer",opacity:slide===total-1?.3:1,fontSize:16}}>›</button>
+            </div>
+            <div style={{display:"flex",gap:3,justifyContent:"center",marginBottom:10,flexWrap:"wrap"}}>
+              {carSlides.map((_,i)=><div key={i} onClick={()=>setSlide(i)} style={{width:i===slide?16:6,height:6,borderRadius:3,background:i===slide?b.acc:"#CCC",cursor:"pointer"}}/>)}
+            </div>
+            <div style={{display:"flex",justifyContent:"center"}} ref={pRef}>
+              {carSlides[slide]?.type==="cover"&&<FeedCover ph={ph} data={data} brand={brand} lt={lt} W={W} fRef={pRef}/>}
+              {carSlides[slide]?.type==="photo"&&(()=>{const idx=carSlides[slide].idx,lb=labels[idx]||{title:"",sub:""};return<FeedSlide photo={ph[idx]} label={lb.title||`Ambiente ${idx}`} sub={lb.sub} idx={idx} brand={brand} lt={lt} W={W} fRef={pRef}/>;})()}
+              {carSlides[slide]?.type==="cta"&&<FeedCTA data={data} brand={brand} W={W} fRef={pRef}/>}
+            </div>
+          </>}
+
+          {/* STORY */}
+          {mode==="story"&&<>
+            <div style={{marginBottom:10}}>
+              <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",marginBottom:6}}>Disposición</div>
+              <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:5}}>
+                {SLAYS.map(({id,l})=><button key={id} onClick={()=>setStL(id)}
+                  style={{padding:"6px 4px",border:`2px solid ${stL===id?b.acc:"#E0E0E0"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:9,background:stL===id?"#FFF8E1":"white",color:stL===id?C.d:C.m,cursor:"pointer",textAlign:"center",lineHeight:1.3}}>
+                  {l}
+                </button>)}
+              </div>
+            </div>
+            <div style={{display:"flex",justifyContent:"center"}} ref={pRef}>
+              <SC ph={ph} data={data} brand={brand} lt={lt} W={W} slRef={pRef}/>
+            </div>
+            <div style={{marginTop:8,padding:"5px 10px",background:"rgba(0,0,0,.04)",borderRadius:6,fontSize:10,color:C.g,textAlign:"center"}}>
+              Zona punteada = espacio para link/sticker de Instagram
+            </div>
+          </>}
+
+          <div style={{marginTop:12}}><DLBtn targetRef={pRef} fname={`${brand}-${data.tipo}.png`} accent={b.acc}/></div>
+          <div style={{marginTop:6,padding:"7px 12px",background:"#FFF8E1",borderRadius:7,fontSize:10,color:"#8B6914",textAlign:"center",lineHeight:1.5}}>
+            💡 <b>Logo y matrícula</b>: arrastrá libremente<br/>
+            📷 <b>Fotos</b>: scroll = zoom · arrastrá = mover
+          </div>
+        </Card>
+      </div>
+    </div>
+  </div>;
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
