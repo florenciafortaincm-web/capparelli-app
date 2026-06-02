@@ -7,10 +7,10 @@ exports.handler = async (event) => {
 
   if (event.httpMethod === "OPTIONS") return { statusCode: 200, headers: CORS, body: "" };
 
-  const key = process.env.GEMINI_API_KEY;
+  const key = process.env.GROQ_API_KEY;
   if (!key) return {
     statusCode: 500, headers: { ...CORS, "Content-Type": "application/json" },
-    body: JSON.stringify({ error: "GEMINI_API_KEY no configurada." })
+    body: JSON.stringify({ error: "GROQ_API_KEY no configurada en Netlify." })
   };
 
   try {
@@ -18,15 +18,12 @@ exports.handler = async (event) => {
     let text = "";
 
     if (body.url) {
-      // Fetch the page server-side (no CORS issues)
       const r = await fetch(body.url, {
         headers: { "User-Agent": "Mozilla/5.0 (compatible)" },
-        signal: AbortSignal.timeout(12000),
       });
-      if (!r.ok) throw new Error(`No se pudo acceder a la pagina (${r.status})`);
+      if (!r.ok) throw new Error(`No se pudo acceder a la página (${r.status})`);
       const html = await r.text();
 
-      // Extract image URLs
       const imgs = [];
       const rx = /(?:src|data-src)=["'](https?[^"']*\.(?:jpe?g|png|webp)[^"']*)/gi;
       let m;
@@ -34,20 +31,19 @@ exports.handler = async (event) => {
         if (!imgs.includes(m[1]) && !/logo|icon|sprite/i.test(m[1])) imgs.push(m[1]);
       }
 
-      // Clean HTML to text
       text = html
         .replace(/<script[\s\S]*?<\/script>/gi, "")
         .replace(/<style[\s\S]*?<\/style>/gi, "")
         .replace(/<[^>]+>/g, " ")
         .replace(/\s+/g, " ")
-        .substring(0, 18000);
+        .substring(0, 12000);
 
-      if (imgs.length) text += "\n\nURLs de imagenes:\n" + imgs.slice(0, 12).join("\n");
+      if (imgs.length) text += "\n\nURLs de imágenes:\n" + imgs.slice(0, 10).join("\n");
 
     } else if (body.text) {
-      text = body.text.substring(0, 18000);
+      text = body.text.substring(0, 12000);
     } else {
-      throw new Error("Envia 'url' o 'text'.");
+      throw new Error("Enviá 'url' o 'text'.");
     }
 
     const prompt = `Sos un extractor de fichas inmobiliarias argentinas.
@@ -65,23 +61,25 @@ Reglas:
 CONTENIDO:
 ${text}`;
 
-    const gr = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${key}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.1, maxOutputTokens: 1024 },
-        }),
-      }
-    );
+    const gr = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${key}`,
+      },
+      body: JSON.stringify({
+        model: "llama3-8b-8192",
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.1,
+        max_tokens: 1024,
+      }),
+    });
 
-    if (!gr.ok) throw new Error(`Gemini error ${gr.status}: ${(await gr.text()).substring(0, 150)}`);
+    if (!gr.ok) throw new Error(`Groq error ${gr.status}: ${(await gr.text()).substring(0, 150)}`);
 
     const gd = await gr.json();
-    const raw = (gd?.candidates?.[0]?.content?.parts?.[0]?.text || "").replace(/```json|```/g, "").trim();
-    if (!raw) throw new Error("Gemini no devolvió datos.");
+    const raw = (gd?.choices?.[0]?.message?.content || "").replace(/```json|```/g, "").trim();
+    if (!raw) throw new Error("Groq no devolvió datos.");
 
     let parsed;
     try { parsed = JSON.parse(raw); }
