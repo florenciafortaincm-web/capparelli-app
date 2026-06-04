@@ -202,26 +202,23 @@ function Drag({W,H,ix=10,iy=10,children}){
 }
 
 /* logoType: 1=H top-left, 2=H top-right, 3=V top-center, 4=H bottom-left, 5=H bottom-right */
-function DLogo({brand,logoType=1,light=false,W,H}){
+function DLogo({brand,logoType,light,W,H}){
   const b=BR[brand],s=W/295;
   const mL=50/1080*W, mT=140/1920*H;
-  const hH=20*s, hW=hH*4.5;   /* horizontal logo dims */
-  const vH=34*s, vW=vH*1.4;   /* vertical logo dims   */
-  const protY=H*(1-265/1920)-hH-8*s; /* just above protection zone */
-  const cfg={
-    1:{shape:"H", left:mL,              top:mT},
-    2:{shape:"H", left:W-mL-hW,         top:mT},
-    3:{shape:"V", left:W/2-vW/2,        top:mT},
-    4:{shape:"H", left:mL,              top:protY},
-    5:{shape:"H", left:W-mL-hW,         top:protY},
-  }[logoType]||{shape:"H",left:mL,top:mT};
+  const hH=20*s, hW=hH*4.5;
+  const vH=34*s, vW=vH*1.4;
+  const protY=H*(1-265/1920)-hH-8*s;
+  let shape="H", left=mL, top=mT;
+  if(logoType===2){left=W-mL-hW;}
+  else if(logoType===3){shape="V";left=W/2-vW/2;}
+  else if(logoType===4){top=protY;}
+  else if(logoType===5){left=W-mL-hW;top=protY;}
   return(
-    <div style={{position:"absolute",left:cfg.left,top:cfg.top,pointerEvents:"none"}}>
-      {cfg.shape==="H"?<b.H h={hH} light={light}/>:<b.V h={vH} light={light}/>}
+    <div style={{position:"absolute",left:left,top:top,pointerEvents:"none"}}>
+      {shape==="H"?<b.H h={hH} light={light}/>:<b.V h={vH} light={light}/>}
     </div>
   );
 }
-
 function DMat({brand,W,H,ix,iy,dark=false}){
   const b=BR[brand],s=W/295;
   return <Drag W={W} H={H} ix={ix??W*.04} iy={iy??H*.83}>
@@ -750,6 +747,7 @@ function App(){
   const [mode,setMode]=useState("story");
   const [stL,setStL]=useState("A");
   const [slide,setSlide]=useState(0);
+  const [lt,setLt]=useState("full");
   const [logoType,setLogoType]=useState(1);
   const [logoLight,setLogoLight]=useState(false);
   const [logoType,setLogoType]=useState(1);
