@@ -655,8 +655,8 @@ function LK({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
           <PT data={data} b={b} s={s*.82}/><Exp data={data} b={b} s={s*.82}/>
         </div>
       </div>
-      <div style={{display:"grid",gridTemplateRows:"1fr 1fr 1fr",gap:2,background:"white"}}>
-        {[1,2,3].map(i=><div key={i} style={{overflow:"hidden",background:"white"}}><PhotoSlot url={ph[i]}/></div>)}
+      <div style={{display:"grid",gridTemplateRows:"1fr 1fr 1fr",gap:2,background:"white",height:"100%",overflow:"hidden"}}>
+        {[1,2,3].map(i=><div key={i} style={{overflow:"hidden",background:"white",minHeight:0}}><PhotoSlot url={ph[i]}/></div>)}
       </div>
     </div>
     <div style={{height:fH,background:"white",padding:`${3*s}px ${10*s}px`,display:"flex",alignItems:"center",borderBottom:"1px solid #eee",flexShrink:0}}>
