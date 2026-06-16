@@ -169,10 +169,13 @@ const Wp=({w=13,c="currentColor"})=><span style={{display:"inline-flex",width:w,
 
 function Feats({data,b,s,compact=false,light=true}){
   const acc=b.acc,col=light?"white":b.bg,ico=compact?12*s:13*s,txs=compact?8.5*s:9.5*s,gap=compact?7*s:10*s;
+  const ni=v=>parseInt(v,10)||0;
   const items=[data.m2&&{k:"m2",t:`${data.m2}m\u00b2`},data.amb&&{k:"amb",t:`${data.amb} amb.`},
-    data.dorm&&{k:"dorm",t:`${data.dorm} dorm.`},data.ban&&{k:"ban",t:`${data.ban} ba\u00f1o${data.ban>1?"s":""}`},
+    data.dorm&&{k:"dorm",t:`${data.dorm} dorm.`},
+    data.ban&&{k:"ban",t:`${data.ban} ba\u00f1o${ni(data.ban)!==1?"s":""}`},
     data.gar&&{k:"gar",t:`${data.gar} coch.`},data.pool&&{k:"pool",t:"Pileta"},
-    data.antig&&{k:"antig",t:`${data.antig} a\u00f1os`},data.aire&&{k:"aire",t:"A/A"}].filter(Boolean);
+    data.antig&&{k:"antig",t:`${data.antig} a\u00f1o${ni(data.antig)!==1?"s":""}`},
+    data.aire&&{k:"aire",t:"A/A"}].filter(Boolean);
   if(!items.length)return null;
   return <div style={{display:"flex",flexWrap:"wrap",gap:`${3*s}px ${gap}px`,alignItems:"center"}}>
     {items.map(({k,t},i)=><div key={i} style={{display:"flex",alignItems:"center",gap:3.5*s,fontFamily:b.fB,fontSize:txs,fontWeight:700,color:col,textTransform:"uppercase",letterSpacing:"0.06em"}}><Icon name={k} w={ico} c={acc}/><span>{t}</span></div>)}
@@ -316,7 +319,10 @@ function PhotoSlot({url,bg="#2a2a2a"}){
 function Drag({W,H,ix=10,iy=10,children}){
   const [pos,setPos]=useState({x:ix,y:iy});
   const [dragging,setDragging]=useState(false);
+  const [snapX,setSnapX]=useState(null);
+  const [snapY,setSnapY]=useState(null);
   const dr=useRef(false),off=useRef({x:0,y:0}),el=useRef();
+  const THR=14;
   const xy=e=>e.touches?{x:e.touches[0].clientX,y:e.touches[0].clientY}:{x:e.clientX,y:e.clientY};
   const go=e=>{
     e.stopPropagation();e.preventDefault();dr.current=true;setDragging(true);
@@ -328,14 +334,32 @@ function Drag({W,H,ix=10,iy=10,children}){
   const mv=e=>{
     if(!dr.current)return;e.preventDefault();
     const{x,y}=xy(e),p=el.current.parentElement.getBoundingClientRect();
-    setPos({x:Math.min(W-60,Math.max(0,x-p.left-off.current.x)),y:Math.min(H-20,Math.max(0,y-p.top-off.current.y))});
+    const ew=el.current.offsetWidth,eh=el.current.offsetHeight;
+    let nx=Math.min(W-ew,Math.max(0,x-p.left-off.current.x));
+    let ny=Math.min(H-eh, Math.max(0,y-p.top-off.current.y));
+    const sc=W/1080, ml=50*sc;
+    const safeT=H*140/1920, safeB=H*265/1920, mb=H*0.185;
+    const xT=[['ml',ml],['cx',W/2-ew/2],['mr',W-ew-ml]];
+    const yT=[['top',safeT],['cy',H/2-eh/2],['bl',H-mb-eh],['bot',H-safeB-eh]];
+    let sx=null,sy=null;
+    for(const[id,v]of xT){if(Math.abs(nx-v)<THR){nx=v;sx=id;break;}}
+    for(const[id,v]of yT){if(Math.abs(ny-v)<THR){ny=v;sy=id;break;}}
+    setSnapX(sx);setSnapY(sy);
+    setPos({x:nx,y:ny});
   };
-  const stop=()=>{dr.current=false;setDragging(false);window.removeEventListener("mousemove",mv);window.removeEventListener("mouseup",stop);window.removeEventListener("touchmove",mv);window.removeEventListener("touchend",stop);};
-  /* Guías de alineación — solo visibles mientras se arrastra, no se exportan */
-  const g={position:"absolute",pointerEvents:"none",zIndex:39};
+  const stop=()=>{dr.current=false;setDragging(false);setSnapX(null);setSnapY(null);
+    window.removeEventListener("mousemove",mv);window.removeEventListener("mouseup",stop);
+    window.removeEventListener("touchmove",mv);window.removeEventListener("touchend",stop);};
+  const g={position:"absolute",pointerEvents:"none",zIndex:39,left:0,right:0};
+  const gv={position:"absolute",pointerEvents:"none",zIndex:39,top:0,bottom:0};
+  const sc=W/1080, ml=50*sc, safeT=H*140/1920, safeB=H*265/1920;
   return <>
-    {dragging&&<div data-noexport="1" style={{...g,left:0,right:0,top:H/2,height:1,background:"rgba(255,198,45,.6)",borderTop:"1px dashed rgba(255,198,45,.9)"}}/>}
-    {dragging&&<div data-noexport="1" style={{...g,top:0,bottom:0,left:W/2,width:1,background:"rgba(255,198,45,.6)",borderLeft:"1px dashed rgba(255,198,45,.9)"}}/>}
+    {dragging&&<div data-noexport="1" style={{...g,top:safeT,  borderTop:snapY==='top'?"2px solid rgba(220,40,40,1)":"1px dashed rgba(220,40,40,.55)"}}/>}
+    {dragging&&<div data-noexport="1" style={{...g,top:H/2,    borderTop:snapY==='cy' ?"2px solid rgba(255,198,45,1)":"1px dashed rgba(255,198,45,.55)"}}/>}
+    {dragging&&<div data-noexport="1" style={{...g,top:H-safeB,borderTop:snapY==='bot'?"2px solid rgba(40,90,220,1)":"1px dashed rgba(40,90,220,.55)"}}/>}
+    {dragging&&<div data-noexport="1" style={{...gv,left:ml,    borderLeft:snapX==='ml'?"2px solid rgba(200,200,200,1)":"1px dashed rgba(200,200,200,.55)"}}/>}
+    {dragging&&<div data-noexport="1" style={{...gv,left:W/2,   borderLeft:snapX==='cx'?"2px solid rgba(255,198,45,1)":"1px dashed rgba(255,198,45,.55)"}}/>}
+    {dragging&&<div data-noexport="1" style={{...gv,left:W-ml,  borderLeft:snapX==='mr'?"2px solid rgba(200,200,200,1)":"1px dashed rgba(200,200,200,.55)"}}/>}
     <div ref={el} onMouseDown={go} onTouchStart={go}
       style={{position:"absolute",left:pos.x,top:pos.y,cursor:dragging?"grabbing":"grab",userSelect:"none",zIndex:40,touchAction:"none"}}>
       {children}
@@ -388,6 +412,7 @@ function SDragLogo({brand,vert=false,logoLight=true,W,H}){
 
 /* LogoOverlay — unifica modo fijo (SLogo) y libre (SDragLogo) para todos los layouts */
 function LogoOverlay({brand,logoMode,logoPos,logoLight,logoVert,W,H,logoMb}){
+  if(logoPos===0) return null;
   if(logoMode==="libre") return <SDragLogo brand={brand} vert={logoVert} logoLight={logoLight} W={W} H={H}/>;
   return <SLogo brand={brand} logoPos={logoPos} logoLight={logoLight} vert={logoVert} W={W} H={H} logoMb={logoMb}/>;
 }
@@ -1075,6 +1100,7 @@ function App(){
   const [pasteContent,setPasteContent]=useState("");
   const [autoStatus,setAutoStatus]=useState("idle");
   const [autoMsg,setAutoMsg]=useState("");
+  const [pendingPhotos,setPendingPhotos]=useState([]);
   const pRef=useRef();
 
   useEffect(()=>{setLabels(p=>Array.from({length:selected.length},(_,i)=>p[i]||{title:"",sub:""}));},[selected.length]);
@@ -1098,9 +1124,11 @@ function App(){
       m2:n(ex.m2),amb:n(ex.amb),dorm:n(ex.dorm),ban:n(ex.ban),gar:n(ex.gar),pool:!!ex.pool,
       precio:n(ex.precio),moneda:mon,expensas:n(ex.expensas),monedaExp:n(ex.monedaExp)||"$",
       dir:n(ex.dir),badge:n(ex.badge),frente:n(ex.frente),fondo:n(ex.fondo)}));
-    const fotos=(ex.fotos||[]).filter(u=>typeof u==="string"&&u.startsWith("http")).slice(0,20);
-    if(fotos.length){const np=fotos.map(u=>({url:u,id:Math.random()}));setPhotos(np);setSelected(np.map(p=>p.id));}
-    return {op,nF:fotos.length};
+    const allFotos=(ex.fotos||[]).filter(u=>typeof u==="string"&&u.startsWith("http"));
+    const first=allFotos.slice(0,10),rest=allFotos.slice(10);
+    if(first.length){const np=first.map(u=>({url:u,id:Math.random()}));setPhotos(np);setSelected(np.map(p=>p.id));}
+    setPendingPhotos(rest.map(u=>({url:u,id:Math.random()})));
+    return {op,nF:allFotos.length};
   };
 
   const parseRes=async(res)=>{
@@ -1265,6 +1293,14 @@ function App(){
 
 <Card title="Fotos" collapsible>
           <PhotoMgr photos={photos} setPhotos={setPhotos} selected={selected} setSelected={setSelected}/>
+          {pendingPhotos.length>0&&<button onClick={()=>{
+            const next=pendingPhotos.slice(0,10),rest=pendingPhotos.slice(10);
+            setPhotos(p=>[...p,...next]);
+            setSelected(s=>[...s,...next.map(p=>p.id)]);
+            setPendingPhotos(rest);
+          }} style={{marginTop:8,width:"100%",padding:"7px 0",border:`2px solid ${b.acc}`,borderRadius:7,fontFamily:PN,fontWeight:800,fontSize:11,color:C.d,background:"#FFF8E1",cursor:"pointer"}}>
+            Cargar 10 más ({pendingPhotos.length} disponibles)
+          </button>}
         </Card>
 
         <Card title="Propiedad" collapsible>
@@ -1346,19 +1382,25 @@ function App(){
 
           {/* Logo — story: fijo (5pos+H/V+tono) o libre (drag+H/V+tono) | feed: H/V */}
           {mode==="story"&&<>
-            {/* Toggle fijo/libre */}
-            <div style={{display:"flex",gap:4,marginBottom:8}}>
+            {/* Sin logo */}
+            <div style={{marginBottom:8}}>
+              <button onClick={()=>setLogoPos(p=>p===0?2:0)} style={{width:"100%",padding:"6px 0",border:`2px solid ${logoPos===0?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:logoPos===0?"#FFF8E1":"white",color:logoPos===0?C.d:C.m}}>
+                {logoPos===0?"✕ Sin logo (activo)":"Sin logo"}
+              </button>
+            </div>
+            {/* Toggle fijo/libre — solo cuando hay logo */}
+            {logoPos!==0&&<div style={{display:"flex",gap:4,marginBottom:8}}>
               {[{id:"fixed",l:"Fijo"},{id:"libre",l:"Posición libre"}].map(o=>
                 <button key={o.id} onClick={()=>setLogoMode(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${logoMode===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:logoMode===o.id?"#FFF8E1":"white",color:logoMode===o.id?C.d:C.m}}>{o.l}</button>
               )}
-            </div>
-            {/* H/V siempre visible */}
-            <div style={{display:"flex",gap:4,marginBottom:7}}>
+            </div>}
+            {/* H/V — solo cuando hay logo */}
+            {logoPos!==0&&<div style={{display:"flex",gap:4,marginBottom:7}}>
               {[{id:false,l:"Horizontal"},{id:true,l:"Vertical"}].map(o=>
                 <button key={String(o.id)} onClick={()=>setLogoVert(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${logoVert===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:logoVert===o.id?"#FFF8E1":"white",color:logoVert===o.id?C.d:C.m}}>{o.l}</button>
               )}
-            </div>
-            {/* Posición — solo en modo fijo */}
+            </div>}
+            {/* Posición — solo en modo fijo y con logo */}
             {logoMode==="fixed"&&<div style={{marginBottom:8}}>
               <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",marginBottom:5}}>Posición</div>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:4,marginBottom:3}}>
