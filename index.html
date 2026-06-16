@@ -178,21 +178,21 @@ function Feats({data,b,s,compact=false,light=true}){
     {items.map(({k,t},i)=><div key={i} style={{display:"flex",alignItems:"center",gap:3.5*s,fontFamily:b.fB,fontSize:txs,fontWeight:700,color:col,textTransform:"uppercase",letterSpacing:"0.06em"}}><Icon name={k} w={ico} c={acc}/><span>{t}</span></div>)}
   </div>;
 }
-/* TerrenoFeats — 3 items grandes cuando tipo es Terreno */
+/* TerrenoFeats — 3 items compactos centrados cuando tipo es Terreno */
 function TerrenoFeats({data,b,s,light=true}){
   const acc=b.acc,col=light?"white":b.bg;
-  const ico=22*s,txsVal=14*s,txsLab=8*s;
+  const ico=14*s,txsVal=10*s,txsLab=6.5*s;
   const items=[
     data.frente&&{k:"frente",v:`${data.frente}m`,l:"FRENTE"},
     data.fondo &&{k:"fondo", v:`${data.fondo}m`, l:"FONDO"},
-    data.m2    &&{k:"m2",    v:`${data.m2}m²`,l:"SUPERFICIE"},
+    data.m2    &&{k:"m2",    v:`${data.m2}m²`,   l:"SUPERFICIE"},
   ].filter(Boolean);
   if(!items.length)return null;
-  return <div style={{display:"flex",gap:8*s,alignItems:"flex-start",justifyContent:"center"}}>
-    {items.map(({k,v,l},i)=><div key={i} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:4*s,flex:1}}>
+  return <div style={{display:"flex",gap:10*s,alignItems:"center",justifyContent:"center"}}>
+    {items.map(({k,v,l},i)=><div key={i} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:3*s}}>
       <Icon name={k} w={ico} c={acc}/>
       <span style={{fontFamily:b.fB,fontSize:txsVal,fontWeight:800,color:col,lineHeight:1,textAlign:"center"}}>{v}</span>
-      <span style={{fontFamily:b.fB,fontSize:txsLab,fontWeight:700,color:acc,letterSpacing:"0.08em",textAlign:"center"}}>{l}</span>
+      <span style={{fontFamily:b.fB,fontSize:txsLab,fontWeight:700,color:acc,letterSpacing:"0.07em",textAlign:"center"}}>{l}</span>
     </div>)}
   </div>;
 }
@@ -224,27 +224,45 @@ function PhotoSlot({url,bg="#2a2a2a"}){
   const [zoom,setZoom]=useState(1);
   const [off,setOff]=useState({x:0,y:0});
   const [hover,setHover]=useState(false);
-  const [showCtrl,setShowCtrl]=useState(false); // controles en mobile
+  const [showCtrl,setShowCtrl]=useState(false);
+  const [nat,setNat]=useState(null);   // {w,h} tamaño natural de la imagen
+  const [cDim,setCDim]=useState({w:1,h:1}); // {w,h} tamaño del contenedor
   const el=useRef();
+  const dragRef=useRef(null);
 
-  useEffect(()=>{setZoom(1);setOff({x:0,y:0});setShowCtrl(false);},[url]);
+  useEffect(()=>{setZoom(1);setOff({x:0,y:0});setShowCtrl(false);setNat(null);},[url]);
 
-  const clamp=(o,z)=>{
-    const w=el.current?el.current.clientWidth:200;
-    const h=el.current?el.current.clientHeight:200;
-    const limX=(z-1)*w/2, limY=(z-1)*h/2;
+  // Medir contenedor con ResizeObserver
+  useEffect(()=>{
+    if(!el.current)return;
+    const ro=new ResizeObserver(([e])=>{
+      const{width:w,height:h}=e.contentRect;
+      if(w>0&&h>0)setCDim({w,h});
+    });
+    ro.observe(el.current);
+    return()=>ro.disconnect();
+  },[]);
+
+  const computeClamp=(o,z,nw,nh)=>{
+    const{w:cw,h:ch}=cDim;
+    const sc=Math.max(cw/(nw||cw),ch/(nh||ch))*z;
+    const rW=( nw||cw)*sc, rH=(nh||ch)*sc;
+    const limX=Math.max(0,(rW-cw)/2), limY=Math.max(0,(rH-ch)/2);
     return{x:Math.max(-limX,Math.min(limX,o.x)),y:Math.max(-limY,Math.min(limY,o.y))};
   };
-  const setZ=nz=>{nz=Math.max(1,Math.min(4,nz));setZoom(nz);setOff(o=>nz<=1.01?{x:0,y:0}:clamp(o,nz));};
+  const setZ=nz=>{
+    nz=Math.max(1,Math.min(4,nz));
+    setZoom(nz);
+    setOff(o=>nz<=1.01?{x:0,y:0}:computeClamp(o,nz,nat?.w,nat?.h));
+  };
 
   useEffect(()=>{
     const e=el.current; if(!e)return;
     const fn=ev=>{ev.preventDefault();setZ(zoom-ev.deltaY*.0025);};
     e.addEventListener('wheel',fn,{passive:false});
     return()=>e.removeEventListener('wheel',fn);
-  },[zoom]);
+  },[zoom,nat,cDim]);
 
-  const dragRef=useRef(null);
   const onPD=e=>{
     if(!url)return;
     try{e.currentTarget.setPointerCapture(e.pointerId);}catch(_){}
@@ -255,30 +273,33 @@ function PhotoSlot({url,bg="#2a2a2a"}){
     if(!dragRef.current)return;
     const dx=e.clientX-dragRef.current.x, dy=e.clientY-dragRef.current.y;
     dragRef.current={x:e.clientX,y:e.clientY};
-    setOff(o=>clamp({x:o.x+dx,y:o.y+dy},zoom));
+    setOff(o=>computeClamp({x:o.x+dx,y:o.y+dy},zoom,nat?.w,nat?.h));
   };
   const onPU=e=>{dragRef.current=null;try{e.currentTarget.releasePointerCapture(e.pointerId);}catch(_){}};
+
+  /* Calcula posición/tamaño del <img> para simular object-fit:cover con píxeles absolutos.
+     html2canvas NO soporta object-fit pero SÍ soporta position:absolute + width/height en px.
+     Esto preserva la calidad nativa del browser (mejor que background-image en thumbnails pequeños). */
+  const getImgStyle=()=>{
+    const{w:cw,h:ch}=cDim;
+    if(!nat||!nat.w||!nat.h)return{position:"absolute",top:0,left:0,width:"100%",height:"100%"};
+    const sc=Math.max(cw/nat.w,ch/nat.h)*zoom;
+    const rW=Math.round(nat.w*sc), rH=Math.round(nat.h*sc);
+    const left=Math.round((cw-rW)/2+off.x);
+    const top=Math.round((ch-rH)/2+off.y);
+    return{position:"absolute",left,top,width:rW,height:rH,userSelect:"none",pointerEvents:"none"};
+  };
+
   const btn={width:26,height:26,border:"none",borderRadius:4,background:"rgba(20,20,20,.85)",color:"#fff",fontSize:14,fontWeight:700,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",lineHeight:1,fontFamily:PN};
   const bstop=fn=>e=>{e.stopPropagation();e.preventDefault();fn();};
   const visCtrl=hover||showCtrl;
-
-  /* background-image: html2canvas soporta backgroundSize:"cover" correctamente;
-     <img objectFit:"cover"> se estira en el export */
-  const bgStyle=url?{
-    backgroundImage:`url(${url})`,
-    backgroundSize:"cover",
-    backgroundRepeat:"no-repeat",
-    backgroundPosition:`calc(50% + ${off.x}px) calc(50% + ${off.y}px)`,
-    transform:zoom>1.01?`scale(${zoom})`:"none",
-    transformOrigin:"center",
-  }:{};
 
   return <div ref={el}
     onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)}
     onClick={()=>{if(isTouchDevice()&&url)setShowCtrl(v=>!v);}}
     style={{width:"100%",height:"100%",overflow:"hidden",background:bg,userSelect:"none",touchAction:"none",cursor:url?(zoom>1.01?"move":"grab"):"default",position:"relative"}}
     onPointerDown={onPD} onPointerMove={onPM} onPointerUp={onPU} onPointerCancel={onPU}>
-    <div style={{position:"absolute",inset:0,...bgStyle}}/>
+    {url&&<img src={url} onLoad={e=>setNat({w:e.target.naturalWidth,h:e.target.naturalHeight})} style={getImgStyle()} draggable={false}/>}
     {!url&&<div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center"}}>
       <span style={{color:"rgba(255,255,255,.2)",fontSize:10,fontFamily:PN}}>sin foto</span>
     </div>}
