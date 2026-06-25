@@ -200,6 +200,35 @@ function TerrenoFeats({data,b,s,light=true}){
   </div>;
 }
 const isTerr=d=>d&&d.tipo==="Terreno";
+/* Helper para items inline de layouts de carrusel/feed */
+const _ni=v=>parseInt(v,10)||0;
+function buildItems(data, style="compact"){
+  if(isTerr(data)){
+    /* Terreno: solo frente, fondo, superficie */
+    return [
+      data.frente&&["frente",`${data.frente}m FRENTE`],
+      data.fondo &&["fondo", `${data.fondo}m FONDO`],
+      data.m2    &&["m2",    `${data.m2}m² SUP.`],
+    ].filter(Boolean);
+  }
+  if(style==="caps") return [
+    data.m2  &&["m2",  `${data.m2}M² TOTALES`],
+    data.dorm&&["dorm",`${data.dorm} DORMITORIO${_ni(data.dorm)!==1?"S":""}`],
+    data.ban &&["ban", `${data.ban} BAÑO${_ni(data.ban)!==1?"S":""}`],
+    data.gar &&["gar", `${data.gar} COCHERA${_ni(data.gar)!==1?"S":""}`],
+    data.pool&&["pool","PILETA"],
+    data.amb &&["amb", `${data.amb} AMBIENTE${_ni(data.amb)!==1?"S":""}`],
+  ].filter(Boolean);
+  /* compact: lower case abreviado */
+  return [
+    data.m2  &&["m2",  `${data.m2}m²`],
+    data.dorm&&["dorm",`${data.dorm} dorm.`],
+    data.ban &&["ban", `${data.ban} baño${_ni(data.ban)!==1?"s":""}`],
+    data.gar &&["gar", `${data.gar} coch.`],
+    data.pool&&["pool","Pileta"],
+    data.amb &&["amb", `${data.amb} amb.`],
+  ].filter(Boolean);
+}
 function SmartFeats(props){
   return isTerr(props.data)?<TerrenoFeats {...props}/>:<Feats {...props}/>;
 }
@@ -483,12 +512,13 @@ function InfoInner({data,b,s,compact=false}){
 */
 
 /* A: foto grande flex + 3 minis + info */
-function LA({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
+function LA({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef,gapColor}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
   const mH=Math.round(H*.13);
+  const gc=gapColor||b.bg;
   return <div ref={slRef} style={{width:W,height:H,background:b.bg,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
     <div style={{flex:1,overflow:"hidden",minHeight:Math.round(H*.35)}}><PhotoSlot url={ph[0]}/></div>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:2,height:mH,flexShrink:0,overflow:"hidden"}}>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:2,height:mH,flexShrink:0,overflow:"hidden",background:gc}}>
       {[1,2,3].map(i=><div key={i} style={{height:mH,overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
     </div>
     <div style={{height:3,background:b.acc,flexShrink:0}}/>
@@ -513,12 +543,13 @@ function LB({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
 }
 
 /* C: 2+1 columnas flex + info */
-function LC({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
+function LC({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef,gapColor}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const gc=gapColor||b.bg;
   return <div ref={slRef} style={{width:W,height:H,background:b.bg,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
-    <div style={{flex:1,display:"grid",gridTemplateColumns:"2fr 1fr",gap:2,overflow:"hidden",minHeight:Math.round(H*.42)}}>
+    <div style={{flex:1,display:"grid",gridTemplateColumns:"2fr 1fr",gap:2,overflow:"hidden",minHeight:Math.round(H*.42),background:gc}}>
       <div style={{overflow:"hidden"}}><PhotoSlot url={ph[0]}/></div>
-      <div style={{display:"grid",gridTemplateRows:"1fr 1fr",gap:2}}>
+      <div style={{display:"grid",gridTemplateRows:"1fr 1fr",gap:2,background:gc}}>
         {[1,2].map(i=><div key={i} style={{overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
       </div>
     </div>
@@ -625,11 +656,12 @@ function LG({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
 }
 
 /* H: fondo claro — logo+línea, título+precio, 2fotos, panorama, features, dirección+logo */
-function LH({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
+function LH({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef,gapColor}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
   const sh=H*.82,safeTop=Math.round(H*140/1920);
   const hH=Math.round(sh*.09),tH=Math.round(sh*.09),fH=Math.round(sh*.10),aH=Math.round(sh*.09);
   const headerH=hH+safeTop;
+  const gc=gapColor||"white";
   return <div ref={slRef} style={{width:W,height:H,background:"white",overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
     <div style={{height:headerH,background:"white",borderBottom:`2.5px solid ${b.acc}`,flexShrink:0}}/>
     <div style={{height:tH,background:"white",display:"flex",alignItems:"center",justifyContent:"space-between",padding:`0 ${12*s}px`,borderBottom:"1px solid #eee",flexShrink:0}}>
@@ -637,8 +669,8 @@ function LH({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
       <PT data={data} b={{...b,acc:b.acc}} s={s*.78} light={false}/>
     </div>
     {/* Fotos — flex:1 elimina espacio muerto */}
-    <div style={{flex:1,display:"flex",flexDirection:"column",gap:2,overflow:"hidden",minHeight:Math.round(H*.30)}}>
-      <div style={{flex:1,display:"grid",gridTemplateColumns:"1fr 1fr",gap:2,overflow:"hidden"}}>
+    <div style={{flex:1,display:"flex",flexDirection:"column",gap:2,overflow:"hidden",minHeight:Math.round(H*.30),background:gc}}>
+      <div style={{flex:1,display:"grid",gridTemplateColumns:"1fr 1fr",gap:2,overflow:"hidden",background:gc}}>
         {[0,1].map(i=><div key={i} style={{overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
       </div>
       <div style={{flex:1,overflow:"hidden"}}><PhotoSlot url={ph[2]}/></div>
@@ -664,9 +696,7 @@ function LH({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
 function LI({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
   const Ghost=b.Ghost;
-  const items=[data.m2&&["m2",`${data.m2}M² TOTALES`],data.dorm&&["dorm",`${data.dorm} DORMITORIOS`],
-    data.ban&&["ban",`${data.ban} BAÑOS`],data.gar&&["gar",`${data.gar} COCHERAS`],
-    data.pool&&["pool","PILETA"],data.amb&&["amb",`${data.amb} AMBIENTES`]].filter(Boolean);
+  const items=buildItems(data,"caps");
   return <div ref={slRef} style={{width:W,height:H,background:"#2A2A2A",overflow:"hidden",position:"relative"}}>
     <div style={{position:"absolute",inset:0}}><PhotoSlot url={ph[0]}/></div>
     <div style={{position:"absolute",inset:0,background:"rgba(0,0,0,.45)"}}/>
@@ -704,8 +734,9 @@ function LI({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
 }
 
 /* J: header oscuro con logo, foto+overlay, 3 minis, features bar, contactos */
-function LJ({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
+function LJ({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef,gapColor}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const gc=gapColor||b.bg;
   const sh=H*.82,safeTop=Math.round(H*140/1920);
   const hH=Math.round(sh*.09),mH=Math.round(sh*.15),fH=Math.round(sh*.10),cH=Math.round(sh*.13);
   const headerH=hH+safeTop;
@@ -722,7 +753,7 @@ function LJ({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
         <Exp data={data} b={b} s={s*.82}/>
       </div>
     </div>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:2,height:mH,flexShrink:0,overflow:"hidden"}}>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:2,height:mH,flexShrink:0,overflow:"hidden",background:gc}}>
       {[1,2,3].map(i=><div key={i} style={{height:mH,overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
     </div>
     <div style={{height:fH,background:b.bg,padding:`0 ${14*s}px`,display:"flex",alignItems:"center",borderTop:`1px solid rgba(255,255,255,.10)`,flexShrink:0}}>
@@ -745,12 +776,13 @@ function LJ({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
 }
 
 /* K: fondo claro, 1 grande izq + 3 der, features, título, dirección */
-function LK({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
+function LK({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef,gapColor}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
   const sh=H*.82,safeTop=Math.round(H*140/1920);
   const gH=Math.round(sh*.44),fH=Math.round(sh*.10),tH=Math.round(sh*.21),aH=Math.round(sh*.08);
+  const gc=gapColor||"white";
   return <div ref={slRef} style={{width:W,height:H,background:"white",overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
-    <div style={{display:"grid",gridTemplateColumns:"3fr 2fr",gap:2,height:gH,flexShrink:0,overflow:"hidden"}}>
+    <div style={{display:"grid",gridTemplateColumns:"3fr 2fr",gap:2,height:gH,flexShrink:0,overflow:"hidden",background:gc}}>
       <div style={{height:gH,overflow:"hidden",position:"relative"}}>
         <PhotoSlot url={ph[0]}/>
         <div style={{position:"absolute",inset:0,background:"linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 55%)"}}/>
@@ -759,7 +791,7 @@ function LK({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
           <PT data={data} b={b} s={s*.82}/><Exp data={data} b={b} s={s*.82}/>
         </div>
       </div>
-      <div style={{display:"grid",gridTemplateRows:"1fr 1fr 1fr",gap:2,background:"white",height:"100%",overflow:"hidden"}}>
+      <div style={{display:"grid",gridTemplateRows:"1fr 1fr 1fr",gap:2,background:gc,height:"100%",overflow:"hidden"}}>
         {[1,2,3].map(i=><div key={i} style={{overflow:"hidden",background:"white",minHeight:0}}><PhotoSlot url={ph[i]}/></div>)}
       </div>
     </div>
@@ -798,9 +830,7 @@ function LL({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
   const lzH=Math.round(H*.18);
   /* Logo "abajo": dentro de la LZ, centrado verticalmente en ella */
   const llLogoMb=Math.round(lzH*.45);
-  const items=[data.m2&&["m2",`${data.m2}m²`],data.dorm&&["dorm",`${data.dorm} dorm.`],
-    data.ban&&["ban",`${data.ban} baños`],data.gar&&["gar",`${data.gar} coch.`],
-    data.pool&&["pool","Pileta"],data.amb&&["amb",`${data.amb} amb.`]].filter(Boolean).slice(0,5);
+  const items=buildItems(data).slice(0,5);
   return <div ref={slRef} style={{width:W,height:H,background:b.bg,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
     {/* Header oscuro — incluye safe zone del reloj */}
     <div style={{height:headerH,background:b.bg,padding:`${8*s}px ${14*s}px`,paddingTop:safeTop+4*s,display:"flex",flexDirection:"column",justifyContent:"flex-end",flexShrink:0}}>
@@ -851,20 +881,19 @@ function LL({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
 }
 
 /* M: Claro — fotos apiladas + info centrada + dirección grande + features con iconos */
-function LM({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
+function LM({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef,gapColor}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const gc=gapColor||"white";
   const safeTop=Math.round(H*140/1920);
   /* Fotos: 2 en fila (más altas para cubrir safe zone del reloj) + panorámica */
   const photo2H=Math.round(H*.20)+safeTop; // absorbe zona del reloj con más foto
   const panH=Math.round(H*.22);
   const lzH=Math.round(H*.18);
   const lmLogoMb=Math.round(lzH*.45);
-  const items=[data.m2&&["m2",`${data.m2} m²`],data.dorm&&["dorm",`${data.dorm} dorm.`],
-    data.ban&&["ban",`${data.ban} baños`],data.gar&&["gar",`${data.gar} coch.`],
-    data.pool&&["pool","Pileta"],data.amb&&["amb",`${data.amb} amb.`]].filter(Boolean).slice(0,4);
+  const items=buildItems(data).slice(0,4);
   return <div ref={slRef} style={{width:W,height:H,background:"white",overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
     {/* Fotos: 2 en fila — altura incluye zona del reloj, el contenido queda cubierto por foto */}
-    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:2,height:photo2H,flexShrink:0,overflow:"hidden"}}>
+    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:2,height:photo2H,flexShrink:0,overflow:"hidden",background:gc}}>
       {[0,1].map(i=><div key={i} style={{overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
     </div>
     <div style={{height:panH,flexShrink:0,overflow:"hidden",position:"relative",marginTop:2}}>
@@ -906,44 +935,37 @@ function LM({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
 }
 
 /* ── Galería (sin info, solo marca de agua) ── */
-function GalA({ph,brand,W,slRef}){
+function GalA({ph,brand,W,slRef,logoVert=false,logoLight=true,gapColor}){
   const H=Math.round(W*1920/1080),b=BR[brand],sc=W/1080;
-  const gap=Math.round(2*sc*3.375); /* gap real ~6px en 1080px */
-  return <div ref={slRef} style={{width:W,height:H,position:"relative",background:"#000",overflow:"hidden",
-    display:"grid",gridTemplateColumns:"1fr 1fr",gridTemplateRows:"1fr 1fr",gap:gap}}>
-    {[0,1,2,3].map(i=><div key={i} style={{overflow:"hidden",position:"relative"}}>
-      <PhotoSlot url={ph[i]?.url} bg={b.bg}/>
-    </div>)}
-    <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",
-      opacity:.07,pointerEvents:"none",zIndex:10}}>
-      <b.H h={110*sc} light={true}/>
-    </div>
-  </div>;
-}
-function GalB({ph,brand,W,slRef,idx=0}){
-  const H=Math.round(W*1920/1080),b=BR[brand],sc=W/1080;
-  return <div ref={slRef} style={{width:W,height:H,position:"relative",background:"#000",overflow:"hidden"}}>
-    <div style={{position:"absolute",inset:0}}><PhotoSlot url={ph[idx]?.url} bg={b.bg}/></div>
-    <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",
-      opacity:.07,pointerEvents:"none",zIndex:10}}>
-      <b.H h={110*sc} light={true}/>
-    </div>
-  </div>;
-}
-
-function GalH({ph,brand,W,slRef}){
-  /* Canvas horizontal 16:9 */
-  const H=Math.round(W*9/16),b=BR[brand],sc=W/1080;
   const gap=Math.round(2*sc*3.375);
-  return <div ref={slRef} style={{width:W,height:H,position:"relative",background:"#000",overflow:"hidden",
+  const gc=gapColor||"#000";
+  return <div ref={slRef} style={{width:W,height:H,position:"relative",background:gc,overflow:"hidden",
     display:"grid",gridTemplateColumns:"1fr 1fr",gridTemplateRows:"1fr 1fr",gap:gap}}>
     {[0,1,2,3].map(i=><div key={i} style={{overflow:"hidden",position:"relative"}}>
       <PhotoSlot url={ph[i]} bg={b.bg}/>
     </div>)}
-    <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",
-      opacity:.07,pointerEvents:"none",zIndex:10}}>
-      <b.H h={70*sc} light={true}/>
-    </div>
+    <SDragLogo brand={brand} vert={logoVert} logoLight={logoLight} W={W} H={H}/>
+  </div>;
+}
+function GalB({ph,brand,W,slRef,idx=0,logoVert=false,logoLight=true}){
+  const H=Math.round(W*1920/1080),b=BR[brand],sc=W/1080;
+  return <div ref={slRef} style={{width:W,height:H,position:"relative",background:"#000",overflow:"hidden"}}>
+    <div style={{position:"absolute",inset:0}}><PhotoSlot url={ph[idx]} bg={b.bg}/></div>
+    <SDragLogo brand={brand} vert={logoVert} logoLight={logoLight} W={W} H={H}/>
+  </div>;
+}
+
+function GalH({ph,brand,W,slRef,logoVert=false,logoLight=true,gapColor}){
+  /* Canvas historia 9:16 — 4 fotos en franjas horizontales */
+  const H=Math.round(W*1920/1080),b=BR[brand],sc=W/1080;
+  const gap=Math.round(2*sc*3.375);
+  const gc=gapColor||"#000";
+  return <div ref={slRef} style={{width:W,height:H,position:"relative",background:gc,overflow:"hidden",
+    display:"grid",gridTemplateColumns:"1fr",gridTemplateRows:"repeat(4,1fr)",gap:gap}}>
+    {[0,1,2,3].map(i=><div key={i} style={{overflow:"hidden",position:"relative"}}>
+      <PhotoSlot url={ph[i]} bg={b.bg}/>
+    </div>)}
+    <SDragLogo brand={brand} vert={logoVert} logoLight={logoLight} W={W} H={H}/>
   </div>;
 }
 
@@ -1191,6 +1213,10 @@ function App(){
   const [pendingPhotos,setPendingPhotos]=useState([]);
   const [galL,setGalL]=useState("4fotos");
   const [galSlide,setGalSlide]=useState(0);
+  const [galLogoVert,setGalLogoVert]=useState(false);
+  const [galLogoLight,setGalLogoLight]=useState(true);
+  const [stGapColor,setStGapColor]=useState("#26282a");
+  const [galGapColor,setGalGapColor]=useState("#000000");
   const [swapSlot,setSwapSlot]=useState(null);
   const pRef=useRef();
 
@@ -1568,15 +1594,32 @@ function App(){
                 <button key={o.id} onClick={()=>setGalL(o.id)} style={{flex:1,padding:"6px 0",border:`2px solid ${galL===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:galL===o.id?"#FFF8E1":"white",color:galL===o.id?C.d:C.m}}>{o.l}</button>
               )}
             </div>
+            <div style={{display:"flex",gap:4,marginBottom:10}}>
+              {[{id:false,l:"H"},{id:true,l:"V"}].map(o=>
+                <button key={String(o.id)} onClick={()=>setGalLogoVert(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${galLogoVert===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:galLogoVert===o.id?"#FFF8E1":"white",color:galLogoVert===o.id?C.d:C.m}}>{o.l}</button>
+              )}
+              <div style={{width:1,background:"#E0E0E0",margin:"0 2px"}}/>
+              {[{id:true,l:"Claro"},{id:false,l:"Oscuro"}].map(o=>
+                <button key={String(o.id)} onClick={()=>setGalLogoLight(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${galLogoLight===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:galLogoLight===o.id?"#FFF8E1":"white",color:galLogoLight===o.id?C.d:C.m}}>{o.l}</button>
+              )}
+            </div>
+            {galL!=="full"&&<div style={{marginBottom:10}}>
+              <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",marginBottom:6}}>Color de línea</div>
+              <div style={{display:"flex",gap:6,alignItems:"center"}}>
+                {["#000000","#26282a","#ffc62d","#ffffff","#f2f2f2"].map(c=>(
+                  <div key={c} onClick={()=>setGalGapColor(c)} style={{width:22,height:22,borderRadius:"50%",background:c,border:`3px solid ${galGapColor===c?b.acc:"#ccc"}`,cursor:"pointer",boxSizing:"border-box",flexShrink:0}}/>
+                ))}
+              </div>
+            </div>}
             {galL==="full"&&ph.length>1&&<div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
               <button onClick={()=>setGalSlide(s=>Math.max(0,s-1))} disabled={galSlide===0} style={{background:b.bg,color:"white",border:"none",borderRadius:7,width:28,height:28,cursor:"pointer",opacity:galSlide===0?.3:1,fontSize:16}}>‹</button>
               <span style={{fontFamily:PN,fontWeight:700,fontSize:11,color:C.d}}>Foto {galSlide+1} / {ph.length}</span>
               <button onClick={()=>setGalSlide(s=>Math.min(ph.length-1,s+1))} disabled={galSlide===ph.length-1} style={{background:b.bg,color:"white",border:"none",borderRadius:7,width:28,height:28,cursor:"pointer",opacity:galSlide===ph.length-1?.3:1,fontSize:16}}>›</button>
             </div>}
             <div style={{display:"flex",justifyContent:"center"}} ref={pRef}>
-              {galL==="4fotos"&&<GalA ph={ph} brand={brand} W={W} slRef={pRef}/>}
-              {galL==="full"&&<GalB ph={ph} brand={brand} W={W} slRef={pRef} idx={galSlide}/>}
-              {galL==="4h"&&<GalH ph={ph} brand={brand} W={W} slRef={pRef}/>}
+              {galL==="4fotos"&&<GalA ph={ph} brand={brand} W={W} slRef={pRef} logoVert={galLogoVert} logoLight={galLogoLight} gapColor={galGapColor}/>}
+              {galL==="full"&&<GalB ph={ph} brand={brand} W={W} slRef={pRef} idx={galSlide} logoVert={galLogoVert} logoLight={galLogoLight}/>}
+              {galL==="4h"&&<GalH ph={ph} brand={brand} W={W} slRef={pRef} logoVert={galLogoVert} logoLight={galLogoLight} gapColor={galGapColor}/>}
             </div>
           </>}
 
@@ -1593,10 +1636,18 @@ function App(){
             </div>
             <div style={{display:"flex",justifyContent:"center"}}>
               <div style={{position:"relative",width:W,height:Math.round(W*16/9)}}>
-                <SC ph={ph} data={data} brand={brand} lt={lt} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} logoMode={logoMode} W={W} slRef={pRef}/>
+                <SC ph={ph} data={data} brand={brand} lt={lt} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} logoMode={logoMode} W={W} slRef={pRef} gapColor={stGapColor}/>
                 {showSafe&&<SafeZones W={W} H={Math.round(W*16/9)}/>}
               </div>
             </div>
+            {["A","C","H","J","K","M"].includes(stL)&&<div style={{marginBottom:8}}>
+              <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",marginBottom:6}}>Color de línea</div>
+              <div style={{display:"flex",gap:6,alignItems:"center"}}>
+                {["#000000","#26282a","#ffc62d","#ffffff","#f2f2f2"].map(c=>(
+                  <div key={c} onClick={()=>setStGapColor(c)} style={{width:22,height:22,borderRadius:"50%",background:c,border:`3px solid ${stGapColor===c?b.acc:"#ccc"}`,cursor:"pointer",boxSizing:"border-box",flexShrink:0}}/>
+                ))}
+              </div>
+            </div>}
             <div style={{marginTop:8,display:"flex",gap:6,alignItems:"center"}}>
               <button onClick={()=>setShowSafe(v=>!v)} style={{flex:"0 0 auto",padding:"6px 11px",border:`2px solid ${showSafe?b.acc:"#DDD"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:10,cursor:"pointer",background:showSafe?"#FFF8E1":"white",color:showSafe?C.d:C.m}}>{showSafe?"■":"□"} Zonas seguras</button>
               <div style={{flex:1,padding:"5px 10px",background:"rgba(0,0,0,.04)",borderRadius:6,fontSize:9.5,color:C.g,lineHeight:1.35}}>
