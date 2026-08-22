@@ -5,6 +5,62 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Generador — Capparelli / Artigue</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,700;0,800;0,900;1,300&family=Lora:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Proxima Nova';src:url('fonts/ProximaNova-Light.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:'Proxima Nova';src:url('fonts/ProximaNova-LightItalic.otf') format('opentype');font-weight:300;font-style:italic;font-display:swap}
+@font-face{font-family:'Proxima Nova';src:url('fonts/ProximaNova-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Proxima Nova';src:url('fonts/ProximaNova-RegularItalic.otf') format('opentype');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Proxima Nova';src:url('fonts/ProximaNova-Semibold.otf') format('opentype');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Proxima Nova';src:url('fonts/ProximaNova-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Proxima Nova';src:url('fonts/ProximaNova-Extrabold.otf') format('opentype');font-weight:800;font-style:normal;font-display:swap}
+@font-face{font-family:'Proxima Nova';src:url('fonts/ProximaNova-Black.otf') format('opentype');font-weight:900;font-style:normal;font-display:swap}
+</style>
+<script>
+/* icons.js — inlineado para garantizar disponibilidad en producción */
+(function (root) {
+  var ICON = {
+    'm2': { vb: '0 0 122.94 122.96', p: "<line x1=\"12.91\" y1=\"91.55\" x2=\"12.91\" y2=\"1.48\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line><line x1=\"121.46\" y1=\"110.06\" x2=\"31.42\" y2=\"110.06\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line><polyline points=\"1.48 11.64 12.89 1.48 24.59 11.64\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></polyline><polyline points=\"111.3 121.48 121.46 110.08 111.3 98.38\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></polyline><path d=\"M36.45,86.42v-26.63c0-6.8,5.51-12.3,12.3-12.3h0c6.8,0,12.3,5.51,12.3,12.3v26.63\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></path><path d=\"M61.06,59.8c0-6.8,5.51-12.3,12.3-12.3h0c6.8,0,12.3,5.51,12.3,12.3v26.63\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></path><line x1=\"36.45\" y1=\"47.11\" x2=\"36.45\" y2=\"59.8\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line><path d=\"M90.37,32.31c0-3.26,2.64-5.9,5.9-5.9s5.9,2.64,5.9,5.9c0,2.03-1.29,3.57-2.59,4.88l-8.38,8.38h12.5\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></path><g><line x1=\"34.32\" y1=\"4.15\" x2=\"52.53\" y2=\"4.15\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line><line x1=\"68.94\" y1=\"4.15\" x2=\"87.15\" y2=\"4.15\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line><line x1=\"104.33\" y1=\"4.15\" x2=\"118.71\" y2=\"4.15\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line><line x1=\"118.71\" y1=\"88.54\" x2=\"118.71\" y2=\"70.33\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line><line x1=\"118.71\" y1=\"53.92\" x2=\"118.71\" y2=\"35.71\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line><line x1=\"118.71\" y1=\"18.52\" x2=\"118.71\" y2=\"4.15\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line></g><circle cx=\"12.91\" cy=\"110.06\" r=\"8.74\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></circle>" },
+    'amb': { vb: '0 0 120.49 122.98', p: "<polyline points=\"87.62 96.56 73.02 96.56 73.02 121.49 1.49 121.49 1.49 1.49 119 1.49 119 96.56 104.4 96.56\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.98\"></polyline><rect x=\"93.36\" y=\"1.49\" width=\"25.64\" height=\"25.64\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.98\"></rect><polyline points=\"75.87 1.49 1.49 1.49 1.49 51.08 39.32 51.08\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.98\"></polyline><polyline points=\"39.32 88.91 1.49 88.91 1.49 51.08 39.32 51.08\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.98\"></polyline><polyline points=\"39.32 88.91 39.32 51.08 75.87 51.08 75.87 1.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.98\"></polyline>" },
+    'dorm': { vb: '0 0 119.77 122.96', p: "<path d=\"M103.13,115.34v3.16c0,1.64,1.33,2.98,2.98,2.98h9.2c1.64,0,2.98-1.33,2.98-2.98v-33.23H1.48v33.23c0,1.64,1.33,2.98,2.98,2.98h9.2c1.64,0,2.98-1.33,2.98-2.98v-3.16\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></path><line x1=\"10.95\" y1=\"108.37\" x2=\"108.81\" y2=\"108.37\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line><line x1=\"24.74\" y1=\"97.01\" x2=\"95.02\" y2=\"97.01\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line><path d=\"M1.48,85.27l11.51-29.11s9.88-6.29,46.89-6.29,46.89,6.29,46.89,6.29l11.51,29.11\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></path><path d=\"M59.88,49.6v-6.84c0-4.57-3.36-6.77-6.06-7.59-2.43-.74-6.61-1.33-12.53-.99-6.46.37-10.13,1.34-12.85,2.53-2.84,1.24-4.6,3.53-4.6,7.67v7.57\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></path><path d=\"M59.88,49.6v-6.84c0-4.57,3.36-6.77,6.06-7.59,2.43-.74,6.61-1.33,12.53-.99,6.46.37,10.13,1.34,12.85,2.53,2.84,1.24,4.6,3.53,4.6,7.67v7.57\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></path><path d=\"M106.77,55.97V8.68c0-3.98-3.22-7.2-7.2-7.2h0c-3.98,0-7.2,3.22-7.2,7.2v1.5H27.4v-1.5c0-3.98-3.22-7.2-7.2-7.2h0c-3.98,0-7.2,3.22-7.2,7.2v47.28\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></path>" },
+    'ban': { vb: '0 0 112.82 123.1', p: "<g><path d=\"M6.51,76.7v13.57h0c0,13.12,10.64,23.76,23.76,23.76h52.28c13.12,0,23.76-10.64,23.76-23.76v-13.57\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></path><path d=\"M98.32,64.81V14c0-6.88-5.57-12.45-12.45-12.45h-12.08c-7.6,0-13.85,5.78-14.61,13.18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></path><path d=\"M62.45,16.09h-6.69c-6.77,0-12.27,5.49-12.27,12.27h31.22c0-6.77-5.49-12.27-12.27-12.27Z\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></path></g><path d=\"M106.1,76.19c-33.02,3.73-66.36,3.73-99.38,0-3.23-.37-5.53-3.23-5.12-6.36h0c.4-3.13,3.27-5.34,6.4-4.98,32.17,3.63,64.65,3.63,96.82,0,3.14-.35,6,1.86,6.4,4.98h0c.4,3.13-1.89,6-5.12,6.36Z\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></path><line x1=\"26.59\" y1=\"113.75\" x2=\"24.03\" y2=\"121.55\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></line><line x1=\"86.22\" y1=\"113.75\" x2=\"88.79\" y2=\"121.55\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></line><path d=\"M12.45,64.79c-.08-.51-.12-1.03-.12-1.56,0-5.52,4.47-9.99,9.97-9.99.89,0,1.74.11,2.56.33.89-4.6,4.93-8.08,9.79-8.08,4.26,0,7.92,2.69,9.34,6.47,4.06.2,7.47,2.82,8.82,6.45,1.61-1.11,3.56-1.76,5.67-1.76,5.52,0,9.99,4.47,9.99,9.97\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></path><path d=\"M14.85,41.87c0,2.49-2.02,4.51-4.51,4.51s-4.51-2.02-4.51-4.51,2.02-4.51,4.51-4.51,4.51,2.02,4.51,4.51Z\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></path><path d=\"M32,34.63c0,2.02-1.64,3.65-3.65,3.65s-3.65-1.64-3.65-3.65,1.64-3.65,3.65-3.65,3.65,1.64,3.65,3.65Z\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></path><circle cx=\"17.58\" cy=\"24.63\" r=\"2.41\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></circle>" },
+    'toilette': { vb: '0 0 110.54 123.1', p: "<path d=\"M1.55,21.48v-6.64c0-3.53,2.86-6.4,6.4-6.4h19.46c3.53,0,6.4,2.86,6.4,6.4v6.64\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></path><line x1=\"21.82\" y1=\"1.55\" x2=\"13.52\" y2=\"1.55\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></line><path d=\"M45.38,51.84h57.92c3.14,0,5.69,2.55,5.69,5.69h0c0,3.14-2.55,5.69-5.69,5.69h-.43\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></path><path d=\"M33.74,58.95V21.48H1.55v47.84c0,4.99,3.09,9.45,7.75,11.21l7.75,2.92c4.7,1.77,7.79,6.28,7.75,11.3-.05,5.97-.09,14.19-.09,26.79h45.47v-4.91c0-6.65,2.85-12.09,10.45-14.8,17.49-6.22,22.24-18.73,22.24-32.23v-6.38H38.01c-2.36,0-4.27-1.91-4.27-4.27Z\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></path><path d=\"M93.22,72.76c-.78,10.38-5.63,16.48-15.78,20.09\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.1\"></path>" },
+    'gar': { vb: '0 0 131.89 122.72', p: "<polyline points=\"120.62 54.37 120.62 121.26 107.27 121.26 107.27 45.56 24.62 45.56 24.62 121.26 11.27 121.26 11.27 54.37\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.72\"></polyline><line x1=\"107.27\" y1=\"45.56\" x2=\"24.62\" y2=\"45.56\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.72\"></line><line x1=\"99.26\" y1=\"56.49\" x2=\"32.63\" y2=\"56.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.72\"></line><line x1=\"99.26\" y1=\"67.43\" x2=\"32.63\" y2=\"67.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.72\"></line><polyline points=\"1.36 45.49 65.94 1.36 130.53 45.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.72\"></polyline><path d=\"M90.16,114.17h-48.43c-2.63,0-4.83-2.01-5.06-4.63l-.62-6.96c-.36-4.04,2.83-7.52,6.88-7.52h46.03c4.06,0,7.24,3.48,6.88,7.52l-.62,6.96c-.23,2.62-2.43,4.63-5.06,4.63Z\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.72\"></path><line x1=\"77.4\" y1=\"104.65\" x2=\"87.25\" y2=\"104.18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.72\"></line><line x1=\"54.48\" y1=\"104.65\" x2=\"44.64\" y2=\"104.18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.72\"></line><line x1=\"78.63\" y1=\"121.36\" x2=\"90.16\" y2=\"121.36\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.72\"></line><line x1=\"53.26\" y1=\"121.36\" x2=\"41.73\" y2=\"121.36\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.72\"></line><path d=\"M90.16,95.17l-7.44-11.4c-1.62-2.48-4.38-3.98-7.35-3.98h-9.43\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.72\"></path><path d=\"M41.73,95.17l7.44-11.4c1.62-2.48,4.38-3.98,7.35-3.98h9.43\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.72\"></path>" },
+    'pool': { vb: '0 0 134.22 122.96', p: "<path d=\"M1.48,88.82c5.17,6.35,13.05,10.41,21.88,10.41s16.71-4.06,21.87-10.41c5.17,6.35,13.05,10.41,21.88,10.41s16.71-4.06,21.87-10.41c5.17,6.35,13.05,10.41,21.87,10.41s16.71-4.06,21.88-10.41\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></path><path d=\"M1.48,111.07c5.17,6.35,13.05,10.41,21.88,10.41s16.71-4.06,21.87-10.41c5.17,6.35,13.05,10.41,21.88,10.41s16.71-4.06,21.87-10.41c5.17,6.35,13.05,10.41,21.87,10.41s16.71-4.06,21.88-10.41\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></path><path d=\"M26.66,85.03V12.14c0-5.89-4.77-10.66-10.66-10.66h0c-5.89,0-10.66,4.77-10.66,10.66v.35\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></path><path d=\"M64.73,85.03V12.14c0-5.89-4.77-10.66-10.66-10.66h0c-5.89,0-10.66,4.77-10.66,10.66v.35\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></path><line x1=\"57.09\" y1=\"50.11\" x2=\"26.66\" y2=\"50.11\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line><line x1=\"57.09\" y1=\"28.25\" x2=\"26.66\" y2=\"28.25\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line><line x1=\"57.09\" y1=\"71.95\" x2=\"26.66\" y2=\"71.95\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line><line x1=\"12.73\" y1=\"28.25\" x2=\"1.48\" y2=\"28.25\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line><line x1=\"78.72\" y1=\"28.25\" x2=\"132.73\" y2=\"28.25\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.96\"></line>" },
+    'balcon': { vb: '0 0 132.12 123.27', p: "<line x1=\"130.48\" y1=\"62.6\" x2=\"1.63\" y2=\"62.6\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><line x1=\"9.31\" y1=\"69.69\" x2=\"9.31\" y2=\"114.23\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><line x1=\"23.5\" y1=\"69.69\" x2=\"23.5\" y2=\"114.23\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><line x1=\"37.68\" y1=\"69.69\" x2=\"37.68\" y2=\"114.23\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><line x1=\"51.87\" y1=\"69.69\" x2=\"51.87\" y2=\"114.23\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><line x1=\"66.06\" y1=\"69.69\" x2=\"66.06\" y2=\"114.23\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><line x1=\"80.25\" y1=\"69.69\" x2=\"80.25\" y2=\"114.23\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><line x1=\"94.44\" y1=\"69.69\" x2=\"94.44\" y2=\"114.23\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><line x1=\"108.62\" y1=\"69.69\" x2=\"108.62\" y2=\"114.23\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><line x1=\"122.81\" y1=\"69.69\" x2=\"122.81\" y2=\"114.23\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><path d=\"M23.36,54.39V15.03c0-7.4,6-13.4,13.4-13.4h58.61c7.4,0,13.4,6,13.4,13.4v39.36\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></path><line x1=\"66.06\" y1=\"1.63\" x2=\"66.06\" y2=\"54.39\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><line x1=\"34.41\" y1=\"37.35\" x2=\"54.76\" y2=\"16.99\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><line x1=\"33.76\" y1=\"23.83\" x2=\"42.09\" y2=\"15.5\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><line x1=\"76.39\" y1=\"37.35\" x2=\"96.75\" y2=\"16.99\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><line x1=\"75.74\" y1=\"23.83\" x2=\"84.08\" y2=\"15.5\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line><line x1=\"6.62\" y1=\"121.63\" x2=\"125.5\" y2=\"121.63\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.27\"></line>" },
+    'antig': { vb: '0 0 123.17 123.14', p: "<path d=\"M101.82,12.47h12.02c4.27,0,7.75,3.48,7.75,7.75v93.59c0,4.27-3.48,7.75-7.75,7.75H9.33c-4.27,0-7.75-3.48-7.75-7.75V20.22c0-4.27,3.48-7.75,7.75-7.75h11.99\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.14\"></path><rect x=\"33.48\" y=\"54.31\" width=\"18.19\" height=\"18.19\" rx=\"2.49\" ry=\"2.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.1\"></rect><rect x=\"51.68\" y=\"54.31\" width=\"18.19\" height=\"18.19\" rx=\"2.49\" ry=\"2.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.1\"></rect><rect x=\"69.87\" y=\"54.31\" width=\"18.19\" height=\"18.19\" rx=\"2.49\" ry=\"2.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.1\"></rect><rect x=\"88.06\" y=\"54.31\" width=\"18.19\" height=\"18.19\" rx=\"2.49\" ry=\"2.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.1\"></rect><rect x=\"33.48\" y=\"72.23\" width=\"18.19\" height=\"18.19\" rx=\"2.49\" ry=\"2.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.1\"></rect><rect x=\"51.68\" y=\"72.23\" width=\"18.19\" height=\"18.19\" rx=\"2.49\" ry=\"2.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.1\"></rect><rect x=\"69.87\" y=\"72.23\" width=\"18.19\" height=\"18.19\" rx=\"2.49\" ry=\"2.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.1\"></rect><rect x=\"88.06\" y=\"72.23\" width=\"18.19\" height=\"18.19\" rx=\"2.49\" ry=\"2.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.1\"></rect><rect x=\"33.48\" y=\"90.14\" width=\"18.19\" height=\"18.19\" rx=\"2.49\" ry=\"2.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.1\"></rect><rect x=\"51.68\" y=\"90.14\" width=\"18.19\" height=\"18.19\" rx=\"2.49\" ry=\"2.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.1\"></rect><rect x=\"15.29\" y=\"90.14\" width=\"18.19\" height=\"18.19\" rx=\"2.49\" ry=\"2.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.1\"></rect><rect x=\"15.29\" y=\"72.44\" width=\"18.19\" height=\"18.19\" rx=\"2.49\" ry=\"2.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.1\"></rect><rect x=\"21.32\" y=\"1.57\" width=\"11.98\" height=\"22.85\" rx=\"2.26\" ry=\"2.26\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.14\"></rect><rect x=\"89.85\" y=\"1.57\" width=\"11.98\" height=\"22.85\" rx=\"2.26\" ry=\"2.26\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.14\"></rect><line x1=\"1.57\" y1=\"41.22\" x2=\"121.59\" y2=\"41.22\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.14\"></line><line x1=\"89.85\" y1=\"12.47\" x2=\"33.3\" y2=\"12.47\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3.14\"></line>" },
+    'aire': { vb: '0 0 118.37 106.93', p: "<path d=\"M34.85,8.23h75.13c3.81,0,6.89,3.09,6.89,6.89v35.39c0,7.34-5.95,13.28-13.28,13.28H17.55c-7.34,0-13.28-5.95-13.28-13.28v-17.72\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.99\"></path><path d=\"M18.9,56.99v-4.42c0-2.8,2.27-5.07,5.07-5.07h73.22c2.8,0,5.07,2.27,5.07,5.07v4.42\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.99\"></path><line x1=\"103.72\" y1=\"21.41\" x2=\"101.39\" y2=\"21.41\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.99\"></line><line x1=\"87.89\" y1=\"35.65\" x2=\"33.26\" y2=\"35.65\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.99\"></line><path d=\"M26,76.44s6.52,7.18,1.49,15.36c-4.66,7.58.72,13.64.72,13.64\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.99\"></path><path d=\"M48.02,76.44s6.52,7.18,1.49,15.36c-4.66,7.58.72,13.64.72,13.64\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.99\"></path><path d=\"M70.04,76.44s6.52,7.18,1.49,15.36c-4.66,7.58.72,13.64.72,13.64\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.99\"></path><path d=\"M92.06,76.44s6.52,7.18,1.49,15.36c-4.66,7.58.72,13.64.72,13.64\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.99\"></path><g><line x1=\"13.35\" y1=\"8.68\" x2=\"13.35\" y2=\"1.49\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.99\"></line><line x1=\"18.98\" y1=\"11.93\" x2=\"25.2\" y2=\"8.34\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.99\"></line><line x1=\"18.97\" y1=\"18.42\" x2=\"25.19\" y2=\"22.02\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.99\"></line><line x1=\"13.34\" y1=\"21.67\" x2=\"13.34\" y2=\"28.85\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.99\"></line><line x1=\"7.72\" y1=\"18.41\" x2=\"1.49\" y2=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.99\"></line><line x1=\"7.73\" y1=\"11.92\" x2=\"1.51\" y2=\"8.31\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.99\"></line></g>" },
+    'frente': { vb: '0 0 130 80', p: "<rect x=\"15\" y=\"4\" width=\"100\" height=\"45\" rx=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.8\"/><line x1=\"4\" y1=\"63\" x2=\"126\" y2=\"63\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.8\"/><polyline points=\"12,56 4,63 12,70\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.8\"/><polyline points=\"118,56 126,63 118,70\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.8\"/><line x1=\"15\" y1=\"53\" x2=\"15\" y2=\"73\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.8\"/><line x1=\"115\" y1=\"53\" x2=\"115\" y2=\"73\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.8\"/>" },
+    'fondo': { vb: '0 0 80 130', p: "<rect x=\"33\" y=\"15\" width=\"44\" height=\"100\" rx=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.8\"/><line x1=\"17\" y1=\"4\" x2=\"17\" y2=\"126\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.8\"/><polyline points=\"10,12 17,4 24,12\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.8\"/><polyline points=\"10,118 17,126 24,118\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.8\"/><line x1=\"7\" y1=\"15\" x2=\"27\" y2=\"15\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.8\"/><line x1=\"7\" y1=\"115\" x2=\"27\" y2=\"115\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.8\"/>" },
+  };
+  var ALIAS = { ruler:'m2','layout-grid':'amb','bed-double':'dorm', bath:'ban', car:'gar', waves:'pool', calendar:'antig' };
+  var UI = {
+    upload: { vb:'0 0 24 24', p:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/>' },
+    download: { vb:'0 0 24 24', p:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>' },
+    plus: { vb:'0 0 24 24', p:'<path d="M5 12h14"/><path d="M12 5v14"/>' },
+    image: { vb:'0 0 24 24', p:'<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>' },
+    link: { vb:'0 0 24 24', p:'<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' },
+    grip: { vb:'0 0 24 24', p:'<circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/>' },
+    'chevron-right': { vb:'0 0 24 24', p:'<path d="m9 18 6-6-6-6"/>' }
+  };
+  var WP = '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>';
+  function resolve(name){ return ICON[name] || ICON[ALIAS[name]] || UI[name] || null; }
+  function capIcon(name, opts){
+    opts = opts || {};
+    var size = opts.size || 24;
+    if (name === 'whatsapp' || name === 'wp'){
+      return '<svg xmlns="http://www.w3.org/2000/svg" width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'+WP+'</svg>';
+    }
+    var ic = resolve(name);
+    if (!ic) return '';
+    var sw = opts.stroke;
+    var swAttr = sw ? ' stroke-width="'+sw+'"' : '';
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="'+size+'" height="'+size+'" viewBox="'+ic.vb+'" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"'+swAttr+' aria-hidden="true">'+ic.p+'</svg>';
+  }
+  capIcon.names = Object.keys(ICON).concat(['whatsapp']).concat(Object.keys(UI));
+  root.capIcon = capIcon;
+})(typeof window !== 'undefined' ? window : this);
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
@@ -16,6 +72,17 @@ input,select,button{font-family:inherit}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
 @media(max-width:700px){.col2{grid-template-columns:1fr!important}}
+.panel-fab{display:none}
+@media(max-width:700px){
+  .panel-fab{display:flex;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:300;
+    padding:11px 24px;border:none;border-radius:24px;cursor:pointer;
+    font-family:"Proxima Nova","Nunito Sans",Arial,sans-serif;font-weight:800;font-size:12px;letter-spacing:.5px;
+    align-items:center;gap:7px;box-shadow:0 4px 18px rgba(0,0,0,.28);white-space:nowrap}
+  .panel-left-col{display:none!important}
+  .panel-left-col.open{display:block!important;position:fixed;inset:0;z-index:200;overflow-y:auto;padding:14px 14px 80px;background:#F3F3F3}
+  .panel-close-btn{display:flex!important}
+}
+.panel-close-btn{display:none;position:sticky;top:0;z-index:10;width:100%;margin-bottom:10px;padding:10px 14px;border:none;border-radius:10px;cursor:pointer;font-family:"Proxima Nova","Nunito Sans",Arial,sans-serif;font-weight:800;font-size:12px;align-items:center;justify-content:center;gap:6px;background:rgba(255,255,255,.95);box-shadow:0 2px 8px rgba(0,0,0,.12)}
 </style>
 </head>
 <body><div id="root"></div>
@@ -28,41 +95,22 @@ const PN='"Proxima Nova","Nunito Sans",Arial,sans-serif';
 const LO='"Lora",Georgia,serif';
 const IT='"Inter","Nunito Sans",Arial,sans-serif';
 
-/* ── SVG Logo Capparelli ──
-   C shape: centro(50,50) radio ext=44 int=28
-   Arco desde (81,19) long way a (81,81) — gap arriba-derecha ≈ 90°
-   Cuadrado amarillo en la abertura
-*/
-const CappC=({h=36,cc="white"})=>(
-  <svg width={h} height={h} viewBox="0 0 100 100" style={{display:"block",flexShrink:0}}>
-    <path d="M81,19 A44,44,0,1,0,81,81 L70,70 A28,28,0,1,1,70,30 Z" fill={cc}/>
-    <rect x="63" y="5" width="24" height="24" fill="#ffc62d"/>
-  </svg>
-);
-const CappH=({h=28,light=true})=>{
-  const tc=light?"white":"#26282a",sc=light?"rgba(255,255,255,.72)":"#53575a";
-  return <div style={{display:"flex",alignItems:"center",gap:h*.28,flexShrink:0}}>
-    <CappC h={h} cc={light?"white":"#53575a"}/>
-    <div>
-      <div style={{fontFamily:PN,fontWeight:900,fontSize:h*.47,color:tc,letterSpacing:.5,lineHeight:1}}>CAPPARELLI</div>
-      <div style={{fontFamily:PN,fontWeight:300,fontSize:h*.27,color:sc,letterSpacing:1.5,lineHeight:1}}>PROPIEDADES</div>
-    </div>
-  </div>;
-};
-const CappV=({h=60,light=true})=>{
-  const tc=light?"white":"#26282a",sc=light?"rgba(255,255,255,.72)":"#53575a";
-  return <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:h*.05,flexShrink:0}}>
-    <CappC h={h*.56} cc={light?"white":"#53575a"}/>
-    <div style={{textAlign:"center"}}>
-      <div style={{fontFamily:PN,fontWeight:900,fontSize:h*.20,color:tc,letterSpacing:.5,lineHeight:1}}>CAPPARELLI</div>
-      <div style={{fontFamily:PN,fontWeight:300,fontSize:h*.12,color:sc,letterSpacing:1.5,lineHeight:1.2}}>PROPIEDADES</div>
-    </div>
-  </div>;
-};
+/* ── Logos Capparelli OFICIALES (SVG del Design System) ── */
+const CAP_SVG={hd:`<svg style="display:block;width:100%;height:100%" id="uuid-298b6ce3-0fd3-4134-a661-689e865fd0f1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 631.02 139.84"><g><path d="M69.95,139.84c-18.68,0-36.25-7.28-49.46-20.49C7.28,106.14,0,88.57,0,69.89S7.28,33.64,20.49,20.43C32.98,7.94,49.35.75,66.88,0v24.1c-11.1.73-21.44,5.4-29.37,13.34-8.67,8.67-13.44,20.19-13.44,32.45s4.77,23.78,13.44,32.45c8.67,8.67,20.19,13.44,32.45,13.44s23.79-4.77,32.45-13.44c7.94-7.94,12.61-18.27,13.34-29.37h24.1c-.75,17.53-7.94,33.9-20.42,46.39-13.21,13.21-30.78,20.49-49.47,20.49Z" fill="#26282a"></path><rect x="92.8" y="6.81" width="40.24" height="40.23" fill="#fcc430"></rect></g><g><g><path d="M167.6,49.1c0-16.76,12.67-28.21,28.62-28.21,12.43,0,19.38,6.54,23.22,13.33l-9.98,4.91c-2.29-4.42-7.2-7.93-13.25-7.93-9.48,0-16.68,7.6-16.68,17.91s7.2,17.91,16.68,17.91c6.05,0,10.96-3.43,13.25-7.93l9.98,4.82c-3.92,6.79-10.79,13.41-23.22,13.41-15.94,0-28.62-11.45-28.62-28.21Z" fill="#26282a"></path><path d="M264,76.33l-3.43-9.4h-24.37l-3.43,9.4h-12.76l21.09-54.54h14.55l21.01,54.54h-12.67ZM248.38,31.85l-9.08,25.02h18.07l-8.99-25.02Z" fill="#26282a"></path><path d="M281.74,76.33V21.79h25.51c11.86,0,18.31,8.01,18.31,17.58s-6.54,17.42-18.31,17.42h-13.9v19.54h-11.61ZM305.7,31.77h-12.35v15.04h12.35c4.58,0,8.01-2.94,8.01-7.52s-3.43-7.52-8.01-7.52Z" fill="#26282a"></path><path d="M332.76,76.33V21.79h25.51c11.86,0,18.31,8.01,18.31,17.58s-6.54,17.42-18.31,17.42h-13.9v19.54h-11.61ZM356.71,31.77h-12.35v15.04h12.35c4.58,0,8.01-2.94,8.01-7.52s-3.43-7.52-8.01-7.52Z" fill="#26282a"></path><path d="M415.91,76.33l-3.43-9.4h-24.37l-3.43,9.4h-12.76l21.09-54.54h14.55l21.01,54.54h-12.67ZM400.29,31.85l-9.08,25.02h18.07l-8.99-25.02Z" fill="#26282a"></path><path d="M464.47,76.33l-10.71-19.54h-8.5v19.54h-11.61V21.79h25.51c11.37,0,18.31,7.44,18.31,17.58s-6.05,14.8-11.94,16.19l12.26,20.77h-13.33ZM457.44,31.77h-12.18v15.04h12.18c4.66,0,8.18-2.94,8.18-7.52s-3.52-7.52-8.18-7.52Z" fill="#26282a"></path><path d="M486.22,76.33V21.79h38.59v9.98h-26.98v11.86h26.41v9.98h-26.41v12.67h26.98v10.06h-38.59Z" fill="#26282a"></path><path d="M533.89,76.33V21.79h11.61v44.32h23.06v10.22h-34.67Z" fill="#26282a"></path><path d="M576.65,76.33V21.79h11.61v44.32h23.06v10.22h-34.67Z" fill="#26282a"></path><path d="M619.41,76.33V21.79h11.61v54.54h-11.61Z" fill="#26282a"></path></g><g><path d="M172.76,118.47v-26.83h11.3c5.51,0,8.57,3.78,8.57,8.25s-3.1,8.25-8.57,8.25h-7.28v10.34h-4.02ZM183.55,95.17h-6.76v9.41h6.76c2.9,0,4.95-1.89,4.95-4.71s-2.05-4.71-4.95-4.71Z" fill="#26282a"></path><path d="M214.24,118.47l-6.4-10.34h-5.03v10.34h-4.02v-26.83h11.3c5.11,0,8.61,3.3,8.61,8.25s-3.26,7.4-6.68,7.84l6.88,10.74h-4.67ZM209.57,95.17h-6.76v9.41h6.76c2.9,0,4.99-1.89,4.99-4.71s-2.09-4.71-4.99-4.71Z" fill="#26282a"></path><path d="M238.05,91.19c8.01,0,13.52,5.91,13.52,13.88s-5.51,13.88-13.52,13.88-13.52-5.91-13.52-13.88,5.51-13.88,13.52-13.88ZM238.05,94.77c-5.75,0-9.37,4.39-9.37,10.3s3.62,10.3,9.37,10.3,9.37-4.43,9.37-10.3-3.7-10.3-9.37-10.3Z" fill="#26282a"></path><path d="M258.44,118.47v-26.83h11.3c5.51,0,8.57,3.78,8.57,8.25s-3.1,8.25-8.57,8.25h-7.28v10.34h-4.02ZM269.22,95.17h-6.76v9.41h6.76c2.9,0,4.95-1.89,4.95-4.71s-2.05-4.71-4.95-4.71Z" fill="#26282a"></path><path d="M284.47,118.47v-26.83h4.02v26.83h-4.02Z" fill="#26282a"></path><path d="M296.5,118.47v-26.83h18.02v3.54h-14v7.84h13.72v3.54h-13.72v8.37h14v3.54h-18.02Z" fill="#26282a"></path><path d="M321.56,118.47v-26.83h9.57c8.37,0,13.92,5.71,13.92,13.44s-5.55,13.4-13.92,13.4h-9.57ZM325.58,114.93h5.55c6.2,0,9.78-4.43,9.78-9.86s-3.46-9.9-9.78-9.9h-5.55v19.75Z" fill="#26282a"></path><path d="M369.63,118.47l-2.17-5.55h-13.16l-2.17,5.55h-4.43l10.66-26.83h5.03l10.66,26.83h-4.43ZM360.86,95.13l-5.39,14.2h10.82l-5.43-14.2Z" fill="#26282a"></path><path d="M379.28,118.47v-26.83h9.57c8.37,0,13.92,5.71,13.92,13.44s-5.55,13.4-13.92,13.4h-9.57ZM383.3,114.93h5.55c6.2,0,9.78-4.43,9.78-9.86s-3.46-9.9-9.78-9.9h-5.55v19.75Z" fill="#26282a"></path><path d="M409.65,118.47v-26.83h18.02v3.54h-14v7.84h13.72v3.54h-13.72v8.37h14v3.54h-18.02Z" fill="#26282a"></path><path d="M435.35,111.59c1.81,2.01,4.71,3.78,8.45,3.78,4.34,0,5.87-2.21,5.87-4.14,0-2.82-3.06-3.62-6.48-4.51-4.3-1.13-9.29-2.37-9.29-7.84,0-4.43,3.9-7.64,9.49-7.64,4.14,0,7.4,1.33,9.78,3.74l-2.33,2.98c-2.05-2.17-4.87-3.14-7.76-3.14s-5.03,1.53-5.03,3.78c0,2.41,2.9,3.18,6.24,4.02,4.38,1.17,9.49,2.53,9.49,8.25,0,4.18-2.9,8.09-10.14,8.09-4.79,0-8.29-1.73-10.58-4.26l2.29-3.1Z" fill="#26282a"></path></g></g></svg>`,hl:`<svg style="display:block;width:100%;height:100%" id="uuid-8dcdcfaa-6d33-427b-a525-517b535f3af1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 631.02 139.84"><g><path d="M69.95,139.84c-18.68,0-36.25-7.28-49.46-20.49C7.28,106.14,0,88.57,0,69.89S7.28,33.64,20.49,20.43C32.98,7.94,49.35.75,66.88,0v24.1c-11.1.73-21.44,5.4-29.37,13.34-8.67,8.67-13.44,20.19-13.44,32.45s4.77,23.78,13.44,32.45c8.67,8.67,20.19,13.44,32.45,13.44s23.79-4.77,32.45-13.44c7.94-7.94,12.61-18.27,13.34-29.37h24.1c-.75,17.53-7.94,33.9-20.42,46.39-13.21,13.21-30.78,20.49-49.47,20.49Z" fill="#fff"></path><rect x="92.8" y="6.81" width="40.24" height="40.23" fill="#ffc62d"></rect></g><g><g><path d="M167.6,49.1c0-16.76,12.67-28.21,28.62-28.21,12.43,0,19.38,6.54,23.22,13.33l-9.98,4.91c-2.29-4.42-7.2-7.93-13.25-7.93-9.48,0-16.68,7.6-16.68,17.91s7.2,17.91,16.68,17.91c6.05,0,10.96-3.43,13.25-7.93l9.98,4.82c-3.92,6.79-10.79,13.41-23.22,13.41-15.94,0-28.62-11.45-28.62-28.21Z" fill="#fff"></path><path d="M264,76.33l-3.43-9.4h-24.37l-3.43,9.4h-12.76l21.09-54.54h14.55l21.01,54.54h-12.67ZM248.38,31.85l-9.08,25.02h18.07l-8.99-25.02Z" fill="#fff"></path><path d="M281.74,76.33V21.79h25.51c11.86,0,18.31,8.01,18.31,17.58s-6.54,17.42-18.31,17.42h-13.9v19.54h-11.61ZM305.7,31.77h-12.35v15.04h12.35c4.58,0,8.01-2.94,8.01-7.52s-3.43-7.52-8.01-7.52Z" fill="#fff"></path><path d="M332.76,76.33V21.79h25.51c11.86,0,18.31,8.01,18.31,17.58s-6.54,17.42-18.31,17.42h-13.9v19.54h-11.61ZM356.71,31.77h-12.35v15.04h12.35c4.58,0,8.01-2.94,8.01-7.52s-3.43-7.52-8.01-7.52Z" fill="#fff"></path><path d="M415.91,76.33l-3.43-9.4h-24.37l-3.43,9.4h-12.76l21.09-54.54h14.55l21.01,54.54h-12.67ZM400.29,31.85l-9.08,25.02h18.07l-8.99-25.02Z" fill="#fff"></path><path d="M464.47,76.33l-10.71-19.54h-8.5v19.54h-11.61V21.79h25.51c11.37,0,18.31,7.44,18.31,17.58s-6.05,14.8-11.94,16.19l12.26,20.77h-13.33ZM457.44,31.77h-12.18v15.04h12.18c4.66,0,8.18-2.94,8.18-7.52s-3.52-7.52-8.18-7.52Z" fill="#fff"></path><path d="M486.22,76.33V21.79h38.59v9.98h-26.98v11.86h26.41v9.98h-26.41v12.67h26.98v10.06h-38.59Z" fill="#fff"></path><path d="M533.89,76.33V21.79h11.61v44.32h23.06v10.22h-34.67Z" fill="#fff"></path><path d="M576.65,76.33V21.79h11.61v44.32h23.06v10.22h-34.67Z" fill="#fff"></path><path d="M619.41,76.33V21.79h11.61v54.54h-11.61Z" fill="#fff"></path></g><g><path d="M172.76,118.47v-26.83h11.3c5.51,0,8.57,3.78,8.57,8.25s-3.1,8.25-8.57,8.25h-7.28v10.34h-4.02ZM183.55,95.17h-6.76v9.41h6.76c2.9,0,4.95-1.89,4.95-4.71s-2.05-4.71-4.95-4.71Z" fill="#fff"></path><path d="M214.24,118.47l-6.4-10.34h-5.03v10.34h-4.02v-26.83h11.3c5.11,0,8.61,3.3,8.61,8.25s-3.26,7.4-6.68,7.84l6.88,10.74h-4.67ZM209.57,95.17h-6.76v9.41h6.76c2.9,0,4.99-1.89,4.99-4.71s-2.09-4.71-4.99-4.71Z" fill="#fff"></path><path d="M238.05,91.19c8.01,0,13.52,5.91,13.52,13.88s-5.51,13.88-13.52,13.88-13.52-5.91-13.52-13.88,5.51-13.88,13.52-13.88ZM238.05,94.77c-5.75,0-9.37,4.39-9.37,10.3s3.62,10.3,9.37,10.3,9.37-4.43,9.37-10.3-3.7-10.3-9.37-10.3Z" fill="#fff"></path><path d="M258.44,118.47v-26.83h11.3c5.51,0,8.57,3.78,8.57,8.25s-3.1,8.25-8.57,8.25h-7.28v10.34h-4.02ZM269.22,95.17h-6.76v9.41h6.76c2.9,0,4.95-1.89,4.95-4.71s-2.05-4.71-4.95-4.71Z" fill="#fff"></path><path d="M284.47,118.47v-26.83h4.02v26.83h-4.02Z" fill="#fff"></path><path d="M296.5,118.47v-26.83h18.02v3.54h-14v7.84h13.72v3.54h-13.72v8.37h14v3.54h-18.02Z" fill="#fff"></path><path d="M321.56,118.47v-26.83h9.57c8.37,0,13.92,5.71,13.92,13.44s-5.55,13.4-13.92,13.4h-9.57ZM325.58,114.93h5.55c6.2,0,9.78-4.43,9.78-9.86s-3.46-9.9-9.78-9.9h-5.55v19.75Z" fill="#fff"></path><path d="M369.63,118.47l-2.17-5.55h-13.16l-2.17,5.55h-4.43l10.66-26.83h5.03l10.66,26.83h-4.43ZM360.86,95.13l-5.39,14.2h10.82l-5.43-14.2Z" fill="#fff"></path><path d="M379.28,118.47v-26.83h9.57c8.37,0,13.92,5.71,13.92,13.44s-5.55,13.4-13.92,13.4h-9.57ZM383.3,114.93h5.55c6.2,0,9.78-4.43,9.78-9.86s-3.46-9.9-9.78-9.9h-5.55v19.75Z" fill="#fff"></path><path d="M409.65,118.47v-26.83h18.02v3.54h-14v7.84h13.72v3.54h-13.72v8.37h14v3.54h-18.02Z" fill="#fff"></path><path d="M435.35,111.59c1.81,2.01,4.71,3.78,8.45,3.78,4.34,0,5.87-2.21,5.87-4.14,0-2.82-3.06-3.62-6.48-4.51-4.3-1.13-9.29-2.37-9.29-7.84,0-4.43,3.9-7.64,9.49-7.64,4.14,0,7.4,1.33,9.78,3.74l-2.33,2.98c-2.05-2.17-4.87-3.14-7.76-3.14s-5.03,1.53-5.03,3.78c0,2.41,2.9,3.18,6.24,4.02,4.38,1.17,9.49,2.53,9.49,8.25,0,4.18-2.9,8.09-10.14,8.09-4.79,0-8.29-1.73-10.58-4.26l2.29-3.1Z" fill="#fff"></path></g></g></svg>`,vd:`<svg style="display:block;width:100%;height:100%" id="uuid-2e5aeeec-6388-4daa-956b-851e0d495836" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 463.93 333.53"><g><path d="M0,263.6c0-16.78,12.69-28.24,28.65-28.24,12.44,0,19.4,6.55,23.25,13.34l-9.99,4.91c-2.29-4.42-7.2-7.94-13.26-7.94-9.49,0-16.7,7.61-16.7,17.93s7.2,17.93,16.7,17.93c6.06,0,10.97-3.44,13.26-7.94l9.99,4.83c-3.93,6.79-10.8,13.42-23.25,13.42-15.96,0-28.65-11.46-28.65-28.24Z" fill="#26282a"></path><path d="M96.5,290.86l-3.44-9.41h-24.39l-3.44,9.41h-12.77l21.12-54.6h14.57l21.04,54.6h-12.69ZM80.87,246.33l-9.09,25.05h18.09l-9-25.05Z" fill="#26282a"></path><path d="M114.26,290.86v-54.6h25.54c11.87,0,18.33,8.02,18.33,17.6s-6.55,17.43-18.33,17.43h-13.91v19.56h-11.62ZM138.25,246.25h-12.36v15.06h12.36c4.58,0,8.02-2.95,8.02-7.53s-3.44-7.53-8.02-7.53Z" fill="#26282a"></path><path d="M165.34,290.86v-54.6h25.54c11.87,0,18.33,8.02,18.33,17.6s-6.55,17.43-18.33,17.43h-13.91v19.56h-11.62ZM189.32,246.25h-12.36v15.06h12.36c4.58,0,8.02-2.95,8.02-7.53s-3.44-7.53-8.02-7.53Z" fill="#26282a"></path><path d="M248.58,290.86l-3.44-9.41h-24.39l-3.44,9.41h-12.77l21.12-54.6h14.57l21.04,54.6h-12.69ZM232.95,246.33l-9.09,25.05h18.09l-9-25.05Z" fill="#26282a"></path><path d="M297.2,290.86l-10.72-19.56h-8.51v19.56h-11.62v-54.6h25.54c11.38,0,18.33,7.45,18.33,17.6s-6.06,14.82-11.95,16.21l12.28,20.79h-13.34ZM290.16,246.25h-12.2v15.06h12.2c4.67,0,8.19-2.95,8.19-7.53s-3.52-7.53-8.19-7.53Z" fill="#26282a"></path><path d="M318.97,290.86v-54.6h38.63v9.99h-27.01v11.87h26.44v9.99h-26.44v12.69h27.01v10.07h-38.63Z" fill="#26282a"></path><path d="M366.69,290.86v-54.6h11.62v44.36h23.08v10.23h-34.71Z" fill="#26282a"></path><path d="M409.5,290.86v-54.6h11.62v44.36h23.08v10.23h-34.71Z" fill="#26282a"></path><path d="M452.3,290.86v-54.6h11.62v54.6h-11.62Z" fill="#26282a"></path></g><g><path d="M232.01,194.64c-26,0-50.46-10.13-68.85-28.52-18.39-18.39-28.52-42.84-28.52-68.85s10.13-50.46,28.52-68.85C180.54,11.05,203.33,1.05,227.73,0v33.54c-15.45,1.02-29.84,7.52-40.88,18.57-12.06,12.06-18.71,28.1-18.71,45.17s6.64,33.1,18.71,45.17c12.06,12.06,28.1,18.71,45.17,18.71s33.11-6.64,45.17-18.71c11.05-11.05,17.55-25.43,18.57-40.88h33.54c-1.05,24.4-11.05,47.18-28.43,64.56-18.39,18.39-42.84,28.52-68.85,28.52Z" fill="#26282a"></path><rect x="263.8" y="9.48" width="56.01" height="56" fill="#fcc430"></rect></g><g><path d="M91.3,333.04v-26.86h11.32c5.52,0,8.58,3.79,8.58,8.26s-3.1,8.26-8.58,8.26h-7.29v10.35h-4.03ZM102.1,309.73h-6.77v9.42h6.77c2.9,0,4.95-1.89,4.95-4.71s-2.05-4.71-4.95-4.71Z" fill="#26282a"></path><path d="M132.82,333.04l-6.4-10.35h-5.03v10.35h-4.03v-26.86h11.32c5.11,0,8.62,3.3,8.62,8.26s-3.26,7.41-6.69,7.85l6.89,10.75h-4.67ZM128.15,309.73h-6.77v9.42h6.77c2.9,0,4.99-1.89,4.99-4.71s-2.09-4.71-4.99-4.71Z" fill="#26282a"></path><path d="M156.66,305.74c8.01,0,13.53,5.92,13.53,13.89s-5.52,13.89-13.53,13.89-13.53-5.92-13.53-13.89,5.52-13.89,13.53-13.89ZM156.66,309.32c-5.76,0-9.38,4.39-9.38,10.31s3.62,10.31,9.38,10.31,9.38-4.43,9.38-10.31-3.71-10.31-9.38-10.31Z" fill="#26282a"></path><path d="M177.08,333.04v-26.86h11.32c5.52,0,8.58,3.79,8.58,8.26s-3.1,8.26-8.58,8.26h-7.29v10.35h-4.03ZM187.87,309.73h-6.77v9.42h6.77c2.9,0,4.95-1.89,4.95-4.71s-2.05-4.71-4.95-4.71Z" fill="#26282a"></path><path d="M203.13,333.04v-26.86h4.03v26.86h-4.03Z" fill="#26282a"></path><path d="M215.17,333.04v-26.86h18.04v3.54h-14.01v7.85h13.73v3.54h-13.73v8.38h14.01v3.54h-18.04Z" fill="#26282a"></path><path d="M240.26,333.04v-26.86h9.58c8.38,0,13.93,5.72,13.93,13.45s-5.56,13.41-13.93,13.41h-9.58ZM244.29,329.5h5.56c6.2,0,9.79-4.43,9.79-9.87s-3.46-9.91-9.79-9.91h-5.56v19.77Z" fill="#26282a"></path><path d="M288.38,333.04l-2.17-5.56h-13.17l-2.18,5.56h-4.43l10.67-26.86h5.03l10.67,26.86h-4.43ZM279.6,309.68l-5.4,14.22h10.83l-5.44-14.22Z" fill="#26282a"></path><path d="M298.04,333.04v-26.86h9.58c8.38,0,13.93,5.72,13.93,13.45s-5.56,13.41-13.93,13.41h-9.58ZM302.07,329.5h5.56c6.2,0,9.79-4.43,9.79-9.87s-3.46-9.91-9.79-9.91h-5.56v19.77Z" fill="#26282a"></path><path d="M328.45,333.04v-26.86h18.04v3.54h-14.02v7.85h13.73v3.54h-13.73v8.38h14.02v3.54h-18.04Z" fill="#26282a"></path><path d="M354.18,326.16c1.81,2.01,4.71,3.79,8.46,3.79,4.35,0,5.88-2.21,5.88-4.15,0-2.82-3.06-3.62-6.48-4.51-4.31-1.13-9.3-2.38-9.3-7.85,0-4.43,3.91-7.65,9.5-7.65,4.15,0,7.41,1.33,9.79,3.75l-2.34,2.98c-2.05-2.17-4.87-3.14-7.77-3.14s-5.03,1.53-5.03,3.79c0,2.42,2.9,3.18,6.24,4.03,4.39,1.17,9.5,2.54,9.5,8.26,0,4.19-2.9,8.1-10.15,8.1-4.79,0-8.3-1.73-10.59-4.27l2.3-3.1Z" fill="#26282a"></path></g></svg>`,vl:`<svg style="display:block;width:100%;height:100%" id="uuid-98d9b7ad-cb15-4b8b-a501-6aee0bc05d78" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 463.93 333.53"><g><path d="M0,263.6c0-16.78,12.69-28.24,28.65-28.24,12.44,0,19.4,6.55,23.25,13.34l-9.99,4.91c-2.29-4.42-7.2-7.94-13.26-7.94-9.49,0-16.7,7.61-16.7,17.93s7.2,17.93,16.7,17.93c6.06,0,10.97-3.44,13.26-7.94l9.99,4.83c-3.93,6.79-10.8,13.42-23.25,13.42-15.96,0-28.65-11.46-28.65-28.24Z" fill="#fff"></path><path d="M96.5,290.86l-3.44-9.41h-24.39l-3.44,9.41h-12.77l21.12-54.6h14.57l21.04,54.6h-12.69ZM80.87,246.33l-9.09,25.05h18.09l-9-25.05Z" fill="#fff"></path><path d="M114.26,290.86v-54.6h25.54c11.87,0,18.33,8.02,18.33,17.6s-6.55,17.43-18.33,17.43h-13.91v19.56h-11.62ZM138.25,246.25h-12.36v15.06h12.36c4.58,0,8.02-2.95,8.02-7.53s-3.44-7.53-8.02-7.53Z" fill="#fff"></path><path d="M165.34,290.86v-54.6h25.54c11.87,0,18.33,8.02,18.33,17.6s-6.55,17.43-18.33,17.43h-13.91v19.56h-11.62ZM189.32,246.25h-12.36v15.06h12.36c4.58,0,8.02-2.95,8.02-7.53s-3.44-7.53-8.02-7.53Z" fill="#fff"></path><path d="M248.58,290.86l-3.44-9.41h-24.39l-3.44,9.41h-12.77l21.12-54.6h14.57l21.04,54.6h-12.69ZM232.95,246.33l-9.09,25.05h18.09l-9-25.05Z" fill="#fff"></path><path d="M297.2,290.86l-10.72-19.56h-8.51v19.56h-11.62v-54.6h25.54c11.38,0,18.33,7.45,18.33,17.6s-6.06,14.82-11.95,16.21l12.28,20.79h-13.34ZM290.16,246.25h-12.2v15.06h12.2c4.67,0,8.19-2.95,8.19-7.53s-3.52-7.53-8.19-7.53Z" fill="#fff"></path><path d="M318.97,290.86v-54.6h38.63v9.99h-27.01v11.87h26.44v9.99h-26.44v12.69h27.01v10.07h-38.63Z" fill="#fff"></path><path d="M366.69,290.86v-54.6h11.62v44.36h23.08v10.23h-34.71Z" fill="#fff"></path><path d="M409.5,290.86v-54.6h11.62v44.36h23.08v10.23h-34.71Z" fill="#fff"></path><path d="M452.3,290.86v-54.6h11.62v54.6h-11.62Z" fill="#fff"></path></g><g><path d="M232.01,194.64c-26,0-50.46-10.13-68.85-28.52-18.39-18.39-28.52-42.84-28.52-68.85s10.13-50.46,28.52-68.85C180.54,11.05,203.33,1.05,227.73,0v33.54c-15.45,1.02-29.84,7.52-40.88,18.57-12.06,12.06-18.71,28.1-18.71,45.17s6.64,33.1,18.71,45.17c12.06,12.06,28.1,18.71,45.17,18.71s33.11-6.64,45.17-18.71c11.05-11.05,17.55-25.43,18.57-40.88h33.54c-1.05,24.4-11.05,47.18-28.43,64.56-18.39,18.39-42.84,28.52-68.85,28.52Z" fill="#fff"></path><rect x="263.8" y="9.48" width="56.01" height="56" fill="#ffc62d"></rect></g><g><path d="M91.3,333.04v-26.86h11.32c5.52,0,8.58,3.79,8.58,8.26s-3.1,8.26-8.58,8.26h-7.29v10.35h-4.03ZM102.1,309.73h-6.77v9.42h6.77c2.9,0,4.95-1.89,4.95-4.71s-2.05-4.71-4.95-4.71Z" fill="#fff"></path><path d="M132.82,333.04l-6.4-10.35h-5.03v10.35h-4.03v-26.86h11.32c5.11,0,8.62,3.3,8.62,8.26s-3.26,7.41-6.69,7.85l6.89,10.75h-4.67ZM128.15,309.73h-6.77v9.42h6.77c2.9,0,4.99-1.89,4.99-4.71s-2.09-4.71-4.99-4.71Z" fill="#fff"></path><path d="M156.66,305.74c8.01,0,13.53,5.92,13.53,13.89s-5.52,13.89-13.53,13.89-13.53-5.92-13.53-13.89,5.52-13.89,13.53-13.89ZM156.66,309.32c-5.76,0-9.38,4.39-9.38,10.31s3.62,10.31,9.38,10.31,9.38-4.43,9.38-10.31-3.71-10.31-9.38-10.31Z" fill="#fff"></path><path d="M177.08,333.04v-26.86h11.32c5.52,0,8.58,3.79,8.58,8.26s-3.1,8.26-8.58,8.26h-7.29v10.35h-4.03ZM187.87,309.73h-6.77v9.42h6.77c2.9,0,4.95-1.89,4.95-4.71s-2.05-4.71-4.95-4.71Z" fill="#fff"></path><path d="M203.13,333.04v-26.86h4.03v26.86h-4.03Z" fill="#fff"></path><path d="M215.17,333.04v-26.86h18.04v3.54h-14.01v7.85h13.73v3.54h-13.73v8.38h14.01v3.54h-18.04Z" fill="#fff"></path><path d="M240.26,333.04v-26.86h9.58c8.38,0,13.93,5.72,13.93,13.45s-5.56,13.41-13.93,13.41h-9.58ZM244.29,329.5h5.56c6.2,0,9.79-4.43,9.79-9.87s-3.46-9.91-9.79-9.91h-5.56v19.77Z" fill="#fff"></path><path d="M288.38,333.04l-2.17-5.56h-13.17l-2.18,5.56h-4.43l10.67-26.86h5.03l10.67,26.86h-4.43ZM279.6,309.68l-5.4,14.22h10.83l-5.44-14.22Z" fill="#fff"></path><path d="M298.04,333.04v-26.86h9.58c8.38,0,13.93,5.72,13.93,13.45s-5.56,13.41-13.93,13.41h-9.58ZM302.07,329.5h5.56c6.2,0,9.79-4.43,9.79-9.87s-3.46-9.91-9.79-9.91h-5.56v19.77Z" fill="#fff"></path><path d="M328.45,333.04v-26.86h18.04v3.54h-14.02v7.85h13.73v3.54h-13.73v8.38h14.02v3.54h-18.04Z" fill="#fff"></path><path d="M354.18,326.16c1.81,2.01,4.71,3.79,8.46,3.79,4.35,0,5.88-2.21,5.88-4.15,0-2.82-3.06-3.62-6.48-4.51-4.31-1.13-9.3-2.38-9.3-7.85,0-4.43,3.91-7.65,9.5-7.65,4.15,0,7.41,1.33,9.79,3.75l-2.34,2.98c-2.05-2.17-4.87-3.14-7.77-3.14s-5.03,1.53-5.03,3.79c0,2.42,2.9,3.18,6.24,4.03,4.39,1.17,9.5,2.54,9.5,8.26,0,4.19-2.9,8.1-10.15,8.1-4.79,0-8.3-1.73-10.59-4.27l2.3-3.1Z" fill="#fff"></path></g></svg>`};
+const CAP_AR={h:631.02/139.84,v:463.93/333.53};
+function CapLogo({orient,h=28,light=true}){
+  const key=(orient==="v"?"v":"h")+(light?"l":"d");
+  const ar=orient==="v"?CAP_AR.v:CAP_AR.h;
+  return <div style={{height:h,width:h*ar,flexShrink:0}} dangerouslySetInnerHTML={{__html:CAP_SVG[key]}}/>;
+}
+/* Horizontal real ratio 4.51:1 — la altura visual del antiguo CappH (h*1) equivale a ~0.62 del nuevo (que incluye descenders); ajustamos */
+const CappH=({h=28,light=true})=><CapLogo orient="h" h={h*1.05} light={light}/>;
+const CappV=({h=60,light=true})=><CapLogo orient="v" h={h*1.15} light={light}/>;
 const CappGhost=({sz=200,op=.1})=>(
-  <svg width={sz} height={sz} viewBox="0 0 100 100" style={{opacity:op,display:"block",flexShrink:0}}>
-    <path d="M81,19 A44,44,0,1,0,81,81 L70,70 A28,28,0,1,1,70,30 Z" fill="white"/>
-    <rect x="63" y="5" width="24" height="24" fill="white"/>
+  /* Solo el mark (C + cuadrado) del SVG oficial — paths extraídos del Design System */
+  <svg width={sz} height={sz} viewBox="125 0 215 200" style={{opacity:op,display:"block",flexShrink:0,overflow:"visible"}}>
+    <path d="M232.01,194.64c-26,0-50.46-10.13-68.85-28.52-18.39-18.39-28.52-42.84-28.52-68.85s10.13-50.46,28.52-68.85C180.54,11.05,203.33,1.05,227.73,0v33.54c-15.45,1.02-29.84,7.52-40.88,18.57-12.06,12.06-18.71,28.1-18.71,45.17s6.64,33.1,18.71,45.17c12.06,12.06,28.1,18.71,45.17,18.71s33.11-6.64,45.17-18.71c11.05-11.05,17.55-25.43,18.57-40.88h33.54c-1.05,24.4-11.05,47.18-28.43,64.56-18.39,18.39-42.84,28.52-68.85,28.52Z" fill="white"/>
+    <rect x="263.8" y="9.48" width="56.01" height="56" fill="white"/>
   </svg>
 );
 
@@ -109,93 +157,216 @@ const DEMO={
   tipo:"Casa",op:"venta",m2:"220",amb:"5",dorm:"4",ban:"3",gar:"2",pool:true,
   precio:"237.000",moneda:"USD",expensas:"85.000",monedaExp:"$",
   dir:"Calle 489 e/ 133 y 134 - Gonnet",badge:"Oportunidad",
+  frente:"",fondo:"",
   agentes:[{n:"Francisco",t:"+54 9 221 638 7669",on:true},{n:"Sofía",t:"+54 9 221 593 9144",on:true},{n:"",t:"",on:false}],
 };
 
 const fs=(tx="",base=22,min=10,thr=14)=>{const l=String(tx).length;return l<=thr?base:Math.max(min,base-(l-thr)*.9);};
 
-/* ── Icons ── */
-const M2=({w=13,c="currentColor"})=><svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" width={w} height={w}><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 3v18"/></svg>;
-const Amb=({w=13,c="currentColor"})=><svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" width={w} height={w}><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M2 12h20M12 7v14"/></svg>;
-const Dorm=({w=13,c="currentColor"})=><svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" width={w} height={w}><path d="M2 20V10a2 2 0 012-2h16a2 2 0 012 2v10"/><path d="M2 15h20"/><path d="M6 8V6a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>;
-const Ban=({w=13,c="currentColor"})=><svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" width={w} height={w}><path d="M4 12h16v4a4 4 0 01-4 4H8a4 4 0 01-4-4v-4z"/><path d="M4 12V6a2 2 0 012-2h2v4"/></svg>;
-const Gar=({w=13,c="currentColor"})=><svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" width={w} height={w}><rect x="2" y="10" width="20" height="10" rx="1"/><path d="M2 10l3-6h14l3 6"/><path d="M9 17h6"/></svg>;
-const Pool=({w=13,c="currentColor"})=><svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" width={w} height={w}><path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M7 3v6M17 3v6"/></svg>;
-const Wp=({w=13})=><svg viewBox="0 0 24 24" fill="currentColor" width={w} height={w}><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>;
+/* ── Icons OFICIALES (Design System, vía capIcon → currentColor) ── */
+const Icon=({name,w=13,c="currentColor"})=><span style={{display:"inline-flex",alignItems:"center",justifyContent:"center",width:w,height:w,color:c,flexShrink:0}} dangerouslySetInnerHTML={{__html:(window.capIcon?capIcon(name,{size:w}):"")}}/>;
+const Wp=({w=13,c="currentColor"})=><span style={{display:"inline-flex",width:w,height:w,color:c,flexShrink:0}} dangerouslySetInnerHTML={{__html:(window.capIcon?capIcon("whatsapp",{size:w}):"")}}/>;
 
 function Feats({data,b,s,compact=false,light=true}){
-  const acc=b.acc,col=light?"white":b.bg,ico=compact?11*s:12*s,txs=compact?8.5*s:9.5*s,gap=compact?7*s:10*s;
-  const items=[data.m2&&{I:M2,t:`${data.m2}m²`},data.amb&&{I:Amb,t:`${data.amb} amb.`},
-    data.dorm&&{I:Dorm,t:`${data.dorm} dorm.`},data.ban&&{I:Ban,t:`${data.ban} baño${data.ban>1?"s":""}`},
-    data.gar&&{I:Gar,t:`${data.gar} coch.`},data.pool&&{I:Pool,t:"Pileta"}].filter(Boolean);
+  const acc=b.acc,col=light?"white":b.bg,ico=compact?12*s:13*s,txs=compact?8.5*s:9.5*s,gap=compact?7*s:10*s;
+  const ni=v=>parseInt(v,10)||0;
+  const items=[data.m2&&{k:"m2",t:`${data.m2}m\u00b2`},data.amb&&{k:"amb",t:`${data.amb} amb.`},
+    data.dorm&&{k:"dorm",t:`${data.dorm} dorm.`},
+    data.ban&&{k:"ban",t:`${data.ban} ba\u00f1o${ni(data.ban)!==1?"s":""}`},
+    data.gar&&{k:"gar",t:`${data.gar} coch.`},data.pool&&{k:"pool",t:"Pileta"},
+    data.antig&&{k:"antig",t:`${data.antig} a\u00f1o${ni(data.antig)!==1?"s":""}`},
+    data.aire&&{k:"aire",t:"A/A"}].filter(Boolean);
   if(!items.length)return null;
   return <div style={{display:"flex",flexWrap:"wrap",gap:`${3*s}px ${gap}px`,alignItems:"center"}}>
-    {items.map(({I,t},i)=><div key={i} style={{display:"flex",alignItems:"center",gap:3*s,fontFamily:b.fB,fontSize:txs,fontWeight:700,color:col}}><I w={ico} c={acc}/><span>{t}</span></div>)}
+    {items.map(({k,t},i)=><div key={i} style={{display:"flex",alignItems:"center",gap:3.5*s,fontFamily:b.fB,fontSize:txs,fontWeight:700,color:col,textTransform:"uppercase",letterSpacing:"0.06em"}}><Icon name={k} w={ico} c={acc}/><span>{t}</span></div>)}
   </div>;
 }
+/* TerrenoFeats — 3 items compactos centrados cuando tipo es Terreno */
+function TerrenoFeats({data,b,s,light=true}){
+  const acc=b.acc,col=light?"white":b.bg;
+  const ico=14*s,txsVal=10*s,txsLab=6.5*s;
+  const items=[
+    data.frente&&{k:"frente",v:`${data.frente}m`,l:"FRENTE"},
+    data.fondo &&{k:"fondo", v:`${data.fondo}m`, l:"FONDO"},
+    data.m2    &&{k:"m2",    v:`${data.m2}m²`,   l:"SUPERFICIE"},
+  ].filter(Boolean);
+  if(!items.length)return null;
+  return <div style={{display:"flex",gap:10*s,alignItems:"center",justifyContent:"center"}}>
+    {items.map(({k,v,l},i)=><div key={i} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:3*s}}>
+      <Icon name={k} w={ico} c={acc}/>
+      <span style={{fontFamily:b.fB,fontSize:txsVal,fontWeight:800,color:col,lineHeight:1,textAlign:"center"}}>{v}</span>
+      <span style={{fontFamily:b.fB,fontSize:txsLab,fontWeight:700,color:acc,letterSpacing:"0.07em",textAlign:"center"}}>{l}</span>
+    </div>)}
+  </div>;
+}
+const isTerr=d=>d&&d.tipo==="Terreno";
+/* Helper para items inline de layouts de carrusel/feed */
+const _ni=v=>parseInt(v,10)||0;
+function buildItems(data, style="compact"){
+  if(isTerr(data)){
+    /* Terreno: solo frente, fondo, superficie */
+    return [
+      data.frente&&["frente",`${data.frente}m FRENTE`],
+      data.fondo &&["fondo", `${data.fondo}m FONDO`],
+      data.m2    &&["m2",    `${data.m2}m² SUP.`],
+    ].filter(Boolean);
+  }
+  if(style==="caps") return [
+    data.m2  &&["m2",  `${data.m2}M² TOTALES`],
+    data.dorm&&["dorm",`${data.dorm} DORMITORIO${_ni(data.dorm)!==1?"S":""}`],
+    data.ban &&["ban", `${data.ban} BAÑO${_ni(data.ban)!==1?"S":""}`],
+    data.gar &&["gar", `${data.gar} COCHERA${_ni(data.gar)!==1?"S":""}`],
+    data.pool&&["pool","PILETA"],
+    data.amb &&["amb", `${data.amb} AMBIENTE${_ni(data.amb)!==1?"S":""}`],
+  ].filter(Boolean);
+  /* compact: lower case abreviado */
+  return [
+    data.m2  &&["m2",  `${data.m2}m²`],
+    data.dorm&&["dorm",`${data.dorm} dorm.`],
+    data.ban &&["ban", `${data.ban} baño${_ni(data.ban)!==1?"s":""}`],
+    data.gar &&["gar", `${data.gar} coch.`],
+    data.pool&&["pool","Pileta"],
+    data.amb &&["amb", `${data.amb} amb.`],
+  ].filter(Boolean);
+}
+function SmartFeats(props){
+  return isTerr(props.data)?<TerrenoFeats {...props}/>:<Feats {...props}/>;
+}
+
 const PT=({data,b,s,light=true})=>{
   if(!data.precio)return null;
   const lb=`${data.moneda} ${data.precio}`;
-  return <div style={{display:"inline-block",border:`2px solid ${b.acc}`,borderRadius:5,padding:`${3*s}px ${8*s}px`}}>
-    <span style={{fontFamily:b.fB,fontWeight:900,fontSize:fs(lb,13*s,8*s,10),color:light?"white":b.bg,lineHeight:1,whiteSpace:"nowrap"}}>{lb}</span>
+  return <div style={{display:"inline-flex",alignItems:"center",width:"fit-content",border:`2px solid ${b.acc}`,borderRadius:5,padding:`${4*s}px ${10*s}px`}}>
+    <span style={{fontFamily:b.fB,fontWeight:800,fontSize:fs(lb,13*s,8*s,10),color:light?"white":b.bg,lineHeight:1,whiteSpace:"nowrap"}}>{lb}</span>
   </div>;
 };
-const Exp=({data,b,s,light=true})=>data.expensas?<div style={{fontFamily:b.fB,fontSize:7.5*s,color:light?"rgba(255,255,255,.6)":"rgba(0,0,0,.45)",marginTop:1*s}}>Expensas: {data.monedaExp} {data.expensas}</div>:null;
+const Exp=({data,b,s,light=true})=>{
+  const v=String(data.expensas||"").trim();
+  if(!v||v==="0"||v==="0.00"||v==="0,00")return null;
+  return <div style={{fontFamily:b.fB,fontSize:7.5*s,color:light?"rgba(255,255,255,.6)":"rgba(0,0,0,.45)",marginTop:1*s}}>Expensas: {data.monedaExp} {v}</div>;
+};
 
 /* ══════════════════════════════════════════════
-   PHOTO SLOT — scroll=zoom, drag=mover
+   PHOTO SLOT — zoom (botones/scroll/touch) + drag para mover
+   Usa background-image en lugar de <img objectFit> para que
+   html2canvas exporte correctamente sin estirar.
 ══════════════════════════════════════════════ */
+const isTouchDevice=()=>'ontouchstart' in window||navigator.maxTouchPoints>0;
+const SwapCtx=React.createContext(null);
+
 function PhotoSlot({url,bg="#2a2a2a"}){
+  const onSwapCtx=React.useContext(SwapCtx);
   const [zoom,setZoom]=useState(1);
   const [off,setOff]=useState({x:0,y:0});
-  const drag=useRef(false),last=useRef({x:0,y:0}),el=useRef();
+  const [hover,setHover]=useState(false);
+  const [showCtrl,setShowCtrl]=useState(false);
+  const [nat,setNat]=useState(null);
+  const [cDim,setCDim]=useState({w:1,h:1});
+  const el=useRef();
+  const dragRef=useRef(null);
+  const tapRef=useRef(null); // rastrear si hubo movimiento para distinguir tap de pan
 
-  /* Reset when photo changes */
-  useEffect(()=>{setZoom(1);setOff({x:0,y:0});},[url]);
+  useEffect(()=>{setZoom(1);setOff({x:0,y:0});setShowCtrl(false);setNat(null);},[url]);
 
-  /* Wheel zoom — must be non-passive to preventDefault */
+  // Medir contenedor con ResizeObserver
   useEffect(()=>{
-    const e=el.current; if(!e)return;
-    const fn=ev=>{
-      ev.preventDefault();
-      setZoom(z=>{const nz=Math.max(1,Math.min(3.5,z-ev.deltaY*.0025));if(nz<=1.02)setOff({x:0,y:0});return nz;});
-    };
-    e.addEventListener('wheel',fn,{passive:false});
-    return()=>e.removeEventListener('wheel',fn);
+    if(!el.current)return;
+    const ro=new ResizeObserver(([e])=>{
+      const{width:w,height:h}=e.contentRect;
+      if(w>0&&h>0)setCDim({w,h});
+    });
+    ro.observe(el.current);
+    return()=>ro.disconnect();
   },[]);
 
-  const pt=e=>e.touches?{x:e.touches[0].clientX,y:e.touches[0].clientY}:{x:e.clientX,y:e.clientY};
-  const onD=e=>{drag.current=true;last.current=pt(e);e.preventDefault();};
-  const onM=e=>{
-    if(!drag.current)return;
-    const p=pt(e);
-    setOff(o=>({x:o.x+(p.x-last.current.x),y:o.y+(p.y-last.current.y)}));
-    last.current=p;
+  const computeClamp=(o,z,nw,nh)=>{
+    const{w:cw,h:ch}=cDim;
+    const sc=Math.max(cw/(nw||cw),ch/(nh||ch))*z;
+    const rW=( nw||cw)*sc, rH=(nh||ch)*sc;
+    const limX=Math.max(0,(rW-cw)/2), limY=Math.max(0,(rH-ch)/2);
+    return{x:Math.max(-limX,Math.min(limX,o.x)),y:Math.max(-limY,Math.min(limY,o.y))};
   };
-  const onU=()=>{drag.current=false;};
+  const setZ=nz=>{
+    nz=Math.max(1,Math.min(4,nz));
+    setZoom(nz);
+    setOff(o=>nz<=1.01?{x:0,y:0}:computeClamp(o,nz,nat?.w,nat?.h));
+  };
+
+  useEffect(()=>{
+    const e=el.current; if(!e)return;
+    const fn=ev=>{ev.preventDefault();setZ(zoom-ev.deltaY*.0025);};
+    e.addEventListener('wheel',fn,{passive:false});
+    return()=>e.removeEventListener('wheel',fn);
+  },[zoom,nat,cDim]);
+
+  const onPD=e=>{
+    if(!url)return;
+    try{e.currentTarget.setPointerCapture(e.pointerId);}catch(_){}
+    dragRef.current={x:e.clientX,y:e.clientY};
+    tapRef.current={x:e.clientX,y:e.clientY};
+    e.preventDefault();
+  };
+  const onPM=e=>{
+    if(!dragRef.current)return;
+    const dx=e.clientX-dragRef.current.x, dy=e.clientY-dragRef.current.y;
+    dragRef.current={x:e.clientX,y:e.clientY};
+    setOff(o=>computeClamp({x:o.x+dx,y:o.y+dy},zoom,nat?.w,nat?.h));
+  };
+  const onPU=e=>{
+    const t=tapRef.current;
+    const wasTap=t&&Math.abs(e.clientX-t.x)<6&&Math.abs(e.clientY-t.y)<6;
+    dragRef.current=null;tapRef.current=null;
+    try{e.currentTarget.releasePointerCapture(e.pointerId);}catch(_){}
+    if(wasTap&&onSwapCtx)onSwapCtx(url);
+  };
+
+  /* Calcula posición/tamaño del <img> para simular object-fit:cover con píxeles absolutos.
+     html2canvas NO soporta object-fit pero SÍ soporta position:absolute + width/height en px.
+     Esto preserva la calidad nativa del browser (mejor que background-image en thumbnails pequeños). */
+  const getImgStyle=()=>{
+    const{w:cw,h:ch}=cDim;
+    if(!nat||!nat.w||!nat.h)return{position:"absolute",top:0,left:0,width:"100%",height:"100%"};
+    const sc=Math.max(cw/nat.w,ch/nat.h)*zoom;
+    const rW=Math.round(nat.w*sc), rH=Math.round(nat.h*sc);
+    const left=Math.round((cw-rW)/2+off.x);
+    const top=Math.round((ch-rH)/2+off.y);
+    return{position:"absolute",left,top,width:rW,height:rH,userSelect:"none",pointerEvents:"none"};
+  };
+
+  const btn={width:26,height:26,border:"none",borderRadius:4,background:"rgba(20,20,20,.85)",color:"#fff",fontSize:14,fontWeight:700,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",lineHeight:1,fontFamily:PN};
+  const bstop=fn=>e=>{e.stopPropagation();e.preventDefault();fn();};
+  const visCtrl=hover||showCtrl;
 
   return <div ref={el}
-    style={{width:"100%",height:"100%",overflow:"hidden",background:bg,userSelect:"none",cursor:zoom>1.05?"move":"default",position:"relative"}}
-    onMouseDown={onD} onMouseMove={onM} onMouseUp={onU} onMouseLeave={onU}
-    onTouchStart={onD} onTouchMove={onM} onTouchEnd={onU}
-    title="Scroll=zoom · arrastrar=mover">
-    {url&&<img src={url} draggable={false}
-      style={{width:"100%",height:"100%",objectFit:"cover",
-        transform:`scale(${zoom}) translate(${off.x/zoom}px,${off.y/zoom}px)`,
-        transformOrigin:"center",pointerEvents:"none"}}/>}
+    onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)}
+    onClick={()=>{if(isTouchDevice()&&url)setShowCtrl(v=>!v);}}
+    style={{width:"100%",height:"100%",overflow:"hidden",background:bg,userSelect:"none",touchAction:"none",cursor:url?(zoom>1.01?"move":"grab"):"default",position:"relative"}}
+    onPointerDown={onPD} onPointerMove={onPM} onPointerUp={onPU} onPointerCancel={onPU}>
+    {url&&<img src={url} onLoad={e=>setNat({w:e.target.naturalWidth,h:e.target.naturalHeight})} style={getImgStyle()} draggable={false}/>}
     {!url&&<div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center"}}>
       <span style={{color:"rgba(255,255,255,.2)",fontSize:10,fontFamily:PN}}>sin foto</span>
     </div>}
+    {url&&visCtrl&&<div data-noexport="1" style={{position:"absolute",bottom:6,right:6,display:"flex",gap:4,zIndex:6}}>
+      <button style={btn} onPointerDown={bstop(()=>setZ(zoom-.3))}>−</button>
+      <button style={{...btn,fontSize:12}} onPointerDown={bstop(()=>setZ(1))}>↺</button>
+      <button style={btn} onPointerDown={bstop(()=>setZ(zoom+.3))}>+</button>
+    </div>}
+    {url&&visCtrl&&zoom>1.01&&<div data-noexport="1" style={{position:"absolute",top:6,left:6,background:"rgba(20,20,20,.85)",color:"#fff",fontSize:9,fontWeight:700,padding:"2px 6px",borderRadius:3,fontFamily:PN,zIndex:6,pointerEvents:"none"}}>{Math.round(zoom*100)}%</div>}
+    {url&&onSwapCtx&&visCtrl&&<div data-noexport="1" style={{position:"absolute",top:6,right:6,background:"rgba(20,20,20,.85)",color:"#fff",fontSize:9,fontWeight:700,padding:"2px 7px",borderRadius:3,fontFamily:PN,zIndex:6,pointerEvents:"none",letterSpacing:.3}}>⇄ cambiar</div>}
   </div>;
 }
 
 /* ── Drag (logo / matrícula) ── */
 function Drag({W,H,ix=10,iy=10,children}){
   const [pos,setPos]=useState({x:ix,y:iy});
+  const [dragging,setDragging]=useState(false);
+  const [snapX,setSnapX]=useState(null);
+  const [snapY,setSnapY]=useState(null);
   const dr=useRef(false),off=useRef({x:0,y:0}),el=useRef();
+  const THR=14;
   const xy=e=>e.touches?{x:e.touches[0].clientX,y:e.touches[0].clientY}:{x:e.clientX,y:e.clientY};
   const go=e=>{
-    e.stopPropagation();e.preventDefault();dr.current=true;
+    e.stopPropagation();e.preventDefault();dr.current=true;setDragging(true);
     const{x,y}=xy(e),r=el.current.getBoundingClientRect();
     off.current={x:x-r.left,y:y-r.top};
     window.addEventListener("mousemove",mv);window.addEventListener("mouseup",stop);
@@ -204,13 +375,37 @@ function Drag({W,H,ix=10,iy=10,children}){
   const mv=e=>{
     if(!dr.current)return;e.preventDefault();
     const{x,y}=xy(e),p=el.current.parentElement.getBoundingClientRect();
-    setPos({x:Math.min(W-60,Math.max(0,x-p.left-off.current.x)),y:Math.min(H-20,Math.max(0,y-p.top-off.current.y))});
+    const ew=el.current.offsetWidth,eh=el.current.offsetHeight;
+    let nx=Math.min(W-ew,Math.max(0,x-p.left-off.current.x));
+    let ny=Math.min(H-eh, Math.max(0,y-p.top-off.current.y));
+    const sc=W/1080, ml=50*sc;
+    const safeT=H*140/1920, safeB=H*265/1920, mb=H*0.185;
+    const xT=[['ml',ml],['cx',W/2-ew/2],['mr',W-ew-ml]];
+    const yT=[['top',safeT],['cy',H/2-eh/2],['bl',H-mb-eh],['bot',H-safeB-eh]];
+    let sx=null,sy=null;
+    for(const[id,v]of xT){if(Math.abs(nx-v)<THR){nx=v;sx=id;break;}}
+    for(const[id,v]of yT){if(Math.abs(ny-v)<THR){ny=v;sy=id;break;}}
+    setSnapX(sx);setSnapY(sy);
+    setPos({x:nx,y:ny});
   };
-  const stop=()=>{dr.current=false;window.removeEventListener("mousemove",mv);window.removeEventListener("mouseup",stop);window.removeEventListener("touchmove",mv);window.removeEventListener("touchend",stop);};
-  return <div ref={el} onMouseDown={go} onTouchStart={go}
-    style={{position:"absolute",left:pos.x,top:pos.y,cursor:"grab",userSelect:"none",zIndex:40,touchAction:"none"}}>
-    {children}
-  </div>;
+  const stop=()=>{dr.current=false;setDragging(false);setSnapX(null);setSnapY(null);
+    window.removeEventListener("mousemove",mv);window.removeEventListener("mouseup",stop);
+    window.removeEventListener("touchmove",mv);window.removeEventListener("touchend",stop);};
+  const g={position:"absolute",pointerEvents:"none",zIndex:39,left:0,right:0};
+  const gv={position:"absolute",pointerEvents:"none",zIndex:39,top:0,bottom:0};
+  const sc=W/1080, ml=50*sc, safeT=H*140/1920, safeB=H*265/1920;
+  return <>
+    {dragging&&<div data-noexport="1" style={{...g,top:safeT,  borderTop:snapY==='top'?"2px solid rgba(220,40,40,1)":"1px dashed rgba(220,40,40,.55)"}}/>}
+    {dragging&&<div data-noexport="1" style={{...g,top:H/2,    borderTop:snapY==='cy' ?"2px solid rgba(255,198,45,1)":"1px dashed rgba(255,198,45,.55)"}}/>}
+    {dragging&&<div data-noexport="1" style={{...g,top:H-safeB,borderTop:snapY==='bot'?"2px solid rgba(40,90,220,1)":"1px dashed rgba(40,90,220,.55)"}}/>}
+    {dragging&&<div data-noexport="1" style={{...gv,left:ml,    borderLeft:snapX==='ml'?"2px solid rgba(200,200,200,1)":"1px dashed rgba(200,200,200,.55)"}}/>}
+    {dragging&&<div data-noexport="1" style={{...gv,left:W/2,   borderLeft:snapX==='cx'?"2px solid rgba(255,198,45,1)":"1px dashed rgba(255,198,45,.55)"}}/>}
+    {dragging&&<div data-noexport="1" style={{...gv,left:W-ml,  borderLeft:snapX==='mr'?"2px solid rgba(200,200,200,1)":"1px dashed rgba(200,200,200,.55)"}}/>}
+    <div ref={el} onMouseDown={go} onTouchStart={go}
+      style={{position:"absolute",left:pos.x,top:pos.y,cursor:dragging?"grabbing":"grab",userSelect:"none",zIndex:40,touchAction:"none"}}>
+      {children}
+    </div>
+  </>;
 }
 
 function DLogo({brand,lt,W,H,ix,iy}){
@@ -220,31 +415,85 @@ function DLogo({brand,lt,W,H,ix,iy}){
     {lt==="full"?<b.H h={20*s} light={true}/>:<b.V h={34*s} light={true}/>}
   </Drag>;
 }
-function DMat({brand,W,H,ix,iy,dark=false}){
+function DMat({brand,W,H,dark=false}){
   const b=BR[brand],s=W/295;
-  return <Drag W={W} H={H} ix={ix??W*.04} iy={iy??H*.83}>
-    <div style={{fontSize:6.5*s,color:dark?"rgba(0,0,0,.28)":"rgba(255,255,255,.40)",letterSpacing:1.3,fontFamily:PN,whiteSpace:"nowrap"}}>
+  /* Centrada y dentro de la zona link (bottom 18%) */
+  return <div style={{position:"absolute",left:0,right:0,bottom:Math.round(H*.045),zIndex:41,pointerEvents:"none",display:"flex",justifyContent:"center"}}>
+    <span style={{fontSize:6.5*s,color:dark?"rgba(0,0,0,.28)":"rgba(255,255,255,.38)",letterSpacing:1.5,fontFamily:PN,whiteSpace:"nowrap"}}>
       {b.mat}
-    </div>
+    </span>
+  </div>;
+}
+function SLogo({brand,logoPos,logoLight,vert=false,W,H,logoMb}){
+  const b=BR[brand],sc=W/1080;
+  const ml=50*sc,mt=140*sc;
+  /* "abajo" = pegado al borde superior de la LZ (H*0.18), logo descansa sobre la zona link.
+     logoMb permite a layouts con bandas adicionales (ej: barra de features) reubicar el logo dentro de la LZ */
+  const mb=logoMb!==undefined?logoMb:Math.round(H*.185);
+  const lh=vert?160*sc:80*sc;
+  const pos={
+    1:{left:ml,top:mt},
+    2:{right:ml,top:mt},
+    3:{left:"50%",top:"50%",transform:"translate(-50%,-50%)"},
+    4:{left:ml,bottom:mb},
+    5:{right:ml,bottom:mb},
+  }[logoPos]||{right:ml,top:mt};
+  return <div style={{position:"absolute",...pos,zIndex:40,pointerEvents:"none"}}>
+    {vert?<b.V h={lh} light={logoLight}/>:<b.H h={lh} light={logoLight}/>}
+  </div>;
+}
+/* Logo libre — arrastrable en historias */
+function SDragLogo({brand,vert=false,logoLight=true,W,H}){
+  const b=BR[brand],sc=W/1080;
+  const lh=vert?160*sc:80*sc;
+  return <Drag W={W} H={H} ix={Math.round(W*.55)} iy={Math.round(H*.08)}>
+    {vert?<b.V h={lh} light={logoLight}/>:<b.H h={lh} light={logoLight}/>}
   </Drag>;
 }
 
-/* Link Zone — in-flow, empuja desde abajo */
-const LZ=({s,H})=>
-  <div style={{height:Math.round(H*.18),borderTop:"1px dashed rgba(255,255,255,.22)",background:"rgba(255,255,255,.04)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,pointerEvents:"none",marginTop:"auto"}}>
-    <span style={{fontSize:6.5*s,color:"rgba(255,255,255,.28)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
+/* LogoOverlay — unifica modo fijo (SLogo) y libre (SDragLogo) para todos los layouts */
+function LogoOverlay({brand,logoMode,logoPos,logoLight,logoVert,W,H,logoMb}){
+  if(logoPos===0) return null;
+  if(logoMode==="libre") return <SDragLogo brand={brand} vert={logoVert} logoLight={logoLight} W={W} H={H}/>;
+  return <SLogo brand={brand} logoPos={logoPos} logoLight={logoLight} vert={logoVert} W={W} H={H} logoMb={logoMb}/>;
+}
+
+/* Safe Zones overlay — guía visual de zonas protegidas de Instagram Stories (no exporta) */
+function SafeZones({W,H}){
+  const top=H*(140/1920),bot=H*(265/1920),side=W*(50/1080);
+  const band={position:"absolute",left:0,right:0,display:"flex",alignItems:"center",justifyContent:"center",pointerEvents:"none"};
+  const lbl={fontFamily:PN,fontWeight:700,fontSize:8,letterSpacing:.5,textTransform:"uppercase"};
+  return <div data-noexport="1" style={{position:"absolute",inset:0,overflow:"hidden",pointerEvents:"none",zIndex:60}}>
+    <div style={{...band,top:0,height:top,background:"rgba(220,40,40,.20)",borderBottom:"1px dashed rgba(220,40,40,.8)"}}>
+      <span style={{...lbl,color:"#c81e1e"}}>Reloj / batería · 140px</span>
+    </div>
+    <div style={{...band,bottom:0,height:bot,background:"rgba(40,90,220,.18)",borderTop:"1px dashed rgba(40,90,220,.8)"}}>
+      <span style={{...lbl,color:"#2a5adb"}}>Link / sticker IG · 265px</span>
+    </div>
+    <div style={{position:"absolute",top:top,bottom:bot,left:0,width:side,background:"rgba(150,150,150,.12)",pointerEvents:"none"}}/>
+    <div style={{position:"absolute",top:top,bottom:bot,right:0,width:side,background:"rgba(150,150,150,.12)",pointerEvents:"none"}}/>
   </div>;
+}
+
+/* Link Zone — el fondo exporta, el texto/línea son guía visual (data-noexport) */
+const LZ=({s,H,dark=false})=>(
+  <div style={{height:Math.round(H*.18),background:dark?"rgba(0,0,0,.04)":"rgba(255,255,255,.04)",flexShrink:0,marginTop:"auto",position:"relative"}}>
+    <div data-noexport="1" style={{position:"absolute",inset:0,borderTop:`1px dashed ${dark?"rgba(0,0,0,.15)":"rgba(255,255,255,.22)"}`,display:"flex",alignItems:"center",justifyContent:"center",pointerEvents:"none"}}>
+      <span style={{fontSize:6.5*s,color:dark?"rgba(0,0,0,.20)":"rgba(255,255,255,.28)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
+    </div>
+  </div>
+);
 
 /* InfoInner — sin fondo propio, sin altura fija */
 function InfoInner({data,b,s,compact=false}){
   return <div style={{display:"flex",flexDirection:"column",gap:3.5*s}}>
     <div>
-      <div style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(data.tipo,compact?20*s:22*s,11*s,12),color:"white",lineHeight:1.05}}>{data.tipo||"Propiedad"}</div>
+      <div style={{fontFamily:b.fT,fontWeight:800,fontSize:fs(data.tipo,compact?20*s:22*s,11*s,12),color:"white",lineHeight:1.05}}>{data.tipo||"Propiedad"}</div>
       <div style={{fontFamily:b.fB,fontWeight:300,fontSize:fs(data.op,compact?13*s:15*s,9*s,14),color:"rgba(255,255,255,.9)",lineHeight:1.2}}>en {data.op||"venta"}</div>
     </div>
-    {data.badge&&<div style={{display:"inline-flex"}}><div style={{background:b.acc,color:"#111",fontSize:8*s,fontWeight:800,padding:`${2*s}px ${7*s}px`,borderRadius:3,fontFamily:b.fB}}>{data.badge}</div></div>}
-    {data.dir&&<div style={{fontFamily:b.fB,fontStyle:"italic",fontSize:fs(data.dir,8.5*s,6.5*s,32),color:"rgba(255,255,255,.58)",lineHeight:1.3}}>{data.dir}</div>}
-    <Feats data={data} b={b} s={s} compact/>
+    {data.badge&&<div style={{display:"inline-flex"}}><div style={{background:b.acc,color:"#111",fontSize:8*s,fontWeight:800,padding:`${2*s}px ${7*s}px`,borderRadius:3,fontFamily:b.fB,textTransform:"uppercase",letterSpacing:"0.06em"}}>{data.badge}</div></div>}
+    {data.dir&&<div style={{fontFamily:b.fB,fontStyle:"italic",fontWeight:300,fontSize:fs(data.dir,8.5*s,6.5*s,32),color:"rgba(255,255,255,.55)",lineHeight:1.3}}>{data.dir}</div>}
+    <SmartFeats data={data} b={b} s={s} compact/>
     <div style={{display:"flex",alignItems:"center",gap:8*s,flexWrap:"wrap"}}><PT data={data} b={b} s={s}/><Exp data={data} b={b} s={s}/></div>
   </div>;
 }
@@ -262,328 +511,461 @@ function InfoInner({data,b,s,compact=false}){
   └── DMat (absolute)
 */
 
-/* A: foto grande + 3 minis + info */
-function LA({ph,data,brand,lt,W,slRef}){
+/* A: foto grande flex + 3 minis + info */
+function LA({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef,gapColor}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
-  const pH=Math.round(H*.50),mH=Math.round(H*.115);
-  return <div ref={slRef} style={{width:W,height:H,background:b.bg,borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
-    <div style={{height:pH,flexShrink:0}}><PhotoSlot url={ph[0]}/></div>
-    <div style={{height:3,background:b.acc,flexShrink:0}}/>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:2,height:mH,flexShrink:0,overflow:"hidden"}}>
+  const mH=Math.round(H*.13);
+  const gc=gapColor||b.bg;
+  return <div ref={slRef} style={{width:W,height:H,background:b.bg,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{flex:1,overflow:"hidden",minHeight:Math.round(H*.35)}}><PhotoSlot url={ph[0]}/></div>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:2,height:mH,flexShrink:0,overflow:"hidden",background:gc}}>
       {[1,2,3].map(i=><div key={i} style={{height:mH,overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
     </div>
-    <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
-      <div style={{padding:`${6*s}px ${10*s}px ${4*s}px`}}><InfoInner data={data} b={b} s={s*.85} compact/></div>
-      <LZ s={s} H={H}/>
-    </div>
-    <DLogo brand={brand} lt={lt} W={W} H={H} ix={W*.60} iy={pH*.50}/>
-    <DMat brand={brand} W={W} H={H}/>
-  </div>;
-}
-
-/* B: foto + info */
-function LB({ph,data,brand,lt,W,slRef}){
-  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
-  const pH=Math.round(H*.60);
-  return <div ref={slRef} style={{width:W,height:H,background:b.bg,borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
-    <div style={{height:pH,flexShrink:0}}><PhotoSlot url={ph[0]}/></div>
     <div style={{height:3,background:b.acc,flexShrink:0}}/>
-    <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
-      <div style={{padding:`${7*s}px ${11*s}px ${4*s}px`}}><InfoInner data={data} b={b} s={s*.92} compact/></div>
-      <LZ s={s} H={H}/>
-    </div>
-    <DLogo brand={brand} lt={lt} W={W} H={H} ix={W*.60} iy={pH*.50}/>
+    <div style={{padding:`${7*s}px ${14*s}px ${5*s}px`,flexShrink:0}}><InfoInner data={data} b={b} s={s*.88} compact/></div>
+    <LZ s={s} H={H}/>
+    <LogoOverlay brand={brand} logoMode={logoMode} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} W={W} H={H}/>
     <DMat brand={brand} W={W} H={H}/>
   </div>;
 }
 
-/* C: 2+1 columnas + info */
-function LC({ph,data,brand,lt,W,slRef}){
+/* B: foto flex + info */
+function LB({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
-  const gH=Math.round(H*.60);
-  return <div ref={slRef} style={{width:W,height:H,background:b.bg,borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
-    <div style={{display:"grid",gridTemplateColumns:"2fr 1fr",gap:2,height:gH,flexShrink:0}}>
-      <div style={{height:gH,overflow:"hidden"}}><PhotoSlot url={ph[0]}/></div>
-      <div style={{display:"grid",gridTemplateRows:"1fr 1fr",gap:2}}>
+  return <div ref={slRef} style={{width:W,height:H,background:b.bg,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{flex:1,overflow:"hidden",minHeight:Math.round(H*.42)}}><PhotoSlot url={ph[0]}/></div>
+    <div style={{height:3,background:b.acc,flexShrink:0}}/>
+    <div style={{padding:`${8*s}px ${14*s}px ${5*s}px`,flexShrink:0}}><InfoInner data={data} b={b} s={s*.92} compact/></div>
+    <LZ s={s} H={H}/>
+    <LogoOverlay brand={brand} logoMode={logoMode} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} W={W} H={H}/>
+    <DMat brand={brand} W={W} H={H}/>
+  </div>;
+}
+
+/* C: 2+1 columnas flex + info */
+function LC({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef,gapColor}){
+  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const gc=gapColor||b.bg;
+  return <div ref={slRef} style={{width:W,height:H,background:b.bg,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{flex:1,display:"grid",gridTemplateColumns:"2fr 1fr",gap:2,overflow:"hidden",minHeight:Math.round(H*.42),background:gc}}>
+      <div style={{overflow:"hidden"}}><PhotoSlot url={ph[0]}/></div>
+      <div style={{display:"grid",gridTemplateRows:"1fr 1fr",gap:2,background:gc}}>
         {[1,2].map(i=><div key={i} style={{overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
       </div>
     </div>
     <div style={{height:3,background:b.acc,flexShrink:0}}/>
-    <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
-      <div style={{padding:`${7*s}px ${11*s}px ${4*s}px`}}><InfoInner data={data} b={b} s={s*.90} compact/></div>
-      <LZ s={s} H={H}/>
-    </div>
-    <DLogo brand={brand} lt={lt} W={W} H={H} ix={W*.60} iy={gH*.50}/>
+    <div style={{padding:`${8*s}px ${14*s}px ${5*s}px`,flexShrink:0}}><InfoInner data={data} b={b} s={s*.90} compact/></div>
+    <LZ s={s} H={H}/>
+    <LogoOverlay brand={brand} logoMode={logoMode} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} W={W} H={H}/>
     <DMat brand={brand} W={W} H={H}/>
   </div>;
 }
 
 /* D: pantalla completa con gradiente */
-function LD({ph,data,brand,lt,W,slRef}){
+function LD({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
-  return <div ref={slRef} style={{width:W,height:H,background:"#111",borderRadius:12,overflow:"hidden",position:"relative"}}>
+  return <div ref={slRef} style={{width:W,height:H,background:"#111",overflow:"hidden",position:"relative"}}>
     <div style={{position:"absolute",inset:0}}><PhotoSlot url={ph[0]}/></div>
     <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom,rgba(0,0,0,.05) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,.5) 60%,rgba(0,0,0,.80) 100%)"}}/>
     <div style={{position:"absolute",bottom:H*.20,left:0,right:0,padding:`0 ${14*s}px`}}>
       <div style={{width:34*s,height:2*s,background:b.acc,marginBottom:6*s}}/>
-      <div style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(data.tipo,23*s,13*s,12),color:"white",lineHeight:1}}>{data.tipo||"Propiedad"}</div>
+      <div style={{fontFamily:b.fT,fontWeight:800,fontSize:fs(data.tipo,23*s,13*s,12),color:"white",lineHeight:1}}>{data.tipo||"Propiedad"}</div>
       <div style={{fontFamily:b.fB,fontWeight:300,fontSize:14*s,color:"rgba(255,255,255,.9)"}}>en {data.op||"venta"}</div>
-      {data.badge&&<div style={{display:"inline-block",marginTop:4*s,background:b.acc,color:"#111",fontSize:8*s,fontWeight:800,padding:`${2*s}px ${7*s}px`,borderRadius:3,fontFamily:b.fB}}>{data.badge}</div>}
+      {data.badge&&<div style={{display:"inline-block",marginTop:4*s,background:b.acc,color:"#111",fontSize:8*s,fontWeight:800,padding:`${2*s}px ${7*s}px`,borderRadius:3,fontFamily:b.fB,textTransform:"uppercase",letterSpacing:"0.06em"}}>{data.badge}</div>}
       {data.dir&&<div style={{fontFamily:b.fB,fontStyle:"italic",fontSize:8.5*s,color:"rgba(255,255,255,.6)",marginTop:3*s,lineHeight:1.3}}>{data.dir}</div>}
-      <div style={{marginTop:6*s}}><Feats data={data} b={b} s={s} compact/></div>
+      <div style={{marginTop:6*s}}><SmartFeats data={data} b={b} s={s} compact/></div>
       <div style={{marginTop:5*s,display:"flex",gap:8*s,flexWrap:"wrap",alignItems:"center"}}><PT data={data} b={b} s={s}/><Exp data={data} b={b} s={s}/></div>
     </div>
-    {/* LZ absolute en este layout */}
-    <div style={{position:"absolute",bottom:0,left:0,right:0,height:H*.18,borderTop:"1px dashed rgba(255,255,255,.22)",background:"rgba(0,0,0,.35)",display:"flex",alignItems:"center",justifyContent:"center"}}>
-      <span style={{fontSize:6.5*s,color:"rgba(255,255,255,.28)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
+    {/* LZ absolute en este layout — fondo exporta, texto no */}
+    <div style={{position:"absolute",bottom:0,left:0,right:0,height:H*.18,background:"rgba(0,0,0,.35)"}}>
+      <div data-noexport="1" style={{position:"absolute",inset:0,borderTop:"1px dashed rgba(255,255,255,.22)",display:"flex",alignItems:"center",justifyContent:"center",pointerEvents:"none"}}>
+        <span style={{fontSize:6.5*s,color:"rgba(255,255,255,.28)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
+      </div>
     </div>
-    <DLogo brand={brand} lt={lt} W={W} H={H} ix={W*.60} iy={H*.15}/>
+    <LogoOverlay brand={brand} logoMode={logoMode} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} W={W} H={H}/>
     <DMat brand={brand} W={W} H={H}/>
   </div>;
 }
 
 /* E: banda color + foto + info */
-function LE({ph,data,brand,lt,W,slRef}){
+function LE({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
-  const bH=Math.round(H*.82*.10),pH=Math.round(H*.82*.44);
-  return <div ref={slRef} style={{width:W,height:H,background:b.bg,borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
-    <div style={{height:bH,background:b.acc,display:"flex",alignItems:"center",padding:`0 ${12*s}px`,flexShrink:0}}>
-      <span style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(data.tipo+" en "+data.op,12*s,8*s,16),color:b.bg,lineHeight:1}}>
-        {data.tipo||"Propiedad"} <span style={{fontWeight:300}}>en {data.op||"venta"}</span>
-      </span>
-    </div>
-    <div style={{height:pH,flexShrink:0}}><PhotoSlot url={ph[0]}/></div>
-    <div style={{height:3,background:"rgba(255,255,255,.12)",flexShrink:0}}/>
-    <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
-      <div style={{padding:`${6*s}px ${10*s}px ${4*s}px`}}><InfoInner data={data} b={b} s={s*.83} compact/></div>
-      <LZ s={s} H={H}/>
-    </div>
-    <DLogo brand={brand} lt={lt} W={W} H={H} ix={W*.62} iy={bH+pH*.50}/>
+  return <div ref={slRef} style={{width:W,height:H,background:b.bg,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{flex:1,overflow:"hidden",minHeight:Math.round(H*.42)}}><PhotoSlot url={ph[0]}/></div>
+    <div style={{height:3,background:b.acc,flexShrink:0}}/>
+    <div style={{padding:`${8*s}px ${14*s}px ${5*s}px`,flexShrink:0}}><InfoInner data={data} b={b} s={s*.92} compact/></div>
+    <LZ s={s} H={H}/>
+    <LogoOverlay brand={brand} logoMode={logoMode} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} W={W} H={H}/>
     <DMat brand={brand} W={W} H={H}/>
   </div>;
 }
 
-/* F: 2 fotos + info */
-function LF({ph,data,brand,lt,W,slRef}){
+/* F: 2 fotos flex + info */
+function LF({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
-  const gH=Math.round(H*.82*.44);
-  return <div ref={slRef} style={{width:W,height:H,background:b.bg,borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
-    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:2,height:gH,flexShrink:0,overflow:"hidden"}}>
-      {[0,1].map(i=><div key={i} style={{height:gH,overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
+  return <div ref={slRef} style={{width:W,height:H,background:b.bg,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{flex:1,display:"grid",gridTemplateColumns:"1fr 1fr",gap:2,overflow:"hidden",minHeight:Math.round(H*.42)}}>
+      {[0,1].map(i=><div key={i} style={{overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
     </div>
     <div style={{height:3,background:b.acc,flexShrink:0}}/>
-    <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
-      <div style={{padding:`${7*s}px ${11*s}px ${4*s}px`}}><InfoInner data={data} b={b} s={s*.90} compact/></div>
-      <LZ s={s} H={H}/>
-    </div>
-    <DLogo brand={brand} lt={lt} W={W} H={H} ix={W*.60} iy={gH*.50}/>
+    <div style={{padding:`${8*s}px ${14*s}px ${5*s}px`,flexShrink:0}}><InfoInner data={data} b={b} s={s*.90} compact/></div>
+    <LZ s={s} H={H}/>
+    <LogoOverlay brand={brand} logoMode={logoMode} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} W={W} H={H}/>
     <DMat brand={brand} W={W} H={H}/>
   </div>;
 }
 
 /* G: fondo claro — header logo, foto, split info+foto, features, contacts */
-function LG({ph,data,brand,lt,W,slRef}){
+function LG({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
-  const sh=H*.82;
-  const hH=Math.round(sh*.09),pHm=Math.round(sh*.30),spH=Math.round(sh*.24),fH=Math.round(sh*.10),cH=Math.round(sh*.09);
-  const Logo=b.H;
-  return <div ref={slRef} style={{width:W,height:H,background:"#F2F2F2",borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
-    {/* Header con logo oscuro */}
-    <div style={{height:hH,background:"white",display:"flex",alignItems:"center",padding:`0 ${10*s}px`,borderBottom:`2px solid ${b.acc}`,flexShrink:0}}>
-      <Logo h={hH*.58} light={false}/>
-    </div>
+  const sh=H*.82,safeTop=Math.round(H*140/1920);
+  const hH=Math.round(sh*.09),pHm=Math.round(sh*.38),spH=Math.round(sh*.24),fH=Math.round(sh*.10),cH=Math.round(sh*.09);
+  /* Banda blanca absorbe safeTop: se estira hasta el borde superior absoluto */
+  const headerH=hH+safeTop;
+  return <div ref={slRef} style={{width:W,height:H,background:"#F2F2F2",overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    {/* Header — banda blanca llega al tope, con línea de acento al final */}
+    <div style={{height:headerH,background:"white",borderBottom:`2px solid ${b.acc}`,flexShrink:0}}/>
     <div style={{height:pHm,flexShrink:0,position:"relative"}}>
       <PhotoSlot url={ph[0]}/>
-      {data.badge&&<div style={{position:"absolute",top:6*s,left:8*s,background:b.acc,color:"#111",fontSize:8.5*s,fontWeight:900,padding:`${2*s}px ${9*s}px`,borderRadius:3,fontFamily:b.fB,zIndex:5}}>{data.badge.toUpperCase()}</div>}
+      {data.badge&&<div style={{position:"absolute",top:6*s,left:8*s,background:b.acc,color:"#111",fontSize:8.5*s,fontWeight:800,padding:`${2*s}px ${9*s}px`,borderRadius:3,fontFamily:b.fB,zIndex:5,textTransform:"uppercase",letterSpacing:"0.06em"}}>{data.badge.toUpperCase()}</div>}
     </div>
     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",height:spH,flexShrink:0}}>
-      <div style={{background:b.bg,padding:`${6*s}px ${8*s}px`,display:"flex",flexDirection:"column",justifyContent:"center",gap:3*s}}>
-        <div style={{fontFamily:b.fB,fontWeight:900,fontSize:fs(data.tipo,9.5*s,7*s,10),color:b.acc,lineHeight:1}}>{(data.tipo||"PROP.").toUpperCase()} EN {(data.op||"VENTA").toUpperCase()}</div>
-        <PT data={data} b={b} s={s*.80}/><Exp data={data} b={b} s={s*.80}/>
+      <div style={{background:b.bg,padding:`${6*s}px ${12*s}px`,display:"flex",flexDirection:"column",justifyContent:"center",gap:3*s}}>
+        <div style={{fontFamily:b.fB,fontWeight:800,fontSize:fs(data.tipo,9.5*s,7*s,10),color:b.acc,lineHeight:1}}>{(data.tipo||"PROP.").toUpperCase()} EN {(data.op||"VENTA").toUpperCase()}</div>
+        <PT data={data} b={b} s={s*.65}/><Exp data={data} b={b} s={s*.65}/>
         {data.dir&&<div style={{fontSize:6.5*s,color:"rgba(255,255,255,.5)",fontStyle:"italic",lineHeight:1.3,fontFamily:b.fB}}>{data.dir}</div>}
       </div>
       <div style={{overflow:"hidden"}}><PhotoSlot url={ph[1]}/></div>
     </div>
-    <div style={{height:fH,background:"white",padding:`${3*s}px ${10*s}px`,display:"flex",alignItems:"center",flexShrink:0}}>
-      <Feats data={data} b={{...b,acc:b.bg}} s={s} light={false} compact/>
+    <div style={{height:fH,background:"white",padding:`${3*s}px ${12*s}px`,display:"flex",alignItems:"center",flexShrink:0}}>
+      <SmartFeats data={data} b={{...b,acc:b.bg}} s={s} light={false} compact/>
     </div>
-    <div style={{height:cH,background:b.bg,padding:`0 ${10*s}px`,display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0}}>
+    <div style={{height:cH,background:b.bg,padding:`0 ${12*s}px`,display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0}}>
       {data.agentes.filter(a=>a.on&&a.t).map((a,i)=>(
         <div key={i} style={{display:"flex",alignItems:"center",gap:4*s,fontSize:8*s,color:"white",fontFamily:b.fB}}><Wp w={10*s}/>{a.t}</div>
       ))}
     </div>
-    <div style={{flex:1,display:"flex",flexDirection:"column"}}>
-      {/* LZ para fondo claro */}
-      <div style={{height:Math.round(H*.18),borderTop:"1px dashed rgba(0,0,0,.12)",background:"rgba(0,0,0,.04)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+    <div style={{height:Math.round(H*.18),background:"rgba(0,0,0,.04)",flexShrink:0,position:"relative"}}>
+      <div data-noexport="1" style={{position:"absolute",inset:0,borderTop:"1px dashed rgba(0,0,0,.12)",display:"flex",alignItems:"center",justifyContent:"center",pointerEvents:"none"}}>
         <span style={{fontSize:6.5*s,color:"rgba(0,0,0,.20)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
       </div>
     </div>
-    <DMat brand={brand} W={W} H={H} dark={true} ix={W*.44}/>
+    <LogoOverlay brand={brand} logoMode={logoMode} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} W={W} H={H}/>
+    <DMat brand={brand} W={W} H={H} dark={true}/>
   </div>;
 }
 
 /* H: fondo claro — logo+línea, título+precio, 2fotos, panorama, features, dirección+logo */
-function LH({ph,data,brand,lt,W,slRef}){
+function LH({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef,gapColor}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
-  const sh=H*.82;
-  const hH=Math.round(sh*.09),tH=Math.round(sh*.09),tpH=Math.round(sh*.21),panH=Math.round(sh*.21),fH=Math.round(sh*.10),aH=Math.round(sh*.10);
-  const Logo=b.H;
-  return <div ref={slRef} style={{width:W,height:H,background:"white",borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
-    <div style={{height:hH,background:"white",display:"flex",alignItems:"center",padding:`0 ${10*s}px`,borderBottom:`2.5px solid ${b.acc}`,flexShrink:0}}>
-      <Logo h={hH*.54} light={false}/>
+  const sh=H*.82,safeTop=Math.round(H*140/1920);
+  const hH=Math.round(sh*.09),tH=Math.round(sh*.09),fH=Math.round(sh*.10),aH=Math.round(sh*.09);
+  const headerH=hH+safeTop;
+  const gc=gapColor||"white";
+  return <div ref={slRef} style={{width:W,height:H,background:"white",overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{height:headerH,background:"white",borderBottom:`2.5px solid ${b.acc}`,flexShrink:0}}/>
+    <div style={{height:tH,background:"white",display:"flex",alignItems:"center",justifyContent:"space-between",padding:`0 ${12*s}px`,borderBottom:"1px solid #eee",flexShrink:0}}>
+      <span style={{fontFamily:b.fT,fontWeight:800,fontSize:fs((data.tipo||"")+" EN "+(data.op||""),12*s,8*s,14),color:b.bg}}>{(data.tipo||"").toUpperCase()} EN {(data.op||"").toUpperCase()}</span>
+      <PT data={data} b={{...b,acc:b.acc}} s={s*.78} light={false}/>
     </div>
-    <div style={{height:tH,background:"white",display:"flex",alignItems:"center",justifyContent:"space-between",padding:`0 ${10*s}px`,borderBottom:"1px solid #eee",flexShrink:0}}>
-      <span style={{fontFamily:b.fT,fontWeight:900,fontSize:fs((data.tipo||"")+" EN "+(data.op||""),12*s,8*s,14),color:b.bg}}>{(data.tipo||"").toUpperCase()} EN {(data.op||"").toUpperCase()}</span>
-      <div style={{background:b.acc,borderRadius:4,padding:`${2*s}px ${7*s}px`}}>
-        <span style={{fontFamily:b.fB,fontWeight:900,fontSize:fs(`${data.moneda} ${data.precio}`,11*s,8*s,10),color:b.bg,whiteSpace:"nowrap"}}>{data.moneda} {data.precio||"—"}</span>
+    {/* Fotos — flex:1 elimina espacio muerto */}
+    <div style={{flex:1,display:"flex",flexDirection:"column",gap:2,overflow:"hidden",minHeight:Math.round(H*.30),background:gc}}>
+      <div style={{flex:1,display:"grid",gridTemplateColumns:"1fr 1fr",gap:2,overflow:"hidden",background:gc}}>
+        {[0,1].map(i=><div key={i} style={{overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
       </div>
+      <div style={{flex:1,overflow:"hidden"}}><PhotoSlot url={ph[2]}/></div>
     </div>
-    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:2,height:tpH,flexShrink:0,overflow:"hidden"}}>
-      {[0,1].map(i=><div key={i} style={{height:tpH,overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
+    <div style={{height:fH,background:"white",padding:`${3*s}px ${12*s}px`,display:"flex",alignItems:"center",borderTop:"1px solid #eee",flexShrink:0}}>
+      <SmartFeats data={data} b={{...b,acc:b.bg}} s={s*.9} light={false} compact/>
     </div>
-    <div style={{height:panH,flexShrink:0,marginTop:2}}><PhotoSlot url={ph[2]}/></div>
-    <div style={{height:fH,background:"white",padding:`${3*s}px ${10*s}px`,display:"flex",alignItems:"center",borderTop:"1px solid #eee",flexShrink:0}}>
-      <Feats data={data} b={{...b,acc:b.bg}} s={s*.9} light={false} compact/>
+    <div style={{background:"white",padding:`${4*s}px ${12*s}px`,display:"flex",flexDirection:"column",justifyContent:"center",gap:2*s,borderTop:"1px solid #eee",flexShrink:0,minHeight:aH}}>
+      {data.dir&&<div style={{fontSize:9*s,color:"#333",fontStyle:"italic",fontFamily:b.fB,lineHeight:1.2,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{data.dir}</div>}
+      <Exp data={data} b={{...b}} s={s*.9} light={false}/>
     </div>
-    <div style={{height:aH,background:"white",padding:`${4*s}px ${10*s}px`,display:"flex",alignItems:"center",justifyContent:"space-between",borderTop:"1px solid #eee",flexShrink:0}}>
-      <div>
-        {data.dir&&<div style={{fontSize:8*s,color:"#444",fontStyle:"italic",fontFamily:b.fB,lineHeight:1.3}}>{data.dir}</div>}
-        <Exp data={data} b={{...b}} s={s} light={false}/>
-      </div>
-      <Logo h={hH*.50} light={false}/>
-    </div>
-    <div style={{flex:1,display:"flex",flexDirection:"column"}}>
-      <div style={{flex:1,background:b.bg,display:"flex",alignItems:"center",justifyContent:"center"}}>
-        <span style={{fontSize:6*s,color:"rgba(255,255,255,.38)",letterSpacing:1.2,fontFamily:PN}}>{b.mat}</span>
-      </div>
-      <div style={{height:Math.round(H*.18),borderTop:"1px dashed rgba(0,0,0,.12)",background:"rgba(0,0,0,.04)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+    <div style={{height:Math.round(H*.18),background:"rgba(0,0,0,.04)",flexShrink:0,position:"relative"}}>
+      <div data-noexport="1" style={{position:"absolute",inset:0,borderTop:"1px dashed rgba(0,0,0,.12)",display:"flex",alignItems:"center",justifyContent:"center",pointerEvents:"none"}}>
         <span style={{fontSize:6.5*s,color:"rgba(0,0,0,.20)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
       </div>
     </div>
+    <LogoOverlay brand={brand} logoMode={logoMode} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} W={W} H={H}/>
+    <DMat brand={brand} W={W} H={H} dark={true}/>
   </div>;
 }
 
 /* I: ghost logo bg + foto full + caja features (sin logo duplicado) */
-function LI({ph,data,brand,lt,W,slRef}){
+function LI({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
   const Ghost=b.Ghost;
-  const items=[data.m2&&[M2,`${data.m2}M² TOTALES`],data.dorm&&[Dorm,`${data.dorm} DORMITORIOS`],
-    data.ban&&[Ban,`${data.ban} BAÑOS`],data.gar&&[Gar,`${data.gar} COCHERAS`],
-    data.pool&&[Pool,"PILETA"],data.amb&&[Amb,`${data.amb} AMBIENTES`]].filter(Boolean);
-  return <div ref={slRef} style={{width:W,height:H,background:"#2A2A2A",borderRadius:12,overflow:"hidden",position:"relative"}}>
+  const items=buildItems(data,"caps");
+  return <div ref={slRef} style={{width:W,height:H,background:"#2A2A2A",overflow:"hidden",position:"relative"}}>
     <div style={{position:"absolute",inset:0}}><PhotoSlot url={ph[0]}/></div>
     <div style={{position:"absolute",inset:0,background:"rgba(0,0,0,.45)"}}/>
     <div style={{position:"absolute",top:-W*.08,right:-W*.1,pointerEvents:"none"}}><Ghost sz={W*.72} op={.13}/></div>
-    <div style={{position:"absolute",top:H*.14,left:0,right:0,bottom:H*.19,padding:`0 ${14*s}px`,overflow:"hidden"}}>
-      <div style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(data.tipo,24*s,14*s,10),color:"white",lineHeight:1}}>{data.tipo||"Casa"}</div>
-      <div style={{display:"flex",alignItems:"center",gap:8*s,marginTop:3*s}}>
-        <span style={{fontFamily:b.fB,fontWeight:300,fontSize:13*s,color:"white"}}>en {data.op||"venta"}</span>
-        <div style={{flex:1,height:1.5*s,background:b.acc}}/>
+    <div style={{position:"absolute",top:H*.10,left:0,right:0,bottom:H*.19,padding:`0 ${14*s}px`,display:"flex",flexDirection:"column"}}>
+      {/* Bloque superior: tipo, op, badge, dir, precio */}
+      <div>
+        <div style={{fontFamily:b.fT,fontWeight:800,fontSize:fs(data.tipo,26*s,14*s,10),color:"white",lineHeight:1}}>{data.tipo||"Casa"}</div>
+        <div style={{display:"flex",alignItems:"center",gap:8*s,marginTop:4*s}}>
+          <span style={{fontFamily:b.fB,fontWeight:300,fontSize:14*s,color:"white"}}>en {data.op||"venta"}</span>
+          <div style={{flex:1,height:1.5*s,background:b.acc}}/>
+        </div>
+        {data.badge&&<div style={{display:"inline-block",marginTop:5*s,background:b.acc,color:"#111",fontSize:8*s,fontWeight:800,padding:`${2*s}px ${7*s}px`,borderRadius:3,fontFamily:b.fB,textTransform:"uppercase",letterSpacing:"0.06em"}}>{data.badge}</div>}
+        {data.dir&&<div style={{fontStyle:"italic",fontSize:8.5*s,color:"rgba(255,255,255,.6)",marginTop:5*s,fontFamily:b.fB,lineHeight:1.3}}>{data.dir}</div>}
+        <div style={{marginTop:8*s,display:"flex",alignItems:"center",gap:8*s,flexWrap:"wrap"}}><PT data={data} b={b} s={s}/><Exp data={data} b={b} s={s}/></div>
       </div>
-      {data.badge&&<div style={{display:"inline-block",marginTop:4*s,background:b.acc,color:"#111",fontSize:8*s,fontWeight:800,padding:`${2*s}px ${7*s}px`,borderRadius:3,fontFamily:b.fB}}>{data.badge}</div>}
-      {data.dir&&<div style={{fontStyle:"italic",fontSize:8.5*s,color:"rgba(255,255,255,.6)",marginTop:4*s,fontFamily:b.fB,lineHeight:1.3}}>{data.dir}</div>}
-      <div style={{marginTop:6*s,display:"flex",alignItems:"center",gap:8*s,flexWrap:"wrap"}}><PT data={data} b={b} s={s}/><Exp data={data} b={b} s={s}/></div>
-      {items.length>0&&<div style={{marginTop:8*s,border:`1.5px solid ${b.acc}`,borderRadius:7,padding:`${6*s}px ${9*s}px`,background:"rgba(0,0,0,.45)"}}>
-        {items.map(([Ico,label],i)=>(
-          <div key={i} style={{display:"flex",alignItems:"center",gap:6*s,marginBottom:i<items.length-1?3*s:0,fontFamily:b.fB,fontSize:9*s,fontWeight:700,color:"white"}}>
-            <Ico w={12*s} c={b.acc}/>{label}
+      {/* Caja features — tamaño natural, gap fijo para equilibrio */}
+      {items.length>0&&<div style={{marginTop:"auto",border:`1.5px solid ${b.acc}`,borderRadius:7,padding:`${9*s}px ${9*s}px`,background:"rgba(0,0,0,.45)",display:"flex",flexDirection:"column",gap:8*s}}>
+        {items.map(([ik,label],i)=>(
+          <div key={i} style={{display:"flex",alignItems:"center",gap:6*s,fontFamily:b.fB,fontSize:9.5*s,fontWeight:700,color:"white"}}>
+            <Icon name={ik} w={13*s} c={b.acc}/>{label}
           </div>
         ))}
       </div>}
     </div>
     <div style={{position:"absolute",bottom:H*.20,left:0,right:0,height:Math.round(H*.18)*0,pointerEvents:"none"}}/>
-    <div style={{position:"absolute",bottom:0,left:0,right:0,height:Math.round(H*.18),borderTop:"1px dashed rgba(255,255,255,.22)",background:"rgba(0,0,0,.5)",display:"flex",alignItems:"center",justifyContent:"center"}}>
-      <span style={{fontSize:6.5*s,color:"rgba(255,255,255,.28)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
+    <div style={{position:"absolute",bottom:0,left:0,right:0,height:Math.round(H*.18),background:"rgba(0,0,0,.5)"}}>
+      <div data-noexport="1" style={{position:"absolute",inset:0,borderTop:"1px dashed rgba(255,255,255,.22)",display:"flex",alignItems:"center",justifyContent:"center",pointerEvents:"none"}}>
+        <span style={{fontSize:6.5*s,color:"rgba(255,255,255,.28)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
+      </div>
     </div>
-    <DLogo brand={brand} lt={lt} W={W} H={H} ix={W*.55} iy={H*.68}/>
+    <LogoOverlay brand={brand} logoMode={logoMode} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} W={W} H={H}/>
     <DMat brand={brand} W={W} H={H}/>
   </div>;
 }
 
 /* J: header oscuro con logo, foto+overlay, 3 minis, features bar, contactos */
-function LJ({ph,data,brand,lt,W,slRef}){
+function LJ({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef,gapColor}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
-  const sh=H*.82;
-  const hH=Math.round(sh*.09),pHm=Math.round(sh*.28),mH=Math.round(sh*.15),fH=Math.round(sh*.10),cH=Math.round(sh*.14);
-  const Logo=b.H;
-  return <div ref={slRef} style={{width:W,height:H,background:b.bg,borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
-    <div style={{height:hH,background:b.bg,display:"flex",alignItems:"center",padding:`0 ${10*s}px`,flexShrink:0}}>
-      <Logo h={hH*.58} light={true}/>
-    </div>
-    <div style={{height:pHm,flexShrink:0,position:"relative"}}>
+  const gc=gapColor||b.bg;
+  const sh=H*.82,safeTop=Math.round(H*140/1920);
+  const hH=Math.round(sh*.09),mH=Math.round(sh*.15),fH=Math.round(sh*.10),cH=Math.round(sh*.13);
+  const headerH=hH+safeTop;
+  return <div ref={slRef} style={{width:W,height:H,background:b.bg,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{height:headerH,background:b.bg,flexShrink:0}}/>
+
+    <div style={{flex:1,position:"relative",overflow:"hidden",minHeight:Math.round(H*.28)}}>
       <PhotoSlot url={ph[0]}/>
-      <div style={{position:"absolute",inset:0,background:"linear-gradient(to right,rgba(0,0,0,.65) 0%,rgba(0,0,0,.1) 60%)"}}/>
-      <div style={{position:"absolute",bottom:8*s,left:10*s,zIndex:2}}>
-        <div style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(data.op,16*s,10*s,8),color:b.acc,lineHeight:1}}>{(data.op||"VENTA").toUpperCase()}</div>
+      <div style={{position:"absolute",inset:0,background:"linear-gradient(to right,rgba(0,0,0,.70) 0%,rgba(0,0,0,.1) 65%)"}}/>
+      <div style={{position:"absolute",bottom:8*s,left:12*s,zIndex:2}}>
+        <div style={{fontFamily:b.fT,fontWeight:800,fontSize:fs(data.op,16*s,10*s,8),color:b.acc,lineHeight:1}}>{(data.op||"VENTA").toUpperCase()}</div>
         <div style={{fontFamily:b.fT,fontWeight:700,fontSize:fs(data.tipo,12*s,8*s,10),color:"white",lineHeight:1.1,marginTop:1*s}}>{data.tipo||"Propiedad"}</div>
-        <div style={{marginTop:3*s}}><PT data={data} b={b} s={s*.82}/></div>
+        <div style={{marginTop:3*s,display:"flex",alignItems:"flex-start"}}><PT data={data} b={b} s={s*.82}/></div>
         <Exp data={data} b={b} s={s*.82}/>
-        {data.dir&&<div style={{fontSize:6.5*s,color:"rgba(255,255,255,.5)",fontStyle:"italic",marginTop:3*s,fontFamily:b.fB}}>{data.dir}</div>}
       </div>
     </div>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:2,height:mH,flexShrink:0,overflow:"hidden"}}>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:2,height:mH,flexShrink:0,overflow:"hidden",background:gc}}>
       {[1,2,3].map(i=><div key={i} style={{height:mH,overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
     </div>
-    <div style={{height:fH,background:b.acc,padding:`0 ${10*s}px`,display:"flex",alignItems:"center",flexShrink:0}}>
-      <Feats data={data} b={{...b,acc:b.bg}} s={s*.9} light={false} compact/>
+    <div style={{height:fH,background:b.bg,padding:`0 ${14*s}px`,display:"flex",alignItems:"center",borderTop:`1px solid rgba(255,255,255,.10)`,flexShrink:0}}>
+      <SmartFeats data={data} b={b} s={s*.9} light={true} compact/>
     </div>
-    <div style={{height:cH,background:b.bg,padding:`${5*s}px ${10*s}px`,display:"flex",flexDirection:"column",justifyContent:"center",gap:4*s,flexShrink:0}}>
+    {data.dir&&<div style={{background:b.bg,padding:`${5*s}px ${14*s}px`,flexShrink:0,borderTop:`1px solid rgba(255,255,255,.08)`}}>
+      <div style={{fontStyle:"italic",fontSize:9.5*s,color:"rgba(255,255,255,.70)",fontFamily:b.fB,lineHeight:1.3}}>{data.dir}</div>
+    </div>}
+    {data.agentes.filter(a=>a.on&&a.t).length>0&&<div style={{height:cH,background:b.bg,padding:`${5*s}px ${14*s}px`,display:"flex",flexDirection:"column",justifyContent:"center",gap:4*s,flexShrink:0}}>
       {data.agentes.filter(a=>a.on&&a.t).slice(0,2).map((a,i)=>(
         <div key={i} style={{display:"flex",alignItems:"center",gap:5*s,fontSize:8.5*s,color:"rgba(255,255,255,.85)",fontFamily:b.fB}}>
           <Wp w={10*s}/>{a.n&&<b style={{color:"white"}}>{a.n} </b>}<span>{a.t}</span>
         </div>
       ))}
-    </div>
-    <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
-      <LZ s={s} H={H}/>
-    </div>
+    </div>}
+    <LZ s={s} H={H}/>
+    <LogoOverlay brand={brand} logoMode={logoMode} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} W={W} H={H}/>
     <DMat brand={brand} W={W} H={H}/>
   </div>;
 }
 
-/* K: fondo claro, 1 grande izq + 3 der, features, título, dirección+logo */
-function LK({ph,data,brand,lt,W,slRef}){
+/* K: fondo claro, 1 grande izq + 3 der, features, título, dirección */
+function LK({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef,gapColor}){
   const H=Math.round(W*16/9),s=W/295,b=BR[brand];
-  const sh=H*.82;
+  const sh=H*.82,safeTop=Math.round(H*140/1920);
   const gH=Math.round(sh*.44),fH=Math.round(sh*.10),tH=Math.round(sh*.21),aH=Math.round(sh*.08);
-  const Logo=b.H;
-  return <div ref={slRef} style={{width:W,height:H,background:"white",borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
-    <div style={{display:"grid",gridTemplateColumns:"3fr 2fr",gap:2,height:gH,flexShrink:0,overflow:"hidden"}}>
+  const gc=gapColor||"white";
+  return <div ref={slRef} style={{width:W,height:H,background:"white",overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    <div style={{display:"grid",gridTemplateColumns:"3fr 2fr",gap:2,height:gH,flexShrink:0,overflow:"hidden",background:gc}}>
       <div style={{height:gH,overflow:"hidden",position:"relative"}}>
         <PhotoSlot url={ph[0]}/>
         <div style={{position:"absolute",inset:0,background:"linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 55%)"}}/>
         <div style={{position:"absolute",bottom:8*s,left:8*s,zIndex:2}}>
-          <div style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(data.op,13*s,9*s,8),color:"white"}}>{(data.op||"VENTA").toUpperCase()}</div>
+          <div style={{fontFamily:b.fT,fontWeight:800,fontSize:fs(data.op,13*s,9*s,8),color:"white"}}>{(data.op||"VENTA").toUpperCase()}</div>
           <PT data={data} b={b} s={s*.82}/><Exp data={data} b={b} s={s*.82}/>
         </div>
       </div>
-      <div style={{display:"grid",gridTemplateRows:"1fr 1fr 1fr",gap:2}}>
-        {[1,2,3].map(i=><div key={i} style={{overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
+      <div style={{display:"grid",gridTemplateRows:"1fr 1fr 1fr",gap:2,background:gc,height:"100%",overflow:"hidden"}}>
+        {[1,2,3].map(i=><div key={i} style={{overflow:"hidden",background:"white",minHeight:0}}><PhotoSlot url={ph[i]}/></div>)}
       </div>
     </div>
     <div style={{height:fH,background:"white",padding:`${3*s}px ${10*s}px`,display:"flex",alignItems:"center",borderBottom:"1px solid #eee",flexShrink:0}}>
-      <Feats data={data} b={{...b,acc:b.bg}} s={s*.9} light={false} compact/>
+      <SmartFeats data={data} b={{...b,acc:b.bg}} s={s*.9} light={false} compact/>
     </div>
     <div style={{height:tH,background:"white",padding:`${5*s}px ${12*s}px`,display:"flex",flexDirection:"column",justifyContent:"center",flexShrink:0}}>
-      <div style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(data.tipo,20*s,12*s,10),color:b.bg,lineHeight:1}}>{data.tipo||"Casa"}</div>
+      <div style={{fontFamily:b.fT,fontWeight:800,fontSize:fs(data.tipo,20*s,12*s,10),color:b.bg,lineHeight:1}}>{data.tipo||"Casa"}</div>
       <div style={{display:"flex",alignItems:"center",gap:6*s,marginTop:2*s}}>
         <span style={{fontFamily:b.fT,fontWeight:300,fontSize:13*s,color:b.bg}}>en {data.op||"venta"}</span>
         <div style={{flex:1,height:1.5*s,background:b.acc}}/>
       </div>
-      {data.badge&&<div style={{display:"inline-block",marginTop:4*s,background:b.acc,color:"#111",fontSize:8*s,fontWeight:800,padding:`${2*s}px ${7*s}px`,borderRadius:3,fontFamily:b.fB}}>{data.badge}</div>}
+      {data.badge&&<div style={{display:"inline-block",marginTop:4*s,background:b.acc,color:"#111",fontSize:8*s,fontWeight:800,padding:`${2*s}px ${7*s}px`,borderRadius:3,fontFamily:b.fB,textTransform:"uppercase",letterSpacing:"0.06em"}}>{data.badge}</div>}
     </div>
     <div style={{height:aH,background:"white",padding:`0 ${12*s}px`,display:"flex",alignItems:"center",justifyContent:"space-between",borderTop:"1px solid #eee",flexShrink:0}}>
       {data.dir&&<div style={{fontStyle:"italic",fontSize:7.5*s,color:"#555",fontFamily:b.fB,lineHeight:1.2}}>{data.dir}</div>}
-      <Logo h={aH*.6} light={false}/>
     </div>
-    <div style={{flex:1,display:"flex",flexDirection:"column"}}>
-      <div style={{flex:1,background:b.bg,display:"flex",alignItems:"center",justifyContent:"center"}}>
-        <span style={{fontSize:5.5*s,color:"rgba(255,255,255,.35)",letterSpacing:1.1,fontFamily:PN}}>{b.mat}</span>
-      </div>
-      <div style={{height:Math.round(H*.18),borderTop:"1px dashed rgba(0,0,0,.12)",background:"rgba(0,0,0,.04)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+    <div style={{height:Math.round(H*.18),background:"rgba(0,0,0,.04)",flexShrink:0,position:"relative"}}>
+      <div data-noexport="1" style={{position:"absolute",inset:0,borderTop:"1px dashed rgba(0,0,0,.12)",display:"flex",alignItems:"center",justifyContent:"center",pointerEvents:"none"}}>
         <span style={{fontSize:6.5*s,color:"rgba(0,0,0,.20)",letterSpacing:1,fontFamily:PN}}>ZONA LINK / WHATSAPP</span>
       </div>
     </div>
+    <LogoOverlay brand={brand} logoMode={logoMode} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} W={W} H={H}/>
+    <DMat brand={brand} W={W} H={H} dark={true}/>
+  </div>;
+}
+
+/* L: Oscuro — foto panorámica + split info/foto + barra features amarilla */
+function LL({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef}){
+  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const safeTop=Math.round(H*140/1920);
+  const headerH=Math.round(H*.13)+safeTop; // absorbe zona segura del reloj
+  const photoH=Math.round(H*.33);
+  const splitH=Math.round(H*.26);
+  const featH=Math.round(H*.10);
+  const lzH=Math.round(H*.18);
+  /* Logo "abajo": dentro de la LZ, centrado verticalmente en ella */
+  const llLogoMb=Math.round(lzH*.45);
+  const items=buildItems(data).slice(0,5);
+  return <div ref={slRef} style={{width:W,height:H,background:b.bg,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    {/* Header oscuro — incluye safe zone del reloj */}
+    <div style={{height:headerH,background:b.bg,padding:`${8*s}px ${14*s}px`,paddingTop:safeTop+4*s,display:"flex",flexDirection:"column",justifyContent:"flex-end",flexShrink:0}}>
+      <div style={{fontFamily:b.fT,fontWeight:800,fontSize:fs(data.tipo,20*s,12*s,10),color:"white",lineHeight:1,letterSpacing:"-0.01em"}}>{(data.tipo||"PROPIEDAD").toUpperCase()}</div>
+      <div style={{display:"flex",alignItems:"center",gap:8*s,marginTop:2*s}}>
+        <span style={{fontFamily:b.fB,fontWeight:300,fontSize:12*s,color:"rgba(255,255,255,.70)",textTransform:"uppercase",letterSpacing:"0.08em"}}>EN {(data.op||"VENTA").toUpperCase()}</span>
+        <div style={{flex:1,height:1.5,background:b.acc,opacity:.7}}/>
+        <PT data={data} b={b} s={s*.82}/>
+      </div>
+    </div>
+    {/* Foto panorámica */}
+    <div style={{height:photoH,flexShrink:0,overflow:"hidden",position:"relative"}}>
+      <PhotoSlot url={ph[0]}/>
+      {data.badge&&<div style={{position:"absolute",top:7*s,left:14*s,background:b.acc,color:"#111",fontSize:8*s,fontWeight:800,padding:`${2*s}px ${9*s}px`,borderRadius:3,fontFamily:b.fB,zIndex:5,textTransform:"uppercase",letterSpacing:"0.06em"}}>{data.badge.toUpperCase()}</div>}
+    </div>
+    {/* Split: info izq + foto der */}
+    <div style={{height:splitH,display:"grid",gridTemplateColumns:"1fr 1fr",flexShrink:0}}>
+      <div style={{background:b.bg,padding:`${9*s}px ${14*s}px`,display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
+        {/* Dirección prominente */}
+        <div>
+          <div style={{width:22*s,height:2,background:b.acc,marginBottom:6*s}}/>
+          {data.dir&&<div style={{fontFamily:b.fB,fontWeight:700,fontSize:9.5*s,color:"white",lineHeight:1.35,letterSpacing:"0.02em"}}>{data.dir.toUpperCase()}</div>}
+        </div>
+        <div>
+          <Exp data={data} b={b} s={s*.85}/>
+          {data.agentes.filter(a=>a.on&&a.t).slice(0,1).map((a,i)=>(
+            <div key={i} style={{display:"flex",alignItems:"center",gap:4*s,fontSize:8*s,color:"rgba(255,255,255,.75)",fontFamily:b.fB,marginTop:4*s}}>
+              <Wp w={9*s}/>{a.n&&<b style={{color:"white"}}>{a.n}</b>}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{overflow:"hidden"}}><PhotoSlot url={ph[1]}/></div>
+    </div>
+    {/* Barra features — fondo acento */}
+    {items.length>0&&<div style={{height:featH,background:b.acc,padding:`0 ${14*s}px`,display:"flex",alignItems:"center",gap:0,flexShrink:0,overflow:"hidden"}}>
+      {items.map(([ik,label],i)=>(
+        <div key={i} style={{display:"flex",alignItems:"center",gap:3*s,flex:1,justifyContent:"center",borderRight:i<items.length-1?`1px solid rgba(0,0,0,.15)`:"none",padding:`0 ${3*s}px`}}>
+          <Icon name={ik} w={12*s} c={b.bg}/>
+          <span style={{fontFamily:b.fB,fontSize:7.5*s,fontWeight:700,color:b.bg,whiteSpace:"nowrap"}}>{label}</span>
+        </div>
+      ))}
+    </div>}
+    <LZ s={s} H={H}/>
+    <LogoOverlay brand={brand} logoMode={logoMode} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} W={W} H={H} logoMb={llLogoMb}/>
+    <DMat brand={brand} W={W} H={H}/>
+  </div>;
+}
+
+/* M: Claro — fotos apiladas + info centrada + dirección grande + features con iconos */
+function LM({ph,data,brand,lt,logoPos,logoLight,logoVert,logoMode,W,slRef,gapColor}){
+  const H=Math.round(W*16/9),s=W/295,b=BR[brand];
+  const gc=gapColor||"white";
+  const safeTop=Math.round(H*140/1920);
+  /* Fotos: 2 en fila (más altas para cubrir safe zone del reloj) + panorámica */
+  const photo2H=Math.round(H*.20)+safeTop; // absorbe zona del reloj con más foto
+  const panH=Math.round(H*.22);
+  const lzH=Math.round(H*.18);
+  const lmLogoMb=Math.round(lzH*.45);
+  const items=buildItems(data).slice(0,4);
+  return <div ref={slRef} style={{width:W,height:H,background:"white",overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+    {/* Fotos: 2 en fila — altura incluye zona del reloj, el contenido queda cubierto por foto */}
+    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:2,height:photo2H,flexShrink:0,overflow:"hidden",background:gc}}>
+      {[0,1].map(i=><div key={i} style={{overflow:"hidden"}}><PhotoSlot url={ph[i]}/></div>)}
+    </div>
+    <div style={{height:panH,flexShrink:0,overflow:"hidden",position:"relative",marginTop:2}}>
+      <PhotoSlot url={ph[2]}/>
+      {data.badge&&<div style={{position:"absolute",top:6*s,left:12*s,background:b.acc,color:"#111",fontSize:8.5*s,fontWeight:800,padding:`${2*s}px ${9*s}px`,borderRadius:3,fontFamily:b.fB,zIndex:5,textTransform:"uppercase",letterSpacing:"0.06em"}}>{data.badge.toUpperCase()}</div>}
+    </div>
+    {/* Separador de acento */}
+    <div style={{height:3,background:b.acc,flexShrink:0}}/>
+    {/* Info centrada — flex:1 con distribución controlada */}
+    <div style={{flex:1,background:"white",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:8*s,padding:`${10*s}px ${14*s}px`}}>
+      {/* Tipo + Op */}
+      <div style={{textAlign:"center"}}>
+        <div style={{fontFamily:b.fT,fontWeight:800,fontSize:fs(data.tipo,22*s,13*s,10),color:b.bg,lineHeight:1,letterSpacing:"-0.01em"}}>{(data.tipo||"PROPIEDAD").toUpperCase()}</div>
+        <div style={{fontFamily:b.fB,fontWeight:300,fontSize:11*s,color:"rgba(0,0,0,.50)",letterSpacing:"0.10em",textTransform:"uppercase",marginTop:2*s}}>EN {(data.op||"VENTA").toUpperCase()}</div>
+      </div>
+      {/* Precio centrado */}
+      <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:2*s}}>
+        <PT data={data} b={{...b}} s={s*.95} light={false}/>
+        <Exp data={data} b={{...b}} s={s*.85} light={false}/>
+      </div>
+      {/* Features — iconos grandes centrados */}
+      {items.length>0&&<div style={{display:"flex",justifyContent:"center",gap:8*s,alignItems:"flex-start",width:"100%"}}>
+        {items.map(([ik,label],i)=>(
+          <div key={i} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:3*s,flex:1}}>
+            <Icon name={ik} w={17*s} c={b.bg}/>
+            <span style={{fontFamily:b.fB,fontSize:6*s,fontWeight:700,color:"rgba(0,0,0,.60)",whiteSpace:"nowrap",textAlign:"center"}}>{label}</span>
+          </div>
+        ))}
+      </div>}
+      {/* Dirección — separador amarillo arriba */}
+      {data.dir&&<div style={{textAlign:"center",width:"100%",paddingTop:7*s,borderTop:`1.5px solid ${b.acc}`}}>
+        <div style={{fontFamily:b.fB,fontWeight:700,fontSize:9.5*s,color:b.bg,lineHeight:1.3,letterSpacing:"0.04em",textTransform:"uppercase"}}>{data.dir}</div>
+      </div>}
+    </div>
+    <LZ s={s} H={H} dark={true}/>
+    <LogoOverlay brand={brand} logoMode={logoMode} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} W={W} H={H} logoMb={lmLogoMb}/>
+    <DMat brand={brand} W={W} H={H} dark={true}/>
+  </div>;
+}
+
+/* ── Galería (sin info, solo marca de agua) ── */
+function GalA({ph,brand,W,slRef,logoVert=false,logoLight=true,gapColor}){
+  const H=Math.round(W*1920/1080),b=BR[brand],sc=W/1080;
+  const gap=Math.round(2*sc*3.375);
+  const gc=gapColor||"#000";
+  return <div ref={slRef} style={{width:W,height:H,position:"relative",background:gc,overflow:"hidden",
+    display:"grid",gridTemplateColumns:"1fr 1fr",gridTemplateRows:"1fr 1fr",gap:gap}}>
+    {[0,1,2,3].map(i=><div key={i} style={{overflow:"hidden",position:"relative"}}>
+      <PhotoSlot url={ph[i]} bg={b.bg}/>
+    </div>)}
+    <SDragLogo brand={brand} vert={logoVert} logoLight={logoLight} W={W} H={H}/>
+  </div>;
+}
+function GalB({ph,brand,W,slRef,idx=0,logoVert=false,logoLight=true}){
+  const H=Math.round(W*1920/1080),b=BR[brand],sc=W/1080;
+  return <div ref={slRef} style={{width:W,height:H,position:"relative",background:"#000",overflow:"hidden"}}>
+    <div style={{position:"absolute",inset:0}}><PhotoSlot url={ph[idx]} bg={b.bg}/></div>
+    <SDragLogo brand={brand} vert={logoVert} logoLight={logoLight} W={W} H={H}/>
+  </div>;
+}
+
+function GalH({ph,brand,W,slRef,logoVert=false,logoLight=true,gapColor}){
+  /* Canvas historia 9:16 — 4 fotos en franjas horizontales */
+  const H=Math.round(W*1920/1080),b=BR[brand],sc=W/1080;
+  const gap=Math.round(2*sc*3.375);
+  const gc=gapColor||"#000";
+  return <div ref={slRef} style={{width:W,height:H,position:"relative",background:gc,overflow:"hidden",
+    display:"grid",gridTemplateColumns:"1fr",gridTemplateRows:"repeat(4,1fr)",gap:gap}}>
+    {[0,1,2,3].map(i=><div key={i} style={{overflow:"hidden",position:"relative"}}>
+      <PhotoSlot url={ph[i]} bg={b.bg}/>
+    </div>)}
+    <SDragLogo brand={brand} vert={logoVert} logoLight={logoLight} W={W} H={H}/>
   </div>;
 }
 
@@ -591,7 +973,7 @@ function LK({ph,data,brand,lt,W,slRef}){
 function FeedCover({ph,data,brand,lt,W,fRef}){
   const s=W/285,b=BR[brand];
   const pH=Math.round(W*.60);
-  return <div ref={fRef} style={{width:W,background:b.bg,borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
+  return <div ref={fRef} style={{width:W,background:b.bg,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column"}}>
     <div style={{height:pH}}><PhotoSlot url={ph[0]}/></div>
     <div style={{height:3,background:b.acc}}/>
     <div style={{padding:`${7*s}px ${11*s}px`}}>
@@ -604,7 +986,7 @@ function FeedCover({ph,data,brand,lt,W,fRef}){
 function FeedSlide({photo,label,sub,idx,brand,lt,W,fRef}){
   const s=W/285,b=BR[brand];
   const ir=idx%2===0,bt=idx%3===0;
-  return <div ref={fRef} style={{width:W,height:W,background:"#222",borderRadius:12,overflow:"hidden",position:"relative"}}>
+  return <div ref={fRef} style={{width:W,height:W,background:"#222",overflow:"hidden",position:"relative"}}>
     <div style={{position:"absolute",inset:0}}><PhotoSlot url={photo}/></div>
     <div style={{position:"absolute",inset:0,background:"linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 55%)"}}/>
     <DLogo brand={brand} lt={lt} W={W} H={W} ix={W*.62} iy={W*.08}/>
@@ -613,8 +995,8 @@ function FeedSlide({photo,label,sub,idx,brand,lt,W,fRef}){
       <div style={{display:"flex",alignItems:"stretch"}}>
         {!bt&&<div style={{width:3*s,background:b.acc,borderRadius:2,marginRight:6*s,flexShrink:0}}/>}
         <div>
-          <div style={{fontFamily:b.fT,fontWeight:900,fontSize:fs(label,18*s,11*s,14),color:"white",lineHeight:1.1,textShadow:"0 1px 6px rgba(0,0,0,.6)"}}>{label||"Ambiente"}</div>
-          {sub&&<div style={{fontFamily:b.fB,fontWeight:300,fontSize:fs(sub,11*s,8*s,22),color:"rgba(255,255,255,.88)",marginTop:2*s,lineHeight:1.3}}>{sub}</div>}
+          <div style={{fontFamily:b.fT,fontWeight:800,fontSize:fs(label,18*s,11*s,14),color:"white",lineHeight:1.05,letterSpacing:"0.04em",textTransform:"uppercase"}}>{label||"Ambiente"}</div>
+          {sub&&<div style={{fontFamily:b.fB,fontWeight:300,fontSize:fs(sub,11.5*s,8*s,20),color:"rgba(255,255,255,.82)",marginTop:3*s,lineHeight:1.4,letterSpacing:"0.06em"}}>{sub}</div>}
         </div>
       </div>
     </div>
@@ -625,7 +1007,7 @@ function FeedCTA({data,brand,W,fRef}){
   const s=W/285,b=BR[brand];
   const Logo=b.H,Ghost=b.Ghost;
   const visAgentes=data.agentes.filter(a=>a.on&&a.n);
-  return <div ref={fRef} style={{width:W,height:W,background:"#ECECEC",borderRadius:12,overflow:"hidden",position:"relative",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
+  return <div ref={fRef} style={{width:W,height:W,background:"#f2f2f2",overflow:"hidden",position:"relative",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
     <div style={{position:"absolute",top:-20*s,left:-40*s,pointerEvents:"none"}}><Ghost sz={300*s} op={.09}/></div>
     <div style={{textAlign:"center",padding:`0 ${18*s}px`,position:"relative",zIndex:1}}>
       <div style={{marginBottom:9*s}}><Logo h={22*s} light={false}/></div>
@@ -653,6 +1035,40 @@ const Inp=({label,value,onChange,placeholder,small=false})=>
       onFocus={e=>e.target.style.borderColor="#ffc62d"} onBlur={e=>e.target.style.borderColor="#E0E0E0"}/>
   </div>;
 
+function SwapPicker({photos,selected,swapSlot,onSwap,onClose}){
+  if(swapSlot===null)return null;
+  const currentId=selected[swapSlot];
+  return <div style={{position:"fixed",inset:0,zIndex:9999,display:"flex",flexDirection:"column",justifyContent:"flex-end"}}
+    onClick={onClose}>
+    <div style={{background:"white",borderRadius:"18px 18px 0 0",padding:"16px 16px 28px",maxHeight:"65vh",overflow:"hidden",display:"flex",flexDirection:"column"}}
+      onClick={e=>e.stopPropagation()}>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
+        <span style={{fontFamily:PN,fontWeight:800,fontSize:14,color:C.d}}>Elegir foto — slot {swapSlot+1}</span>
+        <button onClick={onClose} style={{border:"none",background:"rgba(0,0,0,.08)",borderRadius:20,width:28,height:28,fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>×</button>
+      </div>
+      <div style={{overflowY:"auto",flex:1}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:6}}>
+          {photos.map(p=>{
+            const isCurrent=p.id===currentId;
+            const isUsed=selected.includes(p.id)&&!isCurrent;
+            return <div key={p.id} onClick={()=>onSwap(p.id)}
+              style={{aspectRatio:"1",borderRadius:8,overflow:"hidden",cursor:"pointer",position:"relative",
+                outline:isCurrent?`3px solid #ffc62d`:"3px solid transparent",outlineOffset:"-3px"}}>
+              <img src={p.url} style={{width:"100%",height:"100%",objectFit:"cover"}} draggable={false}/>
+              {isCurrent&&<div style={{position:"absolute",inset:0,background:"rgba(255,198,45,.25)",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                <span style={{fontFamily:PN,fontWeight:800,fontSize:10,color:"#fff",background:"rgba(0,0,0,.6)",borderRadius:3,padding:"2px 5px"}}>actual</span>
+              </div>}
+              {isUsed&&<div style={{position:"absolute",top:4,right:4,background:"rgba(0,0,0,.6)",borderRadius:3,padding:"1px 4px"}}>
+                <span style={{fontFamily:PN,fontWeight:700,fontSize:8,color:"rgba(255,255,255,.7)"}}>{selected.indexOf(p.id)+1}</span>
+              </div>}
+            </div>;
+          })}
+        </div>
+      </div>
+    </div>
+  </div>;
+}
+
 const Sel=({label,value,onChange,options})=>
   <div style={{marginBottom:9}}>
     <label style={{display:"block",fontFamily:PN,fontSize:10,fontWeight:700,color:C.m,letterSpacing:.6,marginBottom:2,textTransform:"uppercase"}}>{label}</label>
@@ -662,11 +1078,17 @@ const Sel=({label,value,onChange,options})=>
     </select>
   </div>;
 
-const Card=({title,children})=>
-  <div style={{background:"white",borderRadius:12,padding:13,boxShadow:"0 2px 10px rgba(0,0,0,.06)",marginBottom:12}}>
-    {title&&<h3 style={{margin:"0 0 9px",fontSize:11,fontWeight:800,letterSpacing:.6,textTransform:"uppercase",color:C.d,fontFamily:PN}}>{title}</h3>}
-    {children}
+function Card({title,children,collapsible=false,defaultOpen=true}){
+  const [open,setOpen]=useState(defaultOpen);
+  return <div style={{background:"white",borderRadius:12,padding:13,boxShadow:"0 2px 10px rgba(0,0,0,.06)",marginBottom:12}}>
+    {title&&<h3 onClick={collapsible?()=>setOpen(o=>!o):undefined}
+      style={{margin:open&&children?"0 0 9px":"0",fontSize:11,fontWeight:800,letterSpacing:.6,textTransform:"uppercase",color:C.d,fontFamily:PN,cursor:collapsible?"pointer":"default",display:"flex",justifyContent:"space-between",alignItems:"center",userSelect:"none"}}>
+      {title}
+      {collapsible&&<span style={{color:C.g,fontWeight:400,fontSize:14,marginLeft:6,lineHeight:1}}>{open?"▾":"▸"}</span>}
+    </h3>}
+    {(!collapsible||open)&&children}
   </div>;
+}
 
 const MRow=({label,value,onChange,moneda,onMoneda,placeholder})=>
   <div style={{marginBottom:9}}>
@@ -684,32 +1106,56 @@ const MRow=({label,value,onChange,moneda,onMoneda,placeholder})=>
 /* ── Photo Manager ── */
 function PhotoMgr({photos,setPhotos,selected,setSelected}){
   const ref=useRef();
-  const add=files=>{Array.from(files).slice(0,10-photos.length).forEach(f=>{const r=new FileReader();r.onload=e=>setPhotos(p=>[...p,{url:e.target.result,id:Math.random()}]);r.readAsDataURL(f);});};
+  const [dragging,setDragging]=useState(null);
+  const [dragOver,setDragOver]=useState(null);
+  const add=files=>{Array.from(files).slice(0,20-photos.length).forEach(f=>{const r=new FileReader();r.onload=e=>setPhotos(p=>[...p,{url:e.target.result,id:Math.random()}]);r.readAsDataURL(f);});};
   const tog=id=>setSelected(p=>p.includes(id)?p.filter(x=>x!==id):[...p,id]);
   const up=id=>setSelected(p=>{const i=p.indexOf(id);if(i<=0)return p;const a=[...p];[a[i-1],a[i]]=[a[i],a[i-1]];return a;});
   const dn=id=>setSelected(p=>{const i=p.indexOf(id);if(i<0||i>=p.length-1)return p;const a=[...p];[a[i],a[i+1]]=[a[i+1],a[i]];return a;});
+  const onDragStart=id=>e=>{setDragging(id);e.dataTransfer.effectAllowed="move";};
+  const onDragOver=id=>e=>{e.preventDefault();e.dataTransfer.dropEffect="move";if(id!==dragging)setDragOver(id);};
+  const onDrop=id=>e=>{
+    e.preventDefault();
+    if(!dragging||dragging===id){setDragging(null);setDragOver(null);return;}
+    setSelected(p=>{
+      const from=p.indexOf(dragging),to=p.indexOf(id);
+      if(from<0||to<0)return p;
+      const a=[...p];a.splice(from,1);a.splice(to,0,dragging);return a;
+    });
+    setDragging(null);setDragOver(null);
+  };
+  const onDragEnd=()=>{setDragging(null);setDragOver(null);};
   return <div>
     <div onDrop={e=>{e.preventDefault();add(e.dataTransfer.files);}} onDragOver={e=>e.preventDefault()} onClick={()=>ref.current.click()}
       style={{border:"2px dashed #ffc62d",borderRadius:9,padding:"12px",textAlign:"center",cursor:"pointer",background:"#fafafa",marginBottom:8}}>
-      <div style={{fontSize:20,marginBottom:2}}>📷</div>
-      <div style={{fontFamily:PN,fontWeight:600,fontSize:12,color:C.d}}>Arrastrá o hacé click · máx 10</div>
-      <div style={{fontFamily:PN,fontSize:10,color:C.g,marginTop:2}}>Scroll en cada foto = zoom · arrastrá = mover</div>
+      <div style={{fontFamily:PN,fontWeight:600,fontSize:12,color:C.d}}>Arrastrá o hacé click · máx 20</div>
+      <div style={{fontFamily:PN,fontSize:10,color:C.g,marginTop:2}}>Zoom con botones o scroll · arrastrá para mover</div>
       <input ref={ref} type="file" multiple accept="image/*" style={{display:"none"}} onChange={e=>add(e.target.files)}/>
     </div>
     {photos.length>0&&<>
-      <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:"#999",letterSpacing:.5,textTransform:"uppercase",marginBottom:4}}>Tocá para seleccionar · ← → reordenar</div>
+      <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:"#999",letterSpacing:.5,textTransform:"uppercase",marginBottom:4}}>Tocá para seleccionar · arrastrá para reordenar</div>
       <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:4}}>
         {photos.map(p=>{
           const si=selected.indexOf(p.id),isSel=si>=0;
-          return <div key={p.id} style={{position:"relative",aspectRatio:"1",borderRadius:5,overflow:"hidden",border:`2.5px solid ${isSel?"#ffc62d":"#DDD"}`,cursor:"pointer"}} onClick={()=>tog(p.id)}>
+          const isDragging=dragging===p.id,isOver=dragOver===p.id&&isSel;
+          return <div key={p.id}
+            draggable={isSel}
+            onDragStart={isSel?onDragStart(p.id):undefined}
+            onDragOver={isSel?onDragOver(p.id):undefined}
+            onDrop={isSel?onDrop(p.id):undefined}
+            onDragEnd={onDragEnd}
+            style={{position:"relative",aspectRatio:"1",borderRadius:5,overflow:"hidden",
+              border:`2.5px solid ${isSel?"#ffc62d":"#DDD"}`,
+              cursor:isSel?"grab":"pointer",
+              opacity:isDragging?.35:1,
+              transition:"opacity .15s"}}
+            onClick={()=>tog(p.id)}>
             <img src={p.url} style={{width:"100%",height:"100%",objectFit:"cover"}}/>
-            {isSel&&<div style={{position:"absolute",top:2,left:2,background:"#ffc62d",color:"#111",fontSize:8,fontWeight:800,width:14,height:14,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:PN}}>{si+1}</div>}
-            {isSel&&<div style={{position:"absolute",bottom:2,left:0,right:0,display:"flex",justifyContent:"center",gap:2}}>
-              <button onClick={e=>{e.stopPropagation();up(p.id);}} style={{background:"rgba(0,0,0,.7)",color:"white",border:"none",borderRadius:2,width:13,height:13,cursor:"pointer",fontSize:7,display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
-              <button onClick={e=>{e.stopPropagation();dn(p.id);}} style={{background:"rgba(0,0,0,.7)",color:"white",border:"none",borderRadius:2,width:13,height:13,cursor:"pointer",fontSize:7,display:"flex",alignItems:"center",justifyContent:"center"}}>→</button>
-            </div>}
+            {isOver&&<div style={{position:"absolute",left:0,top:0,bottom:0,width:4,background:"#ffc62d",zIndex:8}}/>}
+            {isOver&&<div style={{position:"absolute",inset:0,background:"rgba(255,198,45,.15)",zIndex:7,pointerEvents:"none"}}/>}
+            {isSel&&<div style={{position:"absolute",top:2,left:2,background:"#ffc62d",color:"#111",fontSize:8,fontWeight:800,width:14,height:14,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:PN,zIndex:5}}>{si+1}</div>}
             <button onClick={e=>{e.stopPropagation();setPhotos(prev=>prev.filter(x=>x.id!==p.id));setSelected(prev=>prev.filter(x=>x!==p.id));}}
-              style={{position:"absolute",top:2,right:2,background:"rgba(0,0,0,.7)",color:"white",border:"none",borderRadius:"50%",width:13,height:13,cursor:"pointer",fontSize:7,display:"flex",alignItems:"center",justifyContent:"center"}}>✕</button>
+              style={{position:"absolute",top:2,right:2,background:"rgba(0,0,0,.7)",color:"white",border:"none",borderRadius:"50%",width:13,height:13,cursor:"pointer",fontSize:7,display:"flex",alignItems:"center",justifyContent:"center",zIndex:5}}>x</button>
           </div>;
         })}
       </div>
@@ -724,21 +1170,20 @@ function DLBtn({targetRef,fname,accent}){
   const go=async()=>{
     setLoading(true);
     try{
-      const cv=await html2canvas(targetRef.current,{
-        useCORS:true,allowTaint:true,scale:3,backgroundColor:null,
-        logging:false,imageTimeout:0
-      });
+      const cv=await html2canvas(targetRef.current,{useCORS:true,allowTaint:true,scale:3,backgroundColor:null,logging:false,imageTimeout:0});
       const dataUrl=cv.toDataURL("image/jpeg",0.92);
       if(isIOS){
-        /* iOS Safari: abrir en nueva pestaña, guardar con press largo */
         const win=window.open();
-        win.document.write(`<html><head><meta name="viewport" content="width=device-width"><title>${fname}</title></head>`
-          +`<body style="margin:0;background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh">`
-          +`<img src="${dataUrl}" style="max-width:100%;height:auto"/>`
-          +`<p style="position:fixed;bottom:20px;left:0;right:0;text-align:center;color:white;font-family:sans-serif;font-size:14px">Mant\u00e9 presionada la imagen para guardarla</p>`
-          +`</body></html>`);
+        win.document.write(
+          `<html><head><meta name="viewport" content="width=device-width">` +
+          `<title>${fname}</title></head>` +
+          `<body style="margin:0;background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh">` +
+          `<img src="${dataUrl}" style="max-width:100%;height:auto"/>` +
+          `<p style="position:fixed;bottom:20px;left:0;right:0;text-align:center;color:white;font-family:sans-serif;font-size:14px">` +
+          `Mantené presionada la imagen para guardarla</p></body></html>`
+        );
         win.document.close();
-      } else {
+      }else{
         const a=document.createElement("a");
         a.download=fname.replace(".png",".jpg");
         a.href=dataUrl;
@@ -750,15 +1195,16 @@ function DLBtn({targetRef,fname,accent}){
   };
   return <button onClick={go} disabled={loading}
     style={{display:"flex",alignItems:"center",justifyContent:"center",gap:6,padding:"10px 14px",background:loading?"#CCC":accent,color:C.d,border:"none",borderRadius:8,fontFamily:PN,fontWeight:800,fontSize:12,cursor:loading?"not-allowed":"pointer",width:"100%"}}>
-    {loading?"Generando...":isIOS?"Ver imagen para guardar":"Descargar imagen"}
+    {loading?"Generando...":isIOS?"Ver imagen para guardar":"⬇️ Descargar imagen"}
   </button>;
 }
 
 const SLAYS=[{id:"A",l:"A: Foto+3 mini"},{id:"B",l:"B: Foto+Info"},{id:"C",l:"C: 2+1 col"},
   {id:"D",l:"D: Pantalla"},{id:"E",l:"E: Banda color"},{id:"F",l:"F: 2 fotos"},
   {id:"G",l:"G: Split claro"},{id:"H",l:"H: Collage"},{id:"I",l:"I: Ghost"},
-  {id:"J",l:"J: Header+Grid"},{id:"K",l:"K: 1+3+Título"}];
-const LMAP={A:LA,B:LB,C:LC,D:LD,E:LE,F:LF,G:LG,H:LH,I:LI,J:LJ,K:LK};
+  {id:"J",l:"J: Header+Grid"},{id:"K",l:"K: 1+3+Título"},
+  {id:"L",l:"L: Barra feat."},{id:"M",l:"M: Iconos centrados"}];
+const LMAP={A:LA,B:LB,C:LC,D:LD,E:LE,F:LF,G:LG,H:LH,I:LI,J:LJ,K:LK,L:LL,M:LM};
 
 /* ══════════════════════════════════════════════
    APP PRINCIPAL
@@ -771,14 +1217,28 @@ function App(){
   const [stL,setStL]=useState("A");
   const [slide,setSlide]=useState(0);
   const [lt,setLt]=useState("full");
+  const [logoPos,setLogoPos]=useState(2);
+  const [logoLight,setLogoLight]=useState(true);
+  const [logoVert,setLogoVert]=useState(false);
+  const [logoMode,setLogoMode]=useState("fixed"); // "fixed"|"libre"
+  const [showSafe,setShowSafe]=useState(false);
   const [labels,setLabels]=useState([]);
   const [data,setData]=useState(DEMO);
+  const [panelOpen,setPanelOpen]=useState(false);
   const [inputMode,setInputMode]=useState("manual");
   const [autoSubMode,setAutoSubMode]=useState("url");
   const [autoUrl,setAutoUrl]=useState("");
   const [pasteContent,setPasteContent]=useState("");
   const [autoStatus,setAutoStatus]=useState("idle");
   const [autoMsg,setAutoMsg]=useState("");
+  const [pendingPhotos,setPendingPhotos]=useState([]);
+  const [galL,setGalL]=useState("4fotos");
+  const [galSlide,setGalSlide]=useState(0);
+  const [galLogoVert,setGalLogoVert]=useState(false);
+  const [galLogoLight,setGalLogoLight]=useState(true);
+  const [stGapColor,setStGapColor]=useState("#26282a");
+  const [galGapColor,setGalGapColor]=useState("#000000");
+  const [swapSlot,setSwapSlot]=useState(null);
   const pRef=useRef();
 
   useEffect(()=>{setLabels(p=>Array.from({length:selected.length},(_,i)=>p[i]||{title:"",sub:""}));},[selected.length]);
@@ -801,10 +1261,12 @@ function App(){
     setData(prev=>({...prev,tipo:n(ex.tipo)||prev.tipo,op,
       m2:n(ex.m2),amb:n(ex.amb),dorm:n(ex.dorm),ban:n(ex.ban),gar:n(ex.gar),pool:!!ex.pool,
       precio:n(ex.precio),moneda:mon,expensas:n(ex.expensas),monedaExp:n(ex.monedaExp)||"$",
-      dir:n(ex.dir),badge:n(ex.badge)}));
-    const fotos=(ex.fotos||[]).filter(u=>typeof u==="string"&&u.startsWith("http")).slice(0,10);
-    if(fotos.length){const np=fotos.map(u=>({url:u,id:Math.random()}));setPhotos(np);setSelected(np.map(p=>p.id));}
-    return {op,nF:fotos.length};
+      dir:n(ex.dir),badge:n(ex.badge),frente:n(ex.frente),fondo:n(ex.fondo)}));
+    const allFotos=(ex.fotos||[]).filter(u=>typeof u==="string"&&u.startsWith("http"));
+    const first=allFotos.slice(0,10),rest=allFotos.slice(10);
+    if(first.length){const np=first.map(u=>({url:u,id:Math.random()}));setPhotos(np);setSelected(np.map(p=>p.id));}
+    setPendingPhotos(rest.map(u=>({url:u,id:Math.random()})));
+    return {op,nF:allFotos.length};
   };
 
   const parseRes=async(res)=>{
@@ -815,35 +1277,58 @@ function App(){
     return d;
   };
 
+  const fmtErr=err=>{
+    const m=String(err.message||err);
+    if(m.includes("NetworkError")||m.includes("Failed to fetch"))return"Sin conexión o el servidor no responde. Verificá tu red.";
+    if(m.includes("404"))return"La URL no existe (404). Verificá que el link sea válido y público.";
+    if(m.includes("403")||m.includes("401"))return"La página bloqueó el acceso (403/401). Usá el modo Pegar texto.";
+    if(m.includes("500")||m.includes("502")||m.includes("503"))return"Error del servidor ("+m.match(/\d{3}/)?.[0]+"). Intentá de nuevo en unos segundos.";
+    if(m.includes("timeout")||m.includes("Timeout"))return"La solicitud tardó demasiado. Intentá de nuevo o usá Pegar texto.";
+    return m;
+  };
+
   const loadFromUrl=async()=>{
     if(!autoUrl.trim()){setAutoMsg("Pegá una URL.");return;}
-    setAutoStatus("loading");setAutoMsg("⏳ Analizando propiedad...");
+    setAutoStatus("loading");setAutoMsg("Analizando propiedad...");
     try{
       const ex=await parseRes(await callProxy({url:autoUrl.trim()}));
       const {op,nF}=applyEx(ex);
-      setAutoMsg("✓ Listo. Operación: "+op+(nF?" | "+nF+" fotos":" | Subí fotos manualmente")+". Revisá.");
+      setAutoMsg("Listo. Operacion: "+op+(nF?" · "+nF+" fotos cargadas":" · Subi fotos manualmente")+". Revisa los datos.");
       setAutoStatus("done");
-    }catch(err){setAutoStatus("error");setAutoMsg("Error: "+err.message);}
+    }catch(err){setAutoStatus("error");setAutoMsg(fmtErr(err));}
   };
 
   const loadFromPaste=async()=>{
     const raw=pasteContent.trim();
     if(!raw){setAutoMsg("Pegá el contenido primero.");return;}
-    setAutoStatus("loading");setAutoMsg("⏳ Analizando...");
+    setAutoStatus("loading");setAutoMsg("Analizando...");
     try{
       const ex=await parseRes(await callProxy({text:raw.substring(0,20000)}));
       const {op,nF}=applyEx(ex);
-      setAutoMsg("✓ Listo. Operación: "+op+(nF?" | "+nF+" fotos":" | Subí fotos manualmente")+". Revisá.");
+      setAutoMsg("Listo. Operacion: "+op+(nF?" · "+nF+" fotos cargadas":" · Subi fotos manualmente")+". Revisa los datos.");
       setAutoStatus("done");
-    }catch(err){setAutoStatus("error");setAutoMsg("Error: "+err.message);}
+    }catch(err){setAutoStatus("error");setAutoMsg(fmtErr(err));}
   };
 
   const b=BR[brand];
   const selPhotos=selected.map(id=>photos.find(p=>p.id===id)).filter(Boolean);
   const ph=selPhotos.map(p=>p.url);
+
+  const doSwap=newId=>{
+    setSelected(prev=>{
+      const next=[...prev];
+      const existIdx=next.indexOf(newId);
+      const curId=next[swapSlot];
+      if(existIdx!==-1&&existIdx!==swapSlot){next[existIdx]=curId;}
+      next[swapSlot]=newId;
+      return next;
+    });
+    setSwapSlot(null);
+  };
+  const swapCtxVal=url=>{const i=selPhotos.findIndex(p=>p.url===url);if(i!==-1)setSwapSlot(i);};
   const carSlides=[{type:"cover"},...selPhotos.slice(1).map((_,i)=>({type:"photo",idx:i+1})),{type:"cta"}];
   const total=carSlides.length;
-  const tipoOpts=["Departamento","Casa","Dúplex","Triplex","PH","Local","Oficina","Terreno","Cochera"].map(v=>({v,l:v}));
+  const tipoOpts=["Departamento","Monoambiente","Casa","Dúplex","Triplex","PH","Local","Oficina","Terreno","Cochera"].map(v=>({v,l:v}));
   const opOpts=["venta","alquiler","alquiler temporal"].map(v=>({v,l:v[0].toUpperCase()+v.slice(1)}));
   const SC=LMAP[stL]||LA;
   const W=320;
@@ -871,8 +1356,11 @@ function App(){
     <div className="col2" style={{maxWidth:1100,margin:"0 auto",padding:"16px 14px",display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
 
       {/* LEFT */}
-      <div>
-                <Card title="Modo de carga">
+      <div className={"panel-left-col"+(panelOpen?" open":"")}>
+        <button className="panel-close-btn" onClick={()=>setPanelOpen(false)} style={{color:b.bg}}>
+          Cerrar panel
+        </button>
+                <Card title="Modo de carga" collapsible>
           <div style={{display:"flex",gap:6,marginBottom:10}}>
             {[["manual","Manual"],["auto","Automatico"]].map(([id,label])=>
               <button key={id} onClick={()=>{setInputMode(id);setAutoStatus("idle");setAutoMsg("");}}
@@ -943,34 +1431,59 @@ function App(){
               color:autoStatus==="done"?"#2E7D32":autoStatus==="error"?"#C62828":"#7B5B00",
               border:"1px solid "+(autoStatus==="done"?"#A5D6A7":autoStatus==="error"?"#FFCDD2":"#FFE082")}}>
               {autoMsg}
+              {autoStatus==="error"&&<div style={{marginTop:7}}>
+                <button onClick={()=>{setInputMode("manual");setAutoStatus("idle");setAutoMsg("");}}
+                  style={{padding:"5px 12px",border:"none",borderRadius:6,cursor:"pointer",
+                    fontFamily:PN,fontWeight:800,fontSize:10,background:"#C62828",color:"white"}}>
+                  Completar manualmente
+                </button>
+              </div>}
             </div>}
           </>}
         </Card>
 
-<Card title="📷 Fotos">
+<Card title="Fotos" collapsible>
           <PhotoMgr photos={photos} setPhotos={setPhotos} selected={selected} setSelected={setSelected}/>
+          {pendingPhotos.length>0&&<button onClick={()=>{
+            const next=pendingPhotos.slice(0,10),rest=pendingPhotos.slice(10);
+            setPhotos(p=>[...p,...next]);
+            setSelected(s=>[...s,...next.map(p=>p.id)]);
+            setPendingPhotos(rest);
+          }} style={{marginTop:8,width:"100%",padding:"7px 0",border:`2px solid ${b.acc}`,borderRadius:7,fontFamily:PN,fontWeight:800,fontSize:11,color:C.d,background:"#FFF8E1",cursor:"pointer"}}>
+            Cargar 10 más ({pendingPhotos.length} disponibles)
+          </button>}
         </Card>
 
-        <Card title="📋 Propiedad">
+        <Card title="Propiedad" collapsible>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"0 10px"}}>
             <Sel label="Tipo" value={data.tipo} onChange={upd("tipo")} options={tipoOpts}/>
             <Sel label="Operación" value={data.op} onChange={upd("op")} options={opOpts}/>
           </div>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"0 6px"}}>
-            <Inp small label="M²"    value={data.m2}   onChange={upd("m2")}   placeholder="220"/>
-            <Inp small label="Amb."  value={data.amb}  onChange={upd("amb")}  placeholder="5"/>
-            <Inp small label="Dorm." value={data.dorm} onChange={upd("dorm")} placeholder="4"/>
-          </div>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"0 6px"}}>
-            <Inp small label="Baños" value={data.ban}  onChange={upd("ban")}  placeholder="3"/>
-            <Inp small label="Coch." value={data.gar}  onChange={upd("gar")}  placeholder="2"/>
-            <div style={{marginBottom:5}}>
-              <label style={{display:"block",fontFamily:PN,fontSize:10,fontWeight:700,color:C.m,letterSpacing:.6,marginBottom:2,textTransform:"uppercase"}}>Pileta</label>
-              <button onClick={()=>upd("pool")(!data.pool)} style={{padding:"5px 12px",border:`1.5px solid ${data.pool?"#ffc62d":"#E0E0E0"}`,borderRadius:6,fontFamily:PN,fontSize:11,fontWeight:700,cursor:"pointer",background:data.pool?"#FFF8E1":"white",color:data.pool?C.d:C.m}}>
-                {data.pool?"✓ Sí":"No"}
-              </button>
+          {data.tipo==="Terreno"?(
+            <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"0 6px"}}>
+              <Inp small label="M² total"   value={data.m2}     onChange={upd("m2")}     placeholder="600"/>
+              <Inp small label="Frente (m)" value={data.frente} onChange={upd("frente")} placeholder="15"/>
+              <Inp small label="Fondo (m)"  value={data.fondo}  onChange={upd("fondo")}  placeholder="40"/>
             </div>
-          </div>
+          ):(
+            <>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"0 6px"}}>
+              <Inp small label="M²"    value={data.m2}   onChange={upd("m2")}   placeholder="220"/>
+              <Inp small label="Amb."  value={data.amb}  onChange={upd("amb")}  placeholder="5"/>
+              <Inp small label="Dorm." value={data.dorm} onChange={upd("dorm")} placeholder="4"/>
+            </div>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"0 6px"}}>
+              <Inp small label="Baños" value={data.ban}  onChange={upd("ban")}  placeholder="3"/>
+              <Inp small label="Coch." value={data.gar}  onChange={upd("gar")}  placeholder="2"/>
+              <div style={{marginBottom:5}}>
+                <label style={{display:"block",fontFamily:PN,fontSize:10,fontWeight:700,color:C.m,letterSpacing:.6,marginBottom:2,textTransform:"uppercase"}}>Pileta</label>
+                <button onClick={()=>upd("pool")(!data.pool)} style={{padding:"5px 12px",border:`1.5px solid ${data.pool?"#ffc62d":"#E0E0E0"}`,borderRadius:6,fontFamily:PN,fontSize:11,fontWeight:700,cursor:"pointer",background:data.pool?"#FFF8E1":"white",color:data.pool?C.d:C.m}}>
+                  {data.pool?"✓ Sí":"No"}
+                </button>
+              </div>
+            </div>
+            </>
+          )}
           <MRow label="Precio" value={data.precio} onChange={upd("precio")} moneda={data.moneda} onMoneda={upd("moneda")} placeholder="237.000"/>
           <MRow label="Expensas (opcional)" value={data.expensas} onChange={upd("expensas")} moneda={data.monedaExp} onMoneda={upd("monedaExp")} placeholder="85.000"/>
           <Inp label="Dirección" value={data.dir}   onChange={upd("dir")}   placeholder="Calle 489 e/ 133 y 134 - Gonnet"/>
@@ -978,7 +1491,7 @@ function App(){
         </Card>
 
         {mode==="feed"&&selPhotos.length>1&&
-          <Card title="🏷 Texto por foto">
+          <Card title="Texto por foto" collapsible>
             {selPhotos.slice(1).map((p,i)=>(
               <div key={p.id} style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"0 6px",paddingBottom:4,borderBottom:"1px solid #eee",marginBottom:5}}>
                 <Inp small label={`Foto ${i+2}`}  value={labels[i+1]?.title||""} onChange={updL(i+1,"title")} placeholder="Living"/>
@@ -988,7 +1501,7 @@ function App(){
           </Card>
         }
 
-        <Card title="📞 Agentes">
+        <Card title="Agentes" collapsible defaultOpen={false}>
           {data.agentes.map((a,i)=>(
             <div key={i} style={{marginBottom:10,paddingBottom:10,borderBottom:i<2?"1px solid #f0f0f0":"none"}}>
               {/* Toggle agente */}
@@ -1011,20 +1524,69 @@ function App(){
       </div>
 
       {/* RIGHT */}
+      <SwapCtx.Provider value={swapCtxVal}>
       <div>
         <Card>
           <div style={{display:"flex",background:"#F0F0F0",borderRadius:10,padding:3,marginBottom:12}}>
-            <Tab id="feed" label="⬛ Carrusel Feed"/>
+            <Tab id="feed" label="⬛ Feed"/>
             <Tab id="story" label="📱 Historia"/>
+            <Tab id="gal" label="🖼 Galería"/>
           </div>
 
-          {/* Logo tipo */}
-          <div style={{display:"flex",gap:5,marginBottom:10,alignItems:"center"}}>
+          {/* Logo — story: fijo (5pos+H/V+tono) o libre (drag+H/V+tono) | feed: H/V */}
+          {mode==="story"&&<>
+            {/* Sin logo */}
+            <div style={{marginBottom:8}}>
+              <button onClick={()=>setLogoPos(p=>p===0?2:0)} style={{width:"100%",padding:"6px 0",border:`2px solid ${logoPos===0?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:logoPos===0?"#FFF8E1":"white",color:logoPos===0?C.d:C.m}}>
+                {logoPos===0?"✕ Sin logo (activo)":"Sin logo"}
+              </button>
+            </div>
+            {/* Toggle fijo/libre — solo cuando hay logo */}
+            {logoPos!==0&&<div style={{display:"flex",gap:4,marginBottom:8}}>
+              {[{id:"fixed",l:"Fijo"},{id:"libre",l:"Posición libre"}].map(o=>
+                <button key={o.id} onClick={()=>setLogoMode(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${logoMode===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:logoMode===o.id?"#FFF8E1":"white",color:logoMode===o.id?C.d:C.m}}>{o.l}</button>
+              )}
+            </div>}
+            {/* H/V — solo cuando hay logo */}
+            {logoPos!==0&&<div style={{display:"flex",gap:4,marginBottom:7}}>
+              {[{id:false,l:"Horizontal"},{id:true,l:"Vertical"}].map(o=>
+                <button key={String(o.id)} onClick={()=>setLogoVert(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${logoVert===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:logoVert===o.id?"#FFF8E1":"white",color:logoVert===o.id?C.d:C.m}}>{o.l}</button>
+              )}
+            </div>}
+            {/* Posición — solo en modo fijo y con logo */}
+            {logoMode==="fixed"&&<div style={{marginBottom:8}}>
+              <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",marginBottom:5}}>Posición</div>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:4,marginBottom:3}}>
+                {[{id:1,l:"↖ Arriba izq."},{id:2,l:"Arriba der. ↗"}].map(o=>
+                  <button key={o.id} onClick={()=>setLogoPos(o.id)} style={{padding:"5px 4px",border:`2px solid ${logoPos===o.id?b.acc:"#E0E0E0"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:8,background:logoPos===o.id?"#FFF8E1":"white",color:logoPos===o.id?C.d:C.m,cursor:"pointer"}}>{o.l}</button>
+                )}
+              </div>
+              <div style={{display:"flex",justifyContent:"center",marginBottom:3}}>
+                <button onClick={()=>setLogoPos(3)} style={{width:"60%",padding:"5px 4px",border:`2px solid ${logoPos===3?b.acc:"#E0E0E0"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:8,background:logoPos===3?"#FFF8E1":"white",color:logoPos===3?C.d:C.m,cursor:"pointer"}}>↕ Centro</button>
+              </div>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:4}}>
+                {[{id:4,l:"↙ Abajo izq."},{id:5,l:"Abajo der. ↘"}].map(o=>
+                  <button key={o.id} onClick={()=>setLogoPos(o.id)} style={{padding:"5px 4px",border:`2px solid ${logoPos===o.id?b.acc:"#E0E0E0"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:8,background:logoPos===o.id?"#FFF8E1":"white",color:logoPos===o.id?C.d:C.m,cursor:"pointer"}}>{o.l}</button>
+                )}
+              </div>
+            </div>}
+            {logoMode==="libre"&&<div style={{marginBottom:8,padding:"8px 10px",background:"rgba(0,0,0,.04)",borderRadius:7,fontSize:9,color:C.g,fontFamily:PN,lineHeight:1.4}}>
+              Arrastrá el logo directamente sobre el preview
+            </div>}
+            {/* Tono */}
+            <div style={{display:"flex",gap:4,marginBottom:10,alignItems:"center"}}>
+              <span style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",flexShrink:0}}>Tono:</span>
+              {[{id:true,l:"Claro"},{id:false,l:"Oscuro"}].map(o=>
+                <button key={String(o.id)} onClick={()=>setLogoLight(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${logoLight===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:10,cursor:"pointer",background:logoLight===o.id?"#FFF8E1":"white",color:logoLight===o.id?C.d:C.m}}>{o.l}</button>
+              )}
+            </div>
+          </>}
+          {mode==="feed"&&<div style={{display:"flex",gap:5,marginBottom:10,alignItems:"center"}}>
             <span style={{fontFamily:PN,fontSize:10,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",flexShrink:0}}>Logo:</span>
             {[{id:"full",l:"Horizontal"},{id:"icon",l:"Vertical"}].map(o=>
               <button key={o.id} onClick={()=>setLt(o.id)} style={{flex:1,padding:"6px 0",border:`2px solid ${lt===o.id?b.acc:"#DDD"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:10,cursor:"pointer",background:lt===o.id?"#FFF8E1":"white",color:lt===o.id?C.d:C.m}}>{o.l}</button>
             )}
-          </div>
+          </div>}
 
           {/* FEED */}
           {mode==="feed"&&<>
@@ -1046,6 +1608,42 @@ function App(){
             </div>
           </>}
 
+          {/* GALERÍA */}
+          {mode==="gal"&&<>
+            <div style={{display:"flex",gap:4,marginBottom:10}}>
+              {[{id:"4fotos",l:"4 fotos"},{id:"full",l:"Pantalla completa"},{id:"4h",l:"4 horizontal"}].map(o=>
+                <button key={o.id} onClick={()=>setGalL(o.id)} style={{flex:1,padding:"6px 0",border:`2px solid ${galL===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:galL===o.id?"#FFF8E1":"white",color:galL===o.id?C.d:C.m}}>{o.l}</button>
+              )}
+            </div>
+            <div style={{display:"flex",gap:4,marginBottom:10}}>
+              {[{id:false,l:"H"},{id:true,l:"V"}].map(o=>
+                <button key={String(o.id)} onClick={()=>setGalLogoVert(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${galLogoVert===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:galLogoVert===o.id?"#FFF8E1":"white",color:galLogoVert===o.id?C.d:C.m}}>{o.l}</button>
+              )}
+              <div style={{width:1,background:"#E0E0E0",margin:"0 2px"}}/>
+              {[{id:true,l:"Claro"},{id:false,l:"Oscuro"}].map(o=>
+                <button key={String(o.id)} onClick={()=>setGalLogoLight(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${galLogoLight===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:galLogoLight===o.id?"#FFF8E1":"white",color:galLogoLight===o.id?C.d:C.m}}>{o.l}</button>
+              )}
+            </div>
+            {galL!=="full"&&<div style={{marginBottom:10}}>
+              <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",marginBottom:6}}>Color de línea</div>
+              <div style={{display:"flex",gap:6,alignItems:"center"}}>
+                {["#000000","#26282a","#ffc62d","#ffffff","#f2f2f2"].map(c=>(
+                  <div key={c} onClick={()=>setGalGapColor(c)} style={{width:22,height:22,borderRadius:"50%",background:c,border:`3px solid ${galGapColor===c?b.acc:"#ccc"}`,cursor:"pointer",boxSizing:"border-box",flexShrink:0}}/>
+                ))}
+              </div>
+            </div>}
+            {galL==="full"&&ph.length>1&&<div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
+              <button onClick={()=>setGalSlide(s=>Math.max(0,s-1))} disabled={galSlide===0} style={{background:b.bg,color:"white",border:"none",borderRadius:7,width:28,height:28,cursor:"pointer",opacity:galSlide===0?.3:1,fontSize:16}}>‹</button>
+              <span style={{fontFamily:PN,fontWeight:700,fontSize:11,color:C.d}}>Foto {galSlide+1} / {ph.length}</span>
+              <button onClick={()=>setGalSlide(s=>Math.min(ph.length-1,s+1))} disabled={galSlide===ph.length-1} style={{background:b.bg,color:"white",border:"none",borderRadius:7,width:28,height:28,cursor:"pointer",opacity:galSlide===ph.length-1?.3:1,fontSize:16}}>›</button>
+            </div>}
+            <div style={{display:"flex",justifyContent:"center"}} ref={pRef}>
+              {galL==="4fotos"&&<GalA ph={ph} brand={brand} W={W} slRef={pRef} logoVert={galLogoVert} logoLight={galLogoLight} gapColor={galGapColor}/>}
+              {galL==="full"&&<GalB ph={ph} brand={brand} W={W} slRef={pRef} idx={galSlide} logoVert={galLogoVert} logoLight={galLogoLight}/>}
+              {galL==="4h"&&<GalH ph={ph} brand={brand} W={W} slRef={pRef} logoVert={galLogoVert} logoLight={galLogoLight} gapColor={galGapColor}/>}
+            </div>
+          </>}
+
           {/* STORY */}
           {mode==="story"&&<>
             <div style={{marginBottom:10}}>
@@ -1057,22 +1655,41 @@ function App(){
                 </button>)}
               </div>
             </div>
-            <div style={{display:"flex",justifyContent:"center"}} ref={pRef}>
-              <SC ph={ph} data={data} brand={brand} lt={lt} W={W} slRef={pRef}/>
+            <div style={{display:"flex",justifyContent:"center"}}>
+              <div style={{position:"relative",width:W,height:Math.round(W*16/9)}}>
+                <SC ph={ph} data={data} brand={brand} lt={lt} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} logoMode={logoMode} W={W} slRef={pRef} gapColor={stGapColor}/>
+                {showSafe&&<SafeZones W={W} H={Math.round(W*16/9)}/>}
+              </div>
             </div>
-            <div style={{marginTop:8,padding:"5px 10px",background:"rgba(0,0,0,.04)",borderRadius:6,fontSize:10,color:C.g,textAlign:"center"}}>
-              Zona punteada = espacio para link/sticker de Instagram
+            {["A","C","H","J","K","M"].includes(stL)&&<div style={{marginBottom:8}}>
+              <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",marginBottom:6}}>Color de línea</div>
+              <div style={{display:"flex",gap:6,alignItems:"center"}}>
+                {["#000000","#26282a","#ffc62d","#ffffff","#f2f2f2"].map(c=>(
+                  <div key={c} onClick={()=>setStGapColor(c)} style={{width:22,height:22,borderRadius:"50%",background:c,border:`3px solid ${stGapColor===c?b.acc:"#ccc"}`,cursor:"pointer",boxSizing:"border-box",flexShrink:0}}/>
+                ))}
+              </div>
+            </div>}
+            <div style={{marginTop:8,display:"flex",gap:6,alignItems:"center"}}>
+              <button onClick={()=>setShowSafe(v=>!v)} style={{flex:"0 0 auto",padding:"6px 11px",border:`2px solid ${showSafe?b.acc:"#DDD"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:10,cursor:"pointer",background:showSafe?"#FFF8E1":"white",color:showSafe?C.d:C.m}}>{showSafe?"■":"□"} Zonas seguras</button>
+              <div style={{flex:1,padding:"5px 10px",background:"rgba(0,0,0,.04)",borderRadius:6,fontSize:9.5,color:C.g,lineHeight:1.35}}>
+                {showSafe?"Rojo = reloj/batería · azul = link IG. Nada crítico ahí.":"Zona punteada = espacio para link/sticker de Instagram"}
+              </div>
             </div>
           </>}
 
-          <div style={{marginTop:12}}><DLBtn targetRef={pRef} fname={`${brand}-${data.tipo}.png`} accent={b.acc}/></div>
+          <div style={{marginTop:12}}><DLBtn targetRef={pRef} fname={`${brand}-${data.tipo}.jpg`} accent={b.acc}/></div>
           <div style={{marginTop:6,padding:"7px 12px",background:"#FFF8E1",borderRadius:7,fontSize:10,color:"#8B6914",textAlign:"center",lineHeight:1.5}}>
-            💡 <b>Logo y matrícula</b>: arrastrá libremente<br/>
-            📷 <b>Fotos</b>: scroll = zoom · arrastrá = mover
+<b>Fotos</b>: zoom con botones o scroll · arrastrá para mover
           </div>
         </Card>
       </div>
+      </SwapCtx.Provider>
     </div>
+    <SwapPicker photos={photos} selected={selected} swapSlot={swapSlot} onSwap={doSwap} onClose={()=>setSwapSlot(null)}/>
+    <button className="panel-fab" onClick={()=>setPanelOpen(v=>!v)}
+      style={{background:b.acc,color:C.d}}>
+      {panelOpen?"Cerrar":"Datos y fotos"}
+    </button>
   </div>;
 }
 
