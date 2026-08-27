@@ -1248,7 +1248,7 @@ function App(){
   const updL=(i,k)=>v=>setLabels(p=>{const l=[...p];l[i]={...(l[i]||{}),[k]:v};return l;});
 
   const callProxy=(body)=>
-    fetch("/.netlify/functions/proxy",{
+    fetch("/api/proxy",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify(body)
