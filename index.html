@@ -1166,20 +1166,20 @@ function PhotoMgr({photos,setPhotos,selected,setSelected}){
 /* ── Descargar ── */
 function DLBtn({targetRef,fname,accent}){
   const [loading,setLoading]=useState(false);
-  const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isMobile=/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   const go=async()=>{
     setLoading(true);
     try{
-      const cv=await html2canvas(targetRef.current,{useCORS:true,allowTaint:true,scale:3,backgroundColor:null,logging:false,imageTimeout:0});
+      const cv=await html2canvas(targetRef.current,{useCORS:true,allowTaint:true,scale:3.375,backgroundColor:null,logging:false,imageTimeout:0,ignoreElements:el=>el.dataset&&el.dataset.noexport==="1"});
       const dataUrl=cv.toDataURL("image/jpeg",0.92);
-      if(isIOS){
+      if(isMobile){
         const win=window.open();
         win.document.write(
           `<html><head><meta name="viewport" content="width=device-width">` +
           `<title>${fname}</title></head>` +
-          `<body style="margin:0;background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh">` +
+          `<body style="margin:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh">` +
           `<img src="${dataUrl}" style="max-width:100%;height:auto"/>` +
-          `<p style="position:fixed;bottom:20px;left:0;right:0;text-align:center;color:white;font-family:sans-serif;font-size:14px">` +
+          `<p style="padding:16px;text-align:center;color:white;font-family:sans-serif;font-size:14px">` +
           `Mantené presionada la imagen para guardarla</p></body></html>`
         );
         win.document.close();
@@ -1195,7 +1195,7 @@ function DLBtn({targetRef,fname,accent}){
   };
   return <button onClick={go} disabled={loading}
     style={{display:"flex",alignItems:"center",justifyContent:"center",gap:6,padding:"10px 14px",background:loading?"#CCC":accent,color:C.d,border:"none",borderRadius:8,fontFamily:PN,fontWeight:800,fontSize:12,cursor:loading?"not-allowed":"pointer",width:"100%"}}>
-    {loading?"Generando...":isIOS?"Ver imagen para guardar":"⬇️ Descargar imagen"}
+    {loading?"Generando...":isMobile?"Ver imagen para guardar":"⬇️ Descargar imagen"}
   </button>;
 }
 
