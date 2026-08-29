@@ -68,10 +68,10 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#F3F3F3;font-family:"Proxima Nova","Nunito Sans",Arial,sans-serif}
-input,select,button{font-family:inherit}
+input,select,button{font-family:inherit;transition:border-color .13s,background .13s,color .13s}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
-@media(max-width:700px){.col2{grid-template-columns:1fr!important}}
+@media(max-width:700px){.col2,.col3{grid-template-columns:1fr!important}}
 .panel-fab{display:none}
 @media(max-width:700px){
   .panel-fab{display:flex;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:300;
@@ -1169,11 +1169,12 @@ function DLBtn({targetRef,fname,accent}){
   const isMobile=/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   const go=async()=>{
     setLoading(true);
+    const win=isMobile?window.open():null;
     try{
       const cv=await html2canvas(targetRef.current,{useCORS:true,allowTaint:true,scale:3.375,backgroundColor:null,logging:false,imageTimeout:0,ignoreElements:el=>el.dataset&&el.dataset.noexport==="1"});
       const dataUrl=cv.toDataURL("image/jpeg",0.92);
       if(isMobile){
-        const win=window.open();
+        if(!win){alert("El navegador bloqueó la ventana. Habilitá popups para este sitio e intentá de nuevo.");return;}
         win.document.write(
           `<html><head><meta name="viewport" content="width=device-width">` +
           `<title>${fname}</title></head>` +
@@ -1194,9 +1195,124 @@ function DLBtn({targetRef,fname,accent}){
     finally{setLoading(false);}
   };
   return <button onClick={go} disabled={loading}
-    style={{display:"flex",alignItems:"center",justifyContent:"center",gap:6,padding:"10px 14px",background:loading?"#CCC":accent,color:C.d,border:"none",borderRadius:8,fontFamily:PN,fontWeight:800,fontSize:12,cursor:loading?"not-allowed":"pointer",width:"100%"}}>
+    style={{display:"flex",alignItems:"center",justifyContent:"center",gap:6,padding:"12px 18px",background:loading?"#CCC":accent,color:loading?"#888":C.d,border:"none",borderRadius:10,fontFamily:PN,fontWeight:800,fontSize:13,letterSpacing:.3,cursor:loading?"not-allowed":"pointer",width:"100%"}}>
     {loading?"Generando...":isMobile?"Ver imagen para guardar":"⬇️ Descargar imagen"}
   </button>;
+}
+
+const SLabel=({children})=><div style={{fontFamily:PN,fontSize:10,fontWeight:700,color:"#6e6e6e",letterSpacing:1.5,textTransform:"uppercase",marginBottom:8}}>{children}</div>;
+const SDivider=()=><div style={{height:1,background:"#EFEFEF",margin:"14px 0"}}/>;
+
+const TNAMES={A:"Foto+3 mini",B:"Foto+Info",C:"2/1 col",D:"Pantalla full",E:"Banda color",F:"2 fotos",G:"Split claro",H:"Collage",I:"Ghost",J:"Header+Grid",K:"1+3 cols",L:"Barra feat.",M:"Iconos centr."};
+function ThumbSVG({id,acc}){
+  const d="#3a3a3a",ph="#585858",ph2="#6c6c6c",tx="#7a7a7a",lzdark="#222",lbg="#eeeeee",lph="#aaaaaa",lph2="#bbbbbb",lldark="#d8d8d8";
+  switch(id){
+    case"A":return<>
+      <rect width="36" height="60" fill={d}/><rect width="36" height="29" fill={ph}/>
+      <rect x="0" y="30" width="11" height="8" fill={ph2}/><rect x="12.5" y="30" width="11" height="8" fill={ph2}/><rect x="25" y="30" width="11" height="8" fill={ph2}/>
+      <rect y="39" width="36" height="2" fill={acc}/>
+      <rect x="3" y="43" width="18" height="1.5" fill={tx} rx=".5"/><rect x="3" y="46.5" width="26" height="1.5" fill={tx} rx=".5"/><rect x="3" y="50" width="14" height="1.5" fill={tx} rx=".5"/>
+      <rect y="54" width="36" height="6" fill={lzdark}/></>;
+    case"B":return<>
+      <rect width="36" height="60" fill={d}/><rect width="36" height="35" fill={ph}/>
+      <rect y="35" width="36" height="1.5" fill={acc}/>
+      <rect x="3" y="38.5" width="22" height="1.5" fill={tx} rx=".5"/><rect x="3" y="42" width="28" height="1.5" fill={tx} rx=".5"/><rect x="3" y="45.5" width="20" height="1.5" fill={tx} rx=".5"/><rect x="3" y="49" width="16" height="1.5" fill={tx} rx=".5"/>
+      <rect y="54" width="36" height="6" fill={lzdark}/></>;
+    case"C":return<>
+      <rect width="36" height="60" fill={d}/><rect width="23" height="30" fill={ph}/>
+      <rect x="24" y="0" width="12" height="14.5" fill={ph2}/><rect x="24" y="15.5" width="12" height="14.5" fill={ph2}/>
+      <rect y="31" width="36" height="2" fill={acc}/>
+      <rect x="3" y="35" width="18" height="1.5" fill={tx} rx=".5"/><rect x="3" y="38.5" width="26" height="1.5" fill={tx} rx=".5"/><rect x="3" y="42" width="14" height="1.5" fill={tx} rx=".5"/>
+      <rect y="54" width="36" height="6" fill={lzdark}/></>;
+    case"D":return<>
+      <rect width="36" height="60" fill={ph}/>
+      <rect y="28" width="36" height="32" fill="#111" opacity=".75"/>
+      <rect x="4" y="36" width="4" height="2" fill={acc}/>
+      <rect x="4" y="40" width="20" height="2" fill="#fff" opacity=".85"/><rect x="4" y="44" width="26" height="1.5" fill="#ccc" opacity=".7"/><rect x="4" y="47.5" width="18" height="1.5" fill="#aaa" opacity=".6"/>
+      <rect y="52" width="36" height="8" fill="#000" opacity=".55"/></>;
+    case"E":return<>
+      <rect width="36" height="60" fill={d}/><rect width="36" height="27" fill={ph}/>
+      <rect y="27" width="36" height="7" fill={acc}/>
+      <rect x="3" y="37" width="20" height="1.5" fill={tx} rx=".5"/><rect x="3" y="40.5" width="28" height="1.5" fill={tx} rx=".5"/><rect x="3" y="44" width="16" height="1.5" fill={tx} rx=".5"/>
+      <rect y="54" width="36" height="6" fill={lzdark}/></>;
+    case"F":return<>
+      <rect width="36" height="60" fill={d}/>
+      <rect width="17.5" height="30" fill={ph}/><rect x="18.5" y="0" width="17.5" height="30" fill={ph2}/>
+      <rect y="31" width="36" height="2" fill={acc}/>
+      <rect x="3" y="35" width="20" height="1.5" fill={tx} rx=".5"/><rect x="3" y="38.5" width="28" height="1.5" fill={tx} rx=".5"/><rect x="3" y="42" width="16" height="1.5" fill={tx} rx=".5"/>
+      <rect y="54" width="36" height="6" fill={lzdark}/></>;
+    case"G":return<>
+      <rect width="36" height="60" fill={lbg}/>
+      <rect width="36" height="7" fill="#fff"/><rect y="5.5" width="36" height="1.5" fill={acc}/>
+      <rect y="8" width="36" height="22" fill={lph}/>
+      <rect y="31" width="17.5" height="12" fill={d}/><rect x="18.5" y="31" width="17.5" height="12" fill={lph2}/>
+      <rect y="44" width="36" height="5" fill="#d8d8d8"/><rect y="50" width="36" height="4" fill={d}/>
+      <rect y="55" width="36" height="5" fill={lldark}/></>;
+    case"H":return<>
+      <rect width="36" height="60" fill="#f5f5f5"/>
+      <rect width="36" height="7" fill="#fff"/><rect y="5.5" width="36" height="1.5" fill={acc}/>
+      <rect y="8" width="17.5" height="15" fill={lph}/><rect x="18.5" y="8" width="17.5" height="15" fill={lph2}/>
+      <rect y="24" width="36" height="14" fill="#c0c0c0"/>
+      <rect y="39" width="36" height="5" fill="#ddd"/><rect y="45" width="36" height="4" fill="#ddd"/>
+      <rect y="50" width="36" height="10" fill={lldark}/></>;
+    case"I":return<>
+      <rect width="36" height="60" fill="#404040"/>
+      <rect width="36" height="60" fill="#111" opacity=".5"/>
+      <circle cx="27" cy="10" r="17" fill="#fff" opacity=".07"/>
+      <rect x="4" y="12" width="18" height="2" fill="#fff" opacity=".7"/><rect x="4" y="16" width="24" height="1.5" fill="#aaa" opacity=".6"/>
+      <rect x="3" y="31" width="30" height="20" fill="none" stroke={acc} strokeWidth="1" rx="2"/>
+      <rect x="6" y="35" width="20" height="1.5" fill="#ccc" opacity=".7" rx=".5"/><rect x="6" y="38.5" width="18" height="1.5" fill="#aaa" opacity=".6" rx=".5"/><rect x="6" y="42" width="14" height="1.5" fill="#aaa" opacity=".5" rx=".5"/>
+      <rect y="53" width="36" height="7" fill="#111" opacity=".6"/></>;
+    case"J":return<>
+      <rect width="36" height="60" fill={d}/><rect width="36" height="8" fill="#2a2a2a"/>
+      <rect y="9" width="36" height="22" fill={ph}/>
+      <rect y="9" width="36" height="22" fill="#000" opacity=".35"/>
+      <rect x="4" y="25" width="14" height="2" fill="#fff" opacity=".8"/>
+      <rect y="32" width="11" height="8" fill={ph2}/><rect x="12.5" y="32" width="11" height="8" fill={ph2}/><rect x="25" y="32" width="11" height="8" fill={ph2}/>
+      <rect y="41" width="36" height="5" fill="#3e3e3e"/><rect y="47" width="36" height="4" fill="#3e3e3e"/>
+      <rect y="52" width="36" height="8" fill={lzdark}/></>;
+    case"K":return<>
+      <rect width="36" height="60" fill="#f0f0f0"/>
+      <rect width="21" height="28" fill={lph}/>
+      <rect x="22" y="0" width="14" height="8.5" fill={lph2}/><rect x="22" y="9.5" width="14" height="8.5" fill={lph2}/><rect x="22" y="19" width="14" height="9" fill={lph2}/>
+      <rect y="29" width="36" height="5" fill="#ddd"/>
+      <rect y="35" width="36" height="15" fill="#f8f8f8"/>
+      <rect x="5" y="39" width="20" height="2" fill="#888" rx=".5"/><rect x="8" y="43" width="14" height="1.5" fill="#aaa" rx=".5"/>
+      <rect y="51" width="36" height="4" fill="#ddd"/><rect y="55" width="36" height="5" fill="#e0e0e0"/></>;
+    case"L":return<>
+      <rect width="36" height="60" fill={d}/><rect width="36" height="12" fill="#2a2a2a"/>
+      <rect x="3" y="4" width="18" height="2" fill="#ccc" rx=".5"/><rect x="3" y="8" width="12" height="1.5" fill="#888" rx=".5"/>
+      <rect y="13" width="36" height="18" fill={ph}/>
+      <rect y="32" width="17.5" height="13" fill="#303030"/><rect x="18.5" y="32" width="17.5" height="13" fill={ph2}/>
+      <rect x="3" y="35" width="12" height="1.2" fill="#666" rx=".4"/><rect x="3" y="38" width="10" height="1.2" fill="#666" rx=".4"/>
+      <rect y="46" width="36" height="7" fill={acc}/>
+      <rect y="54" width="36" height="6" fill={lzdark}/></>;
+    case"M":return<>
+      <rect width="36" height="60" fill="#f5f5f5"/>
+      <rect width="17.5" height="13" fill={lph}/><rect x="18.5" y="0" width="17.5" height="13" fill={lph2}/>
+      <rect y="14" width="36" height="16" fill="#c0c0c0"/>
+      <rect y="31" width="36" height="2" fill={acc}/>
+      <rect x="7" y="35" width="22" height="2" fill="#888" rx=".5"/><rect x="10" y="39" width="16" height="1.5" fill="#aaa" rx=".5"/>
+      <rect x="8" y="43" width="20" height="2" fill="none" stroke={acc} strokeWidth="1" rx="1"/>
+      <rect x="3" y="49" width="6" height="4" fill="#ddd" rx="1"/><rect x="10.5" y="49" width="6" height="4" fill="#ddd" rx="1"/><rect x="18" y="49" width="6" height="4" fill="#ddd" rx="1"/><rect x="25.5" y="49" width="6" height="4" fill="#ddd" rx="1"/>
+      <rect y="55" width="36" height="5" fill="#e0e0e0"/></>;
+    default:return<rect width="36" height="60" fill="#ccc"/>;
+  }
+}
+function LayoutThumb({id,active,fav=false,onClick,onToggleFav,b}){
+  return <div onClick={onClick} title={TNAMES[id]} style={{cursor:"pointer",borderRadius:7,border:`2px solid ${active?b.acc:"#E0E0E0"}`,background:active?"#FFF8E1":"white",transition:"border-color .12s,background .12s",position:"relative"}}>
+    <div style={{overflow:"hidden",borderRadius:"5px 5px 0 0"}}>
+      <svg viewBox="0 0 36 60" style={{display:"block",width:"100%",height:52}} xmlns="http://www.w3.org/2000/svg">
+        <ThumbSVG id={id} acc={b.acc}/>
+      </svg>
+    </div>
+    <button onClick={e=>{e.stopPropagation();onToggleFav&&onToggleFav(id);}}
+      style={{position:"absolute",top:3,right:3,width:16,height:16,border:"none",background:"transparent",cursor:"pointer",padding:0,fontSize:12,lineHeight:1,color:fav?b.acc:"rgba(255,255,255,0.5)",textShadow:fav?"none":"0 0 3px rgba(0,0,0,.5)",zIndex:2,display:"flex",alignItems:"center",justifyContent:"center"}}>★</button>
+    <div style={{padding:"2px 4px 3px",textAlign:"center",lineHeight:1.2}}>
+      <span style={{fontFamily:PN,fontSize:7,color:"#c0c0c0",marginRight:2}}>{id}</span>
+      <span style={{fontFamily:PN,fontSize:8,fontWeight:700,color:active?b.acc:"#666"}}>{TNAMES[id]}</span>
+    </div>
+  </div>;
 }
 
 const SLAYS=[{id:"A",l:"A: Foto+3 mini"},{id:"B",l:"B: Foto+Info"},{id:"C",l:"C: 2+1 col"},
@@ -1239,7 +1355,124 @@ function App(){
   const [stGapColor,setStGapColor]=useState("#26282a");
   const [galGapColor,setGalGapColor]=useState("#000000");
   const [swapSlot,setSwapSlot]=useState(null);
+  const [favLayouts,setFavLayouts]=useState(()=>{try{return JSON.parse(localStorage.getItem("cap_favs")||"[]")}catch{return[]}});
+  useEffect(()=>{try{localStorage.setItem("cap_favs",JSON.stringify(favLayouts))}catch{}},[favLayouts]);
+  const toggleFav=id=>setFavLayouts(p=>p.includes(id)?p.filter(x=>x!==id):[...p,id]);
+  const [recentLayouts,setRecentLayouts]=useState(()=>{try{return JSON.parse(localStorage.getItem("cap_recents")||"[]")}catch{return[]}});
+  useEffect(()=>{try{localStorage.setItem("cap_recents",JSON.stringify(recentLayouts))}catch{}},[recentLayouts]);
+  useEffect(()=>{setRecentLayouts(p=>{const next=[stL,...p.filter(x=>x!==stL)].slice(0,5);return next;});},[stL]);
+  const [presets,setPresets]=useState(()=>{try{return JSON.parse(localStorage.getItem("cap_presets")||"[]")}catch{return[]}});
+  useEffect(()=>{try{localStorage.setItem("cap_presets",JSON.stringify(presets))}catch{}},[presets]);
+  const [presetSaving,setPresetSaving]=useState(false);
+  const [presetName,setPresetName]=useState("");
+  const [deleteConfirm,setDeleteConfirm]=useState(null);
+  const [editingPreset,setEditingPreset]=useState(null);
+  const [editingName,setEditingName]=useState("");
+  const [presetNotice,setPresetNotice]=useState("");
+  const currentConfig=()=>({mode,stL,galL,brand,logoPos,logoLight,logoVert,logoMode,stGapColor,galGapColor,galLogoVert,galLogoLight});
+  const savePreset=()=>{
+    if(!presetName.trim())return;
+    const p={id:"p_"+Date.now(),name:presetName.trim(),createdAt:Date.now(),config:currentConfig()};
+    setPresets(prev=>[...prev,p]);
+    setPresetName("");setPresetSaving(false);
+  };
+  const applyPreset=preset=>{
+    const c=preset.config,valid=SLAYS.map(s=>s.id);
+    let layout=c.stL,notice="";
+    if(c.stL&&!valid.includes(c.stL)){layout="A";notice=`Layout "${c.stL}" ya no existe — se aplicó A.`;}
+    if(c.mode!==undefined)setMode(c.mode);
+    if(c.brand!==undefined)setBrand(c.brand);
+    if(layout!==undefined)setStL(layout);
+    if(c.galL!==undefined)setGalL(c.galL);
+    if(c.logoPos!==undefined)setLogoPos(c.logoPos);
+    if(c.logoLight!==undefined)setLogoLight(c.logoLight);
+    if(c.logoVert!==undefined)setLogoVert(c.logoVert);
+    if(c.logoMode!==undefined)setLogoMode(c.logoMode);
+    if(c.stGapColor!==undefined)setStGapColor(c.stGapColor);
+    if(c.galGapColor!==undefined)setGalGapColor(c.galGapColor);
+    if(c.galLogoVert!==undefined)setGalLogoVert(c.galLogoVert);
+    if(c.galLogoLight!==undefined)setGalLogoLight(c.galLogoLight);
+    if(notice){setPresetNotice(notice);setTimeout(()=>setPresetNotice(""),4500);}
+  };
+  const deletePreset=id=>{setPresets(p=>p.filter(x=>x.id!==id));setDeleteConfirm(null);};
+  const renamePreset=id=>{
+    if(!editingName.trim()){setEditingPreset(null);return;}
+    setPresets(p=>p.map(x=>x.id===id?{...x,name:editingName.trim()}:x));
+    setEditingPreset(null);
+  };
+  const [suggestion,setSuggestion]=useState(null); // null | {ids:[],ts:number}
+  useEffect(()=>{setSuggestion(null);setVariantIds(null);},[selected.length,data.badge,data.dir,data.m2,data.amb,data.dorm,data.ban,data.gar]);
+  // Pure scoring function — reutilizada por Sugerir y Variantes
+  const getLayoutSuggestions=()=>{
+    const n=selected.length;
+    if(n===0)return[];
+    const d=data;
+    const infoFields=[d.m2,d.amb,d.dorm,d.ban,d.gar,d.pool,d.aire,d.balcon].filter(Boolean).length;
+    const infoRica=infoFields>=3,infoEscasa=infoFields<=1;
+    const hasDir=!!d.dir,hasBadge=!!d.badge,hasAgente=d.agentes&&d.agentes.some(a=>a.on&&a.t);
+    const minPh={A:4,B:1,C:3,D:1,E:1,F:2,G:2,H:3,I:1,J:4,K:4,L:2,M:3};
+    const slots={A:4,B:1,C:3,D:1,E:1,F:2,G:2,H:3,I:1,J:4,K:4,L:2,M:3};
+    const eligible=Object.keys(minPh).filter(id=>n>=minPh[id]);
+    const scores={};
+    eligible.forEach(id=>{const used=Math.min(n,slots[id]),waste=Math.max(0,n-slots[id]);scores[id]=Math.round((used/slots[id])*6-waste*1.5);});
+    if(hasBadge){['D','I','K','L','M'].forEach(id=>{if(scores[id]!==undefined)scores[id]+=1;});}
+    if(infoRica){if(scores['I']!==undefined)scores['I']+=1;if(scores['L']!==undefined)scores['L']+=2;if(scores['M']!==undefined)scores['M']+=1;}
+    if(infoEscasa){['D','B'].forEach(id=>{if(scores[id]!==undefined)scores[id]+=1;});}
+    if(hasDir){['L','K'].forEach(id=>{if(scores[id]!==undefined)scores[id]+=1;});}
+    if(hasAgente){['G','J'].forEach(id=>{if(scores[id]!==undefined)scores[id]+=1;});}
+    const FAM={A:'four',J:'four',K:'four',B:'single',E:'single',D:'bleed',I:'bleed',C:'three',H:'three',M:'three',F:'two',G:'two',L:'two'};
+    const THRESH=1;
+    const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+    const top=[],usedFam=new Set();
+    for(const [id,sc] of sorted){
+      if(top.length>=3)break;
+      const fam=FAM[id];
+      if(!usedFam.has(fam)){top.push(id);usedFam.add(fam);}
+      else{const hasAlt=sorted.some(([oid,os])=>!top.includes(oid)&&oid!==id&&FAM[oid]!==fam&&os>=sc-THRESH);if(!hasAlt)top.push(id);}
+    }
+    if(top.length<3){for(const [id] of sorted){if(top.length>=3)break;if(!top.includes(id))top.push(id);}}
+    return top;
+  };
+  const computeSuggestion=()=>{
+    const ids=getLayoutSuggestions();
+    setSuggestion({ids,ts:Date.now()});
+  };
+  // Variantes
+  const [variantIds,setVariantIds]=useState(null);
+  const [varThumbs,setVarThumbs]=useState({});
+  const [downloadingVar,setDownloadingVar]=useState(null);
   const pRef=useRef();
+  const varRef0=useRef(),varRef1=useRef(),varRef2=useRef();
+  const varRefs=[varRef0,varRef1,varRef2];
+  const openVariants=()=>{const ids=getLayoutSuggestions();setVariantIds(ids.length>0?ids:null);setVarThumbs({});};
+  const closeVariants=()=>{setVariantIds(null);setVarThumbs({});};
+  const downloadVariant=async(i)=>{
+    const ref=varRefs[i];if(!ref||!ref.current)return;
+    setDownloadingVar(i);
+    try{
+      const canvas=await html2canvas(ref.current,{scale:3.375,useCORS:true,imageTimeout:0,allowTaint:true,ignoreElements:el=>el.dataset?.noexport==="1"});
+      const a=document.createElement('a');a.download=`capparelli-${variantIds[i]}.jpg`;a.href=canvas.toDataURL('image/jpeg',0.92);a.click();
+    }finally{setDownloadingVar(null);}
+  };
+  // Generar thumbnails de variantes tras montaje
+  useEffect(()=>{
+    if(!variantIds||variantIds.length===0){setVarThumbs({});return;}
+    let cancelled=false;
+    const generate=async()=>{
+      for(let i=0;i<variantIds.length;i++){
+        if(cancelled)break;
+        const ref=varRefs[i];
+        if(!ref||!ref.current)continue;
+        try{
+          const canvas=await html2canvas(ref.current,{scale:1,useCORS:true,imageTimeout:15000,allowTaint:true,ignoreElements:el=>el.dataset?.noexport==="1"});
+          if(!cancelled)setVarThumbs(prev=>({...prev,[variantIds[i]]:canvas.toDataURL('image/jpeg',0.85)}));
+        }catch(e){}
+      }
+    };
+    // pequeño delay para que los refs estén montados
+    const tid=setTimeout(generate,80);
+    return()=>{cancelled=true;clearTimeout(tid);};
+  },[variantIds]);
 
   useEffect(()=>{setLabels(p=>Array.from({length:selected.length},(_,i)=>p[i]||{title:"",sub:""}));},[selected.length]);
 
@@ -1353,7 +1586,8 @@ function App(){
     </div>
 
     {/* Main grid */}
-    <div className="col2" style={{maxWidth:1100,margin:"0 auto",padding:"16px 14px",display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
+    <SwapCtx.Provider value={swapCtxVal}>
+    <div className="col3" style={{maxWidth:1280,margin:"0 auto",padding:"16px 14px",display:"grid",gridTemplateColumns:"minmax(240px,280px) 1fr minmax(220px,260px)",gap:16}}>
 
       {/* LEFT */}
       <div className={"panel-left-col"+(panelOpen?" open":"")}>
@@ -1523,153 +1757,301 @@ function App(){
         </Card>
       </div>
 
-      {/* RIGHT */}
-      <SwapCtx.Provider value={swapCtxVal}>
-      <div>
+      {/* MIDDLE — Preview */}
+      <div className="preview-col" style={{display:"flex",flexDirection:"column",alignItems:"center",paddingTop:4,gap:8}}>
+
+        {/* Feed preview */}
+        {mode==="feed"&&<>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",width:W,marginBottom:2}}>
+            <button onClick={()=>setSlide(s=>Math.max(0,s-1))} disabled={slide===0} style={{background:b.bg,color:"white",border:"none",borderRadius:7,width:28,height:28,cursor:"pointer",opacity:slide===0?.3:1,fontSize:16}}>‹</button>
+            <div style={{textAlign:"center"}}>
+              <div style={{fontFamily:PN,fontWeight:700,fontSize:12,color:C.d}}>Slide {slide+1} / {total}</div>
+              <div style={{fontSize:10,color:C.g}}>{carSlides[slide]?.type==="cover"?"Portada":carSlides[slide]?.type==="cta"?"Contacto":"Foto ambiente"}</div>
+            </div>
+            <button onClick={()=>setSlide(s=>Math.min(total-1,s+1))} disabled={slide===total-1} style={{background:b.bg,color:"white",border:"none",borderRadius:7,width:28,height:28,cursor:"pointer",opacity:slide===total-1?.3:1,fontSize:16}}>›</button>
+          </div>
+          <div style={{display:"flex",gap:3,justifyContent:"center",flexWrap:"wrap"}}>
+            {carSlides.map((_,i)=><div key={i} onClick={()=>setSlide(i)} style={{width:i===slide?16:6,height:6,borderRadius:3,background:i===slide?b.acc:"#CCC",cursor:"pointer"}}/>)}
+          </div>
+          <div style={{display:"flex",justifyContent:"center"}} ref={pRef}>
+            {carSlides[slide]?.type==="cover"&&<FeedCover ph={ph} data={data} brand={brand} lt={lt} W={W} fRef={pRef}/>}
+            {carSlides[slide]?.type==="photo"&&(()=>{const idx=carSlides[slide].idx,lb=labels[idx]||{title:"",sub:""};return<FeedSlide photo={ph[idx]} label={lb.title||`Ambiente ${idx}`} sub={lb.sub} idx={idx} brand={brand} lt={lt} W={W} fRef={pRef}/>;})()}
+            {carSlides[slide]?.type==="cta"&&<FeedCTA data={data} brand={brand} W={W} fRef={pRef}/>}
+          </div>
+        </>}
+
+        {/* Gal preview */}
+        {mode==="gal"&&<>
+          {galL==="full"&&ph.length>1&&<div style={{display:"flex",alignItems:"center",justifyContent:"space-between",width:W}}>
+            <button onClick={()=>setGalSlide(s=>Math.max(0,s-1))} disabled={galSlide===0} style={{background:b.bg,color:"white",border:"none",borderRadius:7,width:28,height:28,cursor:"pointer",opacity:galSlide===0?.3:1,fontSize:16}}>‹</button>
+            <span style={{fontFamily:PN,fontWeight:700,fontSize:11,color:C.d}}>Foto {galSlide+1} / {ph.length}</span>
+            <button onClick={()=>setGalSlide(s=>Math.min(ph.length-1,s+1))} disabled={galSlide===ph.length-1} style={{background:b.bg,color:"white",border:"none",borderRadius:7,width:28,height:28,cursor:"pointer",opacity:galSlide===ph.length-1?.3:1,fontSize:16}}>›</button>
+          </div>}
+          <div style={{display:"flex",justifyContent:"center"}} ref={pRef}>
+            {galL==="4fotos"&&<GalA ph={ph} brand={brand} W={W} slRef={pRef} logoVert={galLogoVert} logoLight={galLogoLight} gapColor={galGapColor}/>}
+            {galL==="full"&&<GalB ph={ph} brand={brand} W={W} slRef={pRef} idx={galSlide} logoVert={galLogoVert} logoLight={galLogoLight}/>}
+            {galL==="4h"&&<GalH ph={ph} brand={brand} W={W} slRef={pRef} logoVert={galLogoVert} logoLight={galLogoLight} gapColor={galGapColor}/>}
+          </div>
+        </>}
+
+        {/* Story preview */}
+        {mode==="story"&&
+          <div style={{display:"flex",justifyContent:"center"}}>
+            <div style={{position:"relative",width:W,height:Math.round(W*16/9)}}>
+              <SC ph={ph} data={data} brand={brand} lt={lt} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} logoMode={logoMode} W={W} slRef={pRef} gapColor={stGapColor}/>
+              {showSafe&&<SafeZones W={W} H={Math.round(W*16/9)}/>}
+            </div>
+          </div>
+        }
+      </div>
+
+      {/* RIGHT — Controls */}
+      <div className="controls-col" style={{position:"sticky",top:0,maxHeight:"100vh",overflowY:"auto",alignSelf:"start"}}>
         <Card>
-          <div style={{display:"flex",background:"#F0F0F0",borderRadius:10,padding:3,marginBottom:12}}>
+
+          {/* ── PRESETS ── */}
+          <div style={{marginBottom:14}}>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:7}}>
+              <SLabel>Presets</SLabel>
+              {presets.length<10&&!presetSaving&&<button onClick={()=>{setPresetSaving(true);setPresetName("");}} style={{background:"none",border:`1.5px solid ${b.acc}`,borderRadius:6,padding:"2px 8px",fontFamily:PN,fontWeight:700,fontSize:9,color:b.acc,cursor:"pointer",letterSpacing:.3}}>+ Guardar</button>}
+            </div>
+            {presetNotice&&<div style={{marginBottom:7,padding:"5px 9px",background:"#FFF8E1",border:`1px solid ${b.acc}`,borderRadius:6,fontFamily:PN,fontSize:9,color:"#7a5f00"}}>{presetNotice}</div>}
+            {presetSaving&&<div style={{marginBottom:8,display:"flex",gap:5}}>
+              <input autoFocus value={presetName} onChange={e=>setPresetName(e.target.value)}
+                onKeyDown={e=>{if(e.key==="Enter")savePreset();if(e.key==="Escape"){setPresetSaving(false);setPresetName("");}}}
+                placeholder="Nombre del preset…"
+                style={{flex:1,border:"1.5px solid #DDD",borderRadius:6,padding:"5px 8px",fontFamily:PN,fontSize:10,outline:"none"}}/>
+              <button onClick={savePreset} disabled={!presetName.trim()} style={{padding:"5px 10px",background:b.acc,border:"none",borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,color:C.d,cursor:presetName.trim()?"pointer":"not-allowed",opacity:presetName.trim()?1:.5}}>Guardar</button>
+              <button onClick={()=>{setPresetSaving(false);setPresetName("");}} style={{padding:"5px 8px",background:"none",border:"1.5px solid #DDD",borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,color:C.m,cursor:"pointer"}}>✕</button>
+            </div>}
+            {presets.length===0&&!presetSaving&&<div style={{fontFamily:PN,fontSize:9,color:"#bbb",textAlign:"center",padding:"8px 0"}}>Sin presets guardados</div>}
+            {presets.map(pr=><div key={pr.id} style={{display:"flex",alignItems:"center",gap:4,marginBottom:5,background:"#F7F7F7",borderRadius:7,padding:"5px 7px"}}>
+              {editingPreset===pr.id
+                ?<input autoFocus value={editingName} onChange={e=>setEditingName(e.target.value)}
+                    onKeyDown={e=>{if(e.key==="Enter")renamePreset(pr.id);if(e.key==="Escape")setEditingPreset(null);}}
+                    onBlur={()=>renamePreset(pr.id)}
+                    style={{flex:1,border:"1.5px solid #DDD",borderRadius:5,padding:"3px 6px",fontFamily:PN,fontSize:10,outline:"none"}}/>
+                :<span style={{flex:1,fontFamily:PN,fontSize:10,fontWeight:600,color:C.d,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{pr.name}</span>
+              }
+              <button onClick={()=>applyPreset(pr)} style={{padding:"3px 8px",background:b.acc,border:"none",borderRadius:5,fontFamily:PN,fontWeight:700,fontSize:8,color:C.d,cursor:"pointer",flexShrink:0}}>Aplicar</button>
+              <button onClick={()=>{setEditingPreset(pr.id);setEditingName(pr.name);}} style={{padding:"3px 5px",background:"none",border:"none",fontSize:11,cursor:"pointer",color:C.g,flexShrink:0}} title="Renombrar">✏</button>
+              {deleteConfirm===pr.id
+                ?<button onClick={()=>deletePreset(pr.id)} style={{padding:"3px 7px",background:"#ff4d4d",border:"none",borderRadius:5,fontFamily:PN,fontWeight:700,fontSize:8,color:"white",cursor:"pointer",flexShrink:0}}>¿Eliminar?</button>
+                :<button onClick={()=>setDeleteConfirm(pr.id)} onBlur={()=>setTimeout(()=>setDeleteConfirm(null),200)} style={{padding:"3px 5px",background:"none",border:"none",fontSize:11,cursor:"pointer",color:"#ccc",flexShrink:0}} title="Eliminar">✕</button>
+              }
+            </div>)}
+            {presets.length>=10&&!presetSaving&&<div style={{fontFamily:PN,fontSize:9,color:"#aaa",textAlign:"center",marginTop:4}}>Límite de 10 presets alcanzado</div>}
+          </div>
+          <SDivider/>
+
+          {/* ── MODO ── */}
+          <SLabel>Modo</SLabel>
+          <div style={{display:"flex",background:"#F0F0F0",borderRadius:10,padding:3,marginBottom:14}}>
             <Tab id="feed" label="⬛ Feed"/>
             <Tab id="story" label="📱 Historia"/>
             <Tab id="gal" label="🖼 Galería"/>
           </div>
 
-          {/* Logo — story: fijo (5pos+H/V+tono) o libre (drag+H/V+tono) | feed: H/V */}
+          {/* ── IDENTIDAD ── */}
+          <SDivider/>
+          <SLabel>Identidad</SLabel>
+
+          {/* Logo — story */}
           {mode==="story"&&<>
-            {/* Sin logo */}
             <div style={{marginBottom:8}}>
-              <button onClick={()=>setLogoPos(p=>p===0?2:0)} style={{width:"100%",padding:"6px 0",border:`2px solid ${logoPos===0?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:logoPos===0?"#FFF8E1":"white",color:logoPos===0?C.d:C.m}}>
+              <button onClick={()=>setLogoPos(p=>p===0?2:0)} style={{width:"100%",padding:"6px 0",border:`2px solid ${logoPos===0?b.acc:"#DDD"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:logoPos===0?"#FFF8E1":"white",color:logoPos===0?C.d:C.m}}>
                 {logoPos===0?"✕ Sin logo (activo)":"Sin logo"}
               </button>
             </div>
-            {/* Toggle fijo/libre — solo cuando hay logo */}
             {logoPos!==0&&<div style={{display:"flex",gap:4,marginBottom:8}}>
               {[{id:"fixed",l:"Fijo"},{id:"libre",l:"Posición libre"}].map(o=>
-                <button key={o.id} onClick={()=>setLogoMode(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${logoMode===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:logoMode===o.id?"#FFF8E1":"white",color:logoMode===o.id?C.d:C.m}}>{o.l}</button>
+                <button key={o.id} onClick={()=>setLogoMode(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${logoMode===o.id?b.acc:"#DDD"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:logoMode===o.id?"#FFF8E1":"white",color:logoMode===o.id?C.d:C.m}}>{o.l}</button>
               )}
             </div>}
-            {/* H/V — solo cuando hay logo */}
             {logoPos!==0&&<div style={{display:"flex",gap:4,marginBottom:7}}>
               {[{id:false,l:"Horizontal"},{id:true,l:"Vertical"}].map(o=>
-                <button key={String(o.id)} onClick={()=>setLogoVert(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${logoVert===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:logoVert===o.id?"#FFF8E1":"white",color:logoVert===o.id?C.d:C.m}}>{o.l}</button>
+                <button key={String(o.id)} onClick={()=>setLogoVert(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${logoVert===o.id?b.acc:"#DDD"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:logoVert===o.id?"#FFF8E1":"white",color:logoVert===o.id?C.d:C.m}}>{o.l}</button>
               )}
             </div>}
-            {/* Posición — solo en modo fijo y con logo */}
-            {logoMode==="fixed"&&<div style={{marginBottom:8}}>
+            {logoMode==="fixed"&&logoPos!==0&&<div style={{marginBottom:8}}>
               <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",marginBottom:5}}>Posición</div>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:4,marginBottom:3}}>
                 {[{id:1,l:"↖ Arriba izq."},{id:2,l:"Arriba der. ↗"}].map(o=>
-                  <button key={o.id} onClick={()=>setLogoPos(o.id)} style={{padding:"5px 4px",border:`2px solid ${logoPos===o.id?b.acc:"#E0E0E0"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:8,background:logoPos===o.id?"#FFF8E1":"white",color:logoPos===o.id?C.d:C.m,cursor:"pointer"}}>{o.l}</button>
+                  <button key={o.id} onClick={()=>setLogoPos(o.id)} style={{padding:"5px 4px",border:`2px solid ${logoPos===o.id?b.acc:"#E0E0E0"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:8,background:logoPos===o.id?"#FFF8E1":"white",color:logoPos===o.id?C.d:C.m,cursor:"pointer"}}>{o.l}</button>
                 )}
               </div>
               <div style={{display:"flex",justifyContent:"center",marginBottom:3}}>
-                <button onClick={()=>setLogoPos(3)} style={{width:"60%",padding:"5px 4px",border:`2px solid ${logoPos===3?b.acc:"#E0E0E0"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:8,background:logoPos===3?"#FFF8E1":"white",color:logoPos===3?C.d:C.m,cursor:"pointer"}}>↕ Centro</button>
+                <button onClick={()=>setLogoPos(3)} style={{width:"60%",padding:"5px 4px",border:`2px solid ${logoPos===3?b.acc:"#E0E0E0"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:8,background:logoPos===3?"#FFF8E1":"white",color:logoPos===3?C.d:C.m,cursor:"pointer"}}>↕ Centro</button>
               </div>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:4}}>
                 {[{id:4,l:"↙ Abajo izq."},{id:5,l:"Abajo der. ↘"}].map(o=>
-                  <button key={o.id} onClick={()=>setLogoPos(o.id)} style={{padding:"5px 4px",border:`2px solid ${logoPos===o.id?b.acc:"#E0E0E0"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:8,background:logoPos===o.id?"#FFF8E1":"white",color:logoPos===o.id?C.d:C.m,cursor:"pointer"}}>{o.l}</button>
+                  <button key={o.id} onClick={()=>setLogoPos(o.id)} style={{padding:"5px 4px",border:`2px solid ${logoPos===o.id?b.acc:"#E0E0E0"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:8,background:logoPos===o.id?"#FFF8E1":"white",color:logoPos===o.id?C.d:C.m,cursor:"pointer"}}>{o.l}</button>
                 )}
               </div>
             </div>}
-            {logoMode==="libre"&&<div style={{marginBottom:8,padding:"8px 10px",background:"rgba(0,0,0,.04)",borderRadius:7,fontSize:9,color:C.g,fontFamily:PN,lineHeight:1.4}}>
+            {logoMode==="libre"&&logoPos!==0&&<div style={{marginBottom:8,padding:"8px 10px",background:"rgba(0,0,0,.04)",borderRadius:7,fontSize:9,color:C.g,fontFamily:PN,lineHeight:1.4}}>
               Arrastrá el logo directamente sobre el preview
             </div>}
-            {/* Tono */}
-            <div style={{display:"flex",gap:4,marginBottom:10,alignItems:"center"}}>
+            <div style={{display:"flex",gap:4,marginBottom:6,alignItems:"center"}}>
               <span style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",flexShrink:0}}>Tono:</span>
               {[{id:true,l:"Claro"},{id:false,l:"Oscuro"}].map(o=>
-                <button key={String(o.id)} onClick={()=>setLogoLight(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${logoLight===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:10,cursor:"pointer",background:logoLight===o.id?"#FFF8E1":"white",color:logoLight===o.id?C.d:C.m}}>{o.l}</button>
+                <button key={String(o.id)} onClick={()=>setLogoLight(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${logoLight===o.id?b.acc:"#DDD"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:10,cursor:"pointer",background:logoLight===o.id?"#FFF8E1":"white",color:logoLight===o.id?C.d:C.m}}>{o.l}</button>
               )}
             </div>
           </>}
-          {mode==="feed"&&<div style={{display:"flex",gap:5,marginBottom:10,alignItems:"center"}}>
-            <span style={{fontFamily:PN,fontSize:10,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",flexShrink:0}}>Logo:</span>
+
+          {/* Logo — feed */}
+          {mode==="feed"&&<div style={{display:"flex",gap:4,marginBottom:6}}>
             {[{id:"full",l:"Horizontal"},{id:"icon",l:"Vertical"}].map(o=>
               <button key={o.id} onClick={()=>setLt(o.id)} style={{flex:1,padding:"6px 0",border:`2px solid ${lt===o.id?b.acc:"#DDD"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:10,cursor:"pointer",background:lt===o.id?"#FFF8E1":"white",color:lt===o.id?C.d:C.m}}>{o.l}</button>
             )}
           </div>}
 
-          {/* FEED */}
-          {mode==="feed"&&<>
-            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
-              <button onClick={()=>setSlide(s=>Math.max(0,s-1))} disabled={slide===0} style={{background:b.bg,color:"white",border:"none",borderRadius:7,width:28,height:28,cursor:"pointer",opacity:slide===0?.3:1,fontSize:16}}>‹</button>
-              <div style={{textAlign:"center"}}>
-                <div style={{fontFamily:PN,fontWeight:700,fontSize:12,color:C.d}}>Slide {slide+1} / {total}</div>
-                <div style={{fontSize:10,color:C.g}}>{carSlides[slide]?.type==="cover"?"Portada":carSlides[slide]?.type==="cta"?"Contacto":"Foto ambiente"}</div>
-              </div>
-              <button onClick={()=>setSlide(s=>Math.min(total-1,s+1))} disabled={slide===total-1} style={{background:b.bg,color:"white",border:"none",borderRadius:7,width:28,height:28,cursor:"pointer",opacity:slide===total-1?.3:1,fontSize:16}}>›</button>
-            </div>
-            <div style={{display:"flex",gap:3,justifyContent:"center",marginBottom:10,flexWrap:"wrap"}}>
-              {carSlides.map((_,i)=><div key={i} onClick={()=>setSlide(i)} style={{width:i===slide?16:6,height:6,borderRadius:3,background:i===slide?b.acc:"#CCC",cursor:"pointer"}}/>)}
-            </div>
-            <div style={{display:"flex",justifyContent:"center"}} ref={pRef}>
-              {carSlides[slide]?.type==="cover"&&<FeedCover ph={ph} data={data} brand={brand} lt={lt} W={W} fRef={pRef}/>}
-              {carSlides[slide]?.type==="photo"&&(()=>{const idx=carSlides[slide].idx,lb=labels[idx]||{title:"",sub:""};return<FeedSlide photo={ph[idx]} label={lb.title||`Ambiente ${idx}`} sub={lb.sub} idx={idx} brand={brand} lt={lt} W={W} fRef={pRef}/>;})()}
-              {carSlides[slide]?.type==="cta"&&<FeedCTA data={data} brand={brand} W={W} fRef={pRef}/>}
-            </div>
-          </>}
-
-          {/* GALERÍA */}
+          {/* Logo — gal */}
           {mode==="gal"&&<>
-            <div style={{display:"flex",gap:4,marginBottom:10}}>
-              {[{id:"4fotos",l:"4 fotos"},{id:"full",l:"Pantalla completa"},{id:"4h",l:"4 horizontal"}].map(o=>
-                <button key={o.id} onClick={()=>setGalL(o.id)} style={{flex:1,padding:"6px 0",border:`2px solid ${galL===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:galL===o.id?"#FFF8E1":"white",color:galL===o.id?C.d:C.m}}>{o.l}</button>
+            <div style={{display:"flex",gap:4,marginBottom:6}}>
+              {[{id:false,l:"Horizontal"},{id:true,l:"Vertical"}].map(o=>
+                <button key={String(o.id)} onClick={()=>setGalLogoVert(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${galLogoVert===o.id?b.acc:"#DDD"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:galLogoVert===o.id?"#FFF8E1":"white",color:galLogoVert===o.id?C.d:C.m}}>{o.l}</button>
               )}
             </div>
-            <div style={{display:"flex",gap:4,marginBottom:10}}>
-              {[{id:false,l:"H"},{id:true,l:"V"}].map(o=>
-                <button key={String(o.id)} onClick={()=>setGalLogoVert(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${galLogoVert===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:galLogoVert===o.id?"#FFF8E1":"white",color:galLogoVert===o.id?C.d:C.m}}>{o.l}</button>
-              )}
-              <div style={{width:1,background:"#E0E0E0",margin:"0 2px"}}/>
+            <div style={{display:"flex",gap:4,marginBottom:6}}>
               {[{id:true,l:"Claro"},{id:false,l:"Oscuro"}].map(o=>
-                <button key={String(o.id)} onClick={()=>setGalLogoLight(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${galLogoLight===o.id?b.acc:"#DDD"}`,borderRadius:6,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:galLogoLight===o.id?"#FFF8E1":"white",color:galLogoLight===o.id?C.d:C.m}}>{o.l}</button>
+                <button key={String(o.id)} onClick={()=>setGalLogoLight(o.id)} style={{flex:1,padding:"5px 0",border:`2px solid ${galLogoLight===o.id?b.acc:"#DDD"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:galLogoLight===o.id?"#FFF8E1":"white",color:galLogoLight===o.id?C.d:C.m}}>{o.l}</button>
               )}
-            </div>
-            {galL!=="full"&&<div style={{marginBottom:10}}>
-              <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",marginBottom:6}}>Color de línea</div>
-              <div style={{display:"flex",gap:6,alignItems:"center"}}>
-                {["#000000","#26282a","#ffc62d","#ffffff","#f2f2f2"].map(c=>(
-                  <div key={c} onClick={()=>setGalGapColor(c)} style={{width:22,height:22,borderRadius:"50%",background:c,border:`3px solid ${galGapColor===c?b.acc:"#ccc"}`,cursor:"pointer",boxSizing:"border-box",flexShrink:0}}/>
-                ))}
-              </div>
-            </div>}
-            {galL==="full"&&ph.length>1&&<div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
-              <button onClick={()=>setGalSlide(s=>Math.max(0,s-1))} disabled={galSlide===0} style={{background:b.bg,color:"white",border:"none",borderRadius:7,width:28,height:28,cursor:"pointer",opacity:galSlide===0?.3:1,fontSize:16}}>‹</button>
-              <span style={{fontFamily:PN,fontWeight:700,fontSize:11,color:C.d}}>Foto {galSlide+1} / {ph.length}</span>
-              <button onClick={()=>setGalSlide(s=>Math.min(ph.length-1,s+1))} disabled={galSlide===ph.length-1} style={{background:b.bg,color:"white",border:"none",borderRadius:7,width:28,height:28,cursor:"pointer",opacity:galSlide===ph.length-1?.3:1,fontSize:16}}>›</button>
-            </div>}
-            <div style={{display:"flex",justifyContent:"center"}} ref={pRef}>
-              {galL==="4fotos"&&<GalA ph={ph} brand={brand} W={W} slRef={pRef} logoVert={galLogoVert} logoLight={galLogoLight} gapColor={galGapColor}/>}
-              {galL==="full"&&<GalB ph={ph} brand={brand} W={W} slRef={pRef} idx={galSlide} logoVert={galLogoVert} logoLight={galLogoLight}/>}
-              {galL==="4h"&&<GalH ph={ph} brand={brand} W={W} slRef={pRef} logoVert={galLogoVert} logoLight={galLogoLight} gapColor={galGapColor}/>}
             </div>
           </>}
 
-          {/* STORY */}
-          {mode==="story"&&<>
-            <div style={{marginBottom:10}}>
-              <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",marginBottom:6}}>Disposición</div>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:5}}>
-                {SLAYS.map(({id,l})=><button key={id} onClick={()=>setStL(id)}
-                  style={{padding:"6px 4px",border:`2px solid ${stL===id?b.acc:"#E0E0E0"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:9,background:stL===id?"#FFF8E1":"white",color:stL===id?C.d:C.m,cursor:"pointer",textAlign:"center",lineHeight:1.3}}>
-                  {l}
-                </button>)}
+          {/* ── ESTILO ── */}
+          {(mode==="story"||mode==="gal")&&<>
+            <SDivider/>
+            <SLabel>Estilo</SLabel>
+          </>}
+
+          {/* ── SUGERENCIA DE LAYOUT ── */}
+          {mode==="story"&&<div style={{marginBottom:10}}>
+            {(!suggestion||suggestion.ids===null)&&
+              <button onClick={computeSuggestion} style={{width:"100%",padding:"7px 0",border:`1.5px solid ${b.acc}`,borderRadius:7,background:"none",fontFamily:PN,fontWeight:700,fontSize:9,color:b.acc,cursor:"pointer",letterSpacing:.3}}>✨ Sugerir layout</button>
+            }
+            {suggestion&&suggestion.ids.length===0&&<>
+              <div style={{fontFamily:PN,fontSize:9,color:C.g,textAlign:"center",padding:"6px 0",marginBottom:4}}>Seleccioná al menos una foto para recibir recomendaciones.</div>
+              <button onClick={()=>setSuggestion(null)} style={{width:"100%",padding:"5px 0",border:"1.5px solid #E0E0E0",borderRadius:6,background:"none",fontFamily:PN,fontWeight:600,fontSize:9,color:C.m,cursor:"pointer"}}>✕ Cerrar</button>
+            </>}
+            {suggestion&&suggestion.ids.length>0&&<div style={{background:"#F7F7F7",borderRadius:8,padding:"8px 8px 6px",border:"1px solid #EFEFEF"}}>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:7}}>
+                <span style={{fontFamily:PN,fontSize:9,fontWeight:700,color:b.acc,letterSpacing:.5}}>✨ Sugeridos</span>
+                <button onClick={()=>setSuggestion(null)} style={{background:"none",border:"none",fontSize:11,color:"#CCC",cursor:"pointer",padding:"0 2px",lineHeight:1}}>✕</button>
               </div>
-            </div>
-            <div style={{display:"flex",justifyContent:"center"}}>
-              <div style={{position:"relative",width:W,height:Math.round(W*16/9)}}>
-                <SC ph={ph} data={data} brand={brand} lt={lt} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} logoMode={logoMode} W={W} slRef={pRef} gapColor={stGapColor}/>
-                {showSafe&&<SafeZones W={W} H={Math.round(W*16/9)}/>}
+              {suggestion.ids.map(id=><div key={id} style={{display:"flex",alignItems:"center",gap:7,marginBottom:6}}>
+                <div style={{width:28,flexShrink:0,borderRadius:4,overflow:"hidden",border:`1.5px solid ${stL===id?b.acc:"#DDD"}`}}>
+                  <svg viewBox="0 0 36 60" style={{display:"block",width:"100%",height:46}} xmlns="http://www.w3.org/2000/svg">
+                    <ThumbSVG id={id} acc={b.acc}/>
+                  </svg>
+                </div>
+                <div style={{flex:1,minWidth:0}}>
+                  <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.d,lineHeight:1}}>{TNAMES[id]}</div>
+                  <div style={{fontFamily:PN,fontSize:8,color:C.g,marginTop:1}}>{id}</div>
+                </div>
+                <button onClick={()=>setStL(id)} style={{padding:"4px 10px",background:stL===id?b.acc:"#26282a",border:"none",borderRadius:5,fontFamily:PN,fontWeight:700,fontSize:8,color:stL===id?C.d:"white",cursor:"pointer",flexShrink:0}}>
+                  {stL===id?"Activo":"Aplicar"}
+                </button>
+              </div>)}
+            </div>}
+          </div>}
+
+          {/* ── VARIANTES ── */}
+          {mode==="story"&&<div style={{marginBottom:10}}>
+            {variantIds===null&&selected.length>0&&
+              <button onClick={openVariants} style={{width:"100%",padding:"7px 0",border:`1.5px solid ${b.acc}`,borderRadius:7,background:"none",fontFamily:PN,fontWeight:700,fontSize:9,color:b.acc,cursor:"pointer",letterSpacing:.3}}>⬛ Comparar variantes</button>
+            }
+            {variantIds!==null&&<div style={{background:"#F7F7F7",borderRadius:8,padding:"8px 8px 6px",border:"1px solid #EFEFEF"}}>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
+                <span style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.d,letterSpacing:.5}}>Variantes</span>
+                <button onClick={closeVariants} style={{background:"none",border:"none",fontSize:11,color:"#CCC",cursor:"pointer",padding:"0 2px",lineHeight:1}}>✕</button>
               </div>
-            </div>
-            {["A","C","H","J","K","M"].includes(stL)&&<div style={{marginBottom:8}}>
-              <div style={{fontFamily:PN,fontSize:9,fontWeight:700,color:C.m,letterSpacing:.6,textTransform:"uppercase",marginBottom:6}}>Color de línea</div>
-              <div style={{display:"flex",gap:6,alignItems:"center"}}>
-                {["#000000","#26282a","#ffc62d","#ffffff","#f2f2f2"].map(c=>(
-                  <div key={c} onClick={()=>setStGapColor(c)} style={{width:22,height:22,borderRadius:"50%",background:c,border:`3px solid ${stGapColor===c?b.acc:"#ccc"}`,cursor:"pointer",boxSizing:"border-box",flexShrink:0}}/>
-                ))}
+              <div style={{display:"grid",gridTemplateColumns:`repeat(${variantIds.length},1fr)`,gap:5}}>
+                {variantIds.map((id,i)=>{
+                  const previewW=Math.floor((220-16-(variantIds.length-1)*5)/variantIds.length);
+                  const previewH=Math.round(previewW*16/9);
+                  return <div key={id} style={{display:"flex",flexDirection:"column",gap:4}}>
+                    <div style={{width:previewW,height:previewH,borderRadius:5,overflow:"hidden",border:`2px solid ${stL===id?b.acc:"#DDD"}`,background:"#eee",position:"relative",flexShrink:0}}>
+                      {varThumbs[id]
+                        ?<img src={varThumbs[id]} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}}/>
+                        :<div style={{width:"100%",height:"100%",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                          <div style={{fontFamily:PN,fontSize:7,color:"#bbb"}}>…</div>
+                        </div>
+                      }
+                    </div>
+                    <div style={{fontFamily:PN,fontSize:8,fontWeight:700,color:stL===id?b.acc:C.d,textAlign:"center",lineHeight:1.2}}>{id}</div>
+                    <div style={{fontFamily:PN,fontSize:7,color:C.g,textAlign:"center",lineHeight:1.1,marginBottom:2}}>{TNAMES[id]}</div>
+                    <button onClick={()=>setStL(id)} style={{padding:"3px 0",background:stL===id?b.acc:"#26282a",border:"none",borderRadius:5,fontFamily:PN,fontWeight:700,fontSize:8,color:stL===id?C.d:"white",cursor:"pointer"}}>
+                      {stL===id?"Activo":"Usar"}
+                    </button>
+                    <button onClick={()=>downloadVariant(i)} disabled={downloadingVar===i||!varThumbs[id]}
+                      style={{padding:"3px 0",background:"none",border:`1.5px solid ${downloadingVar===i?"#ccc":"#DDD"}`,borderRadius:5,fontFamily:PN,fontWeight:700,fontSize:8,color:downloadingVar===i?"#aaa":C.m,cursor:downloadingVar===i?"not-allowed":"pointer"}}>
+                      {downloadingVar===i?"Generando…":"Descargar"}
+                    </button>
+                  </div>;
+                })}
               </div>
             </div>}
-            <div style={{marginTop:8,display:"flex",gap:6,alignItems:"center"}}>
+          </div>}
+
+          {/* Layouts — story */}
+          {mode==="story"&&(()=>{
+            const favIds=favLayouts;
+            const recentIds=recentLayouts.filter(id=>!favIds.includes(id));
+            const usedIds=new Set([...favIds,...recentIds]);
+            const todosIds=SLAYS.map(({id})=>id).filter(id=>!usedIds.has(id));
+            return <div style={{marginBottom:6}}>
+              {favIds.length>0&&<>
+                <div style={{fontFamily:PN,fontSize:9,fontWeight:600,color:"#888",letterSpacing:1,textTransform:"uppercase",marginBottom:5,display:"flex",alignItems:"center",gap:4}}>
+                  <span style={{color:b.acc}}>★</span><span>Favoritos</span>
+                </div>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5,marginBottom:10}}>
+                  {favIds.map(id=><LayoutThumb key={id} id={id} active={stL===id} fav={true} onClick={()=>setStL(id)} onToggleFav={toggleFav} b={b}/>)}
+                </div>
+              </>}
+              {recentIds.length>0&&<>
+                <div style={{fontFamily:PN,fontSize:9,fontWeight:600,color:"#888",letterSpacing:1,textTransform:"uppercase",marginBottom:5,display:"flex",alignItems:"center",gap:4}}>
+                  <span style={{fontSize:10}}>🕘</span><span>Recientes</span>
+                </div>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5,marginBottom:10}}>
+                  {recentIds.map(id=><LayoutThumb key={id} id={id} active={stL===id} fav={false} onClick={()=>setStL(id)} onToggleFav={toggleFav} b={b}/>)}
+                </div>
+              </>}
+              {todosIds.length>0&&<>
+                {(favIds.length>0||recentIds.length>0)&&
+                  <div style={{fontFamily:PN,fontSize:9,fontWeight:600,color:"#888",letterSpacing:1,textTransform:"uppercase",marginBottom:5}}>Todos</div>
+                }
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5}}>
+                  {todosIds.map(id=><LayoutThumb key={id} id={id} active={stL===id} fav={false} onClick={()=>setStL(id)} onToggleFav={toggleFav} b={b}/>)}
+                </div>
+              </>}
+            </div>;
+          })()}
+
+          {/* Layouts — gal */}
+          {mode==="gal"&&<div style={{display:"flex",gap:4,marginBottom:6}}>
+            {[{id:"4fotos",l:"4 fotos"},{id:"full",l:"Pantalla completa"},{id:"4h",l:"4 horizontal"}].map(o=>
+              <button key={o.id} onClick={()=>setGalL(o.id)} style={{flex:1,padding:"6px 0",border:`2px solid ${galL===o.id?b.acc:"#DDD"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:9,cursor:"pointer",background:galL===o.id?"#FFF8E1":"white",color:galL===o.id?C.d:C.m}}>{o.l}</button>
+            )}
+          </div>}
+
+          {/* ── COLOR DE GRILLA ── */}
+          {(mode==="story"&&["A","C","H","J","K","M"].includes(stL))||(mode==="gal"&&galL!=="full")?<>
+            <SDivider/>
+            <SLabel>Color de grilla</SLabel>
+            <div style={{display:"flex",gap:6,alignItems:"center",marginBottom:6}}>
+              {["#000000","#26282a","#ffc62d","#ffffff","#f2f2f2"].map(c=>(
+                <div key={c} onClick={()=>mode==="gal"?setGalGapColor(c):setStGapColor(c)} style={{width:22,height:22,borderRadius:"50%",background:c,border:`3px solid ${(mode==="gal"?galGapColor:stGapColor)===c?b.acc:"#ccc"}`,cursor:"pointer",boxSizing:"border-box",flexShrink:0}}/>
+              ))}
+            </div>
+          </>:null}
+
+          {/* Zonas seguras — story */}
+          {mode==="story"&&<>
+            <SDivider/>
+            <div style={{display:"flex",gap:6,alignItems:"center",marginBottom:6}}>
               <button onClick={()=>setShowSafe(v=>!v)} style={{flex:"0 0 auto",padding:"6px 11px",border:`2px solid ${showSafe?b.acc:"#DDD"}`,borderRadius:7,fontFamily:PN,fontWeight:700,fontSize:10,cursor:"pointer",background:showSafe?"#FFF8E1":"white",color:showSafe?C.d:C.m}}>{showSafe?"■":"□"} Zonas seguras</button>
               <div style={{flex:1,padding:"5px 10px",background:"rgba(0,0,0,.04)",borderRadius:6,fontSize:9.5,color:C.g,lineHeight:1.35}}>
                 {showSafe?"Rojo = reloj/batería · azul = link IG. Nada crítico ahí.":"Zona punteada = espacio para link/sticker de Instagram"}
@@ -1677,14 +2059,23 @@ function App(){
             </div>
           </>}
 
-          <div style={{marginTop:12}}><DLBtn targetRef={pRef} fname={`${brand}-${data.tipo}.jpg`} accent={b.acc}/></div>
-          <div style={{marginTop:6,padding:"7px 12px",background:"#FFF8E1",borderRadius:7,fontSize:10,color:"#8B6914",textAlign:"center",lineHeight:1.5}}>
-<b>Fotos</b>: zoom con botones o scroll · arrastrá para mover
+          {/* ── EXPORTAR ── */}
+          <SDivider/>
+          <SLabel>Exportar</SLabel>
+          <DLBtn targetRef={pRef} fname={`${brand}-${data.tipo}.jpg`} accent={b.acc}/>
+          <div style={{marginTop:8,padding:"7px 12px",background:"#F7F7F7",borderRadius:7,fontSize:10,color:"#666",textAlign:"center",lineHeight:1.5,border:"1px solid #E8E8E8"}}>
+            <b>Fotos</b>: zoom con botones o scroll · arrastrá para mover
           </div>
         </Card>
       </div>
-      </SwapCtx.Provider>
     </div>
+    {/* ── VARIANTES: renders ocultos para captura — position:fixed z-index:-1 cubre el fondo del browser pero html2canvas captura por árbol DOM, no por pantalla ── */}
+    {variantIds&&variantIds.map((id,i)=>{const VC=LMAP[id]||LA;return(
+      <div key={id} data-noexport="1" style={{position:"fixed",top:0,left:0,width:W,zIndex:-1,pointerEvents:"none",userSelect:"none"}}>
+        <VC ph={ph} data={data} brand={brand} lt={lt} logoPos={logoPos} logoLight={logoLight} logoVert={logoVert} logoMode={logoMode} W={W} slRef={varRefs[i]} gapColor={stGapColor}/>
+      </div>
+    );})}
+    </SwapCtx.Provider>
     <SwapPicker photos={photos} selected={selected} swapSlot={swapSlot} onSwap={doSwap} onClose={()=>setSwapSlot(null)}/>
     <button className="panel-fab" onClick={()=>setPanelOpen(v=>!v)}
       style={{background:b.acc,color:C.d}}>
